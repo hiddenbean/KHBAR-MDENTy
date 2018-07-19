@@ -11,6 +11,31 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::domain('partenaire.khbarmdinty.com')->group(function () {
+
+    Route::get('/', 'PartnerController@index');
+    Route::get('home', 'HomeController@index')->name('home');
+    Route::get('inscription/', 'auth\PartnerRegisterController@showRegisterForm');
+    Route::get('seconnecter/', 'auth\PartnerLoginController@showLoginForm');
+    Route::get('deconnecter/', 'auth\PartnerLoginController@logout');
+
+    Auth::routes();
 });
+
+
+Route::domain('partenaire.khbarmdinty.com')->group(function () {
+    
+     Route::post('seconnecter', 'auth\PartnerLoginController@login')->name('partner.login');
+     Route::post('inscription', 'auth\PartnerRegisterController@create')->name('partner.register.submit');
+
+});
+
+
+
+
+
+Auth::routes();
