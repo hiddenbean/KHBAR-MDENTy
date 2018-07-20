@@ -79,7 +79,7 @@ class PartnerRegisterController extends Controller
             'email'     =>  $request->input('email'),
             'password'  =>  $password,
             'name' =>  $name,
-            'status'    =>  'not verified',
+            'status'    =>  '0',
         ]);
 
         $this->guardsLogout();

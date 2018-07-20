@@ -33,7 +33,7 @@ class PartnerLoginController extends Controller
      */
     public function __construct()
     {
-       $this->middleware('guest:partner');
+    //    $this->middleware('guest:partner');
     }
 
 
@@ -119,7 +119,6 @@ class PartnerLoginController extends Controller
             'password' => 'required|min:6',
         ]);
     }
-
    /**
      * Log the partner out of the application.
      *

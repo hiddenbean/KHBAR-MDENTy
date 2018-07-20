@@ -14,11 +14,11 @@
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+Route::get('home', 'HomeController@index')->name('home');
 
 Route::domain('partenaire.khbarmdinty.com')->group(function () {
 
     Route::get('/', 'PartnerController@index');
-    Route::get('home', 'HomeController@index')->name('home');
     Route::get('inscription/', 'auth\PartnerRegisterController@showRegisterForm');
     Route::get('seconnecter/', 'auth\PartnerLoginController@showLoginForm');
     Route::get('deconnecter/', 'auth\PartnerLoginController@logout');

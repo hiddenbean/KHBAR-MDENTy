@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Auth;
 use App\Partner;
 use Illuminate\Http\Request;
 
@@ -26,7 +26,7 @@ class PartnerController extends Controller
      */
     public function index()
     {
-        return 'You Are A Partner';
+        return 'You Are A Partner '.Auth::id();
     }
 
     /**
