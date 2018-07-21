@@ -4,6 +4,8 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+//Use AuthenticationException to override the unauthenticated function. 
+use Illuminate\Auth\AuthenticationException;
 
 class Handler extends ExceptionHandler
 {
@@ -69,7 +71,7 @@ class Handler extends ExceptionHandler
         switch($guard)
         {
             case 'staff' :
-                $this->authenticationCheck($guard) ? $login = "404" : $login = '/';
+                $this->authenticationCheck($guard) ? $login = "404" : $login = '/seconnecter';
                 break;
         }
         return redirect()->guest(url($login));
