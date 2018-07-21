@@ -21,7 +21,7 @@ class RedirectIfAuthenticated
             switch($guard)
             {
                 case 'staff' : $staff=auth()->guard($guard)->user();return redirect('/'); break;
-                case 'partner' : $staff=auth()->guard($guard)->user();return redirect('/'); break;
+                case 'partner-account' : $staff=auth()->guard($guard)->user();return redirect('/'); break;
             }
         }
 

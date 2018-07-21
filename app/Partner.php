@@ -3,18 +3,9 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-//use this notification to sen an email to a specific user
-use App\Notifications\ResetPasswordNotification;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Model;
 
-class Partner extends Authenticatable
+class Partner extends Model
 {
-    protected $guard="partner";
-    protected $fillable = [
-        'email',
-        'password',
-        'name',
-        'status',
-    ];
+    
 }

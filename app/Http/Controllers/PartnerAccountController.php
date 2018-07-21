@@ -1,29 +1,27 @@
 <?php
 
 namespace App\Http\Controllers;
-use Auth;
-use App\Partner;
+
+use App\PartnerAccount;
 use Illuminate\Http\Request;
 
-class PartnerController extends Controller
+class PartnerAccountController extends Controller
 {
-
     public function __construct()
     {
-        $this->middleware('auth:partner-account')->except('stoere');
+        $this->middleware('auth:partner-account');
     }
 
     protected function validateRequest(Request $request)
     {
         $request->validate([
-            'name' => 'required|unique:partners,name',
-            'company_name' => 'required',
-            'trade_registry' => 'required',
-            'ice' => 'required',
-            'taxe_id' => 'required',
-            'about' => 'required',
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required|email|unique:partner_accounts,email',
+            'password' => 'required|min:6|confirmed',
         ]);
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -31,7 +29,7 @@ class PartnerController extends Controller
      */
     public function index()
     {
-        return 'You Are A Partner space'.Auth::id();
+        return 'You Are A Partner '.Auth::id();
     }
 
     /**
@@ -41,7 +39,7 @@ class PartnerController extends Controller
      */
     public function create()
     {
-        
+        //
     }
 
     /**
@@ -50,19 +48,24 @@ class PartnerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,$id)
     {
         $this->validateRequest($request);
+        $password = bcrypt($request->password);
+        $name = str_before($request->email, '@');
+        while(PartnerAccount::where('name', $name)->first()){
+            $name = $name.'_'.rand(0,9);
+        }
 
-        $partner = new Partner();
-        $partner->company_name = $request->company_name;
-        $partner->name = $request->name;
-        $partner->about = $request->about;
-        $partner->taxe_id = $request->taxe_id;
-        $partner->ice = $request->ice;
-        $partner->trade_registry = $request->trade_registry;
-        $partner->status = '0';
-        $partner->save();
+        $partnerAccount = new PartnerAccount();
+        $partnerAccount->first_name = $request->first_name;
+        $partnerAccount->last_name = $request->last_name;
+        $partnerAccount->name = $name;
+        $partnerAccount->password = $password;
+        $partnerAccount->partner_id = $id;
+        $partnerAccount->save();
+
+        return $partnerAccount;
     }
 
     /**

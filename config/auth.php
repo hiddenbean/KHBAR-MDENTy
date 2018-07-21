@@ -45,9 +45,9 @@ return [
             'driver' => 'token',
             'provider' => 'users',
         ],
-        'partner' => [
+        'partner-account' => [
             'driver' => 'session',
-            'provider' => 'partners',
+            'provider' => 'partner-accounts',
         ],
     ],
 
@@ -73,9 +73,9 @@ return [
             'driver' => 'eloquent',
             'model' => App\User::class,
         ],
-        'partners' => [
+        'partner-accounts' => [
             'driver' => 'eloquent',
-            'model' => App\Partner::class,
+            'model' => App\PartnerAccount::class,
         ],
 
         // 'users' => [
@@ -105,8 +105,8 @@ return [
             'table' => 'password_resets',
             'expire' => 60,
         ],
-        'partners' => [
-            'provider' => 'partners',
+        'partner-accounts' => [
+            'provider' => 'partner-accounts',
             'table' => 'password_resets',
             'expire' => 60,
         ],

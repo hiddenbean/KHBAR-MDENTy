@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Auth;
-use App\Partner;
+use App\PartnerAccount;
 use Illuminate\Http\Request;
-class PartnerLoginController extends Controller
+class PartnerAccountLoginController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
@@ -85,14 +85,14 @@ class PartnerLoginController extends Controller
 
         switch ($loginType) {
             case 'email':
-                if(Auth::guard('partner')->attempt($request->only('email', 'password'), $request->remember))
+                if(Auth::guard('partner-account')->attempt($request->only('email', 'password'), $request->remember))
                 {
                     // return redirect()->intended('/');
                     return redirect('/');
                 }
                 break;
                 case 'username':
-                if(Auth::guard('partner')->attempt(['name' => $request->email, 'password' => $request->password], $request->remember))
+                if(Auth::guard('partner-account')->attempt(['name' => $request->email, 'password' => $request->password], $request->remember))
                 {
                     // return redirect()->intended('/');
                     return redirect('/');
@@ -127,7 +127,7 @@ class PartnerLoginController extends Controller
      */
    public function logout(Request $request)
     {
-        Auth::guard('partner')->logout();
+        Auth::guard('partner-account')->logout();
         $request->session()->invalidate();
         return redirect('seconnecter');
     }
