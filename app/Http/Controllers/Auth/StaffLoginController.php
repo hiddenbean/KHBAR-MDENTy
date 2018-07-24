@@ -5,7 +5,7 @@ use App\Http\Controllers\Controller;
 use Auth;
 use Illuminate\Http\Request;
 
-class LoginController extends Controller
+class StaffLoginController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
@@ -18,7 +18,6 @@ class LoginController extends Controller
     |
     */
 
-    use AuthenticatesUsers;
 
     /**
      * Where to redirect users after login.
@@ -77,7 +76,7 @@ class LoginController extends Controller
     public function validateReqeust(Request $request)
     {
         $request->validate([
-            'email' => 'required|email|unique:staff,email',
+            'email' => 'required|email',
             'password' => 'required|min:6',
         ]);
     }
