@@ -19,11 +19,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-
 Route::domain('staff.khbarmdinty.com')->group(function () {
 
     Route::get('/', 'StaffController@index');
-    Route::get('seconnecter/', 'auth\StaffLoginController@showLoginForm');
+    Route::get('seconnecter/', 'auth\StaffLoginController@showLoginForm')->name('staff.login');
     Route::get('deconnecter/', 'auth\StaffLoginController@logout');
 
     Auth::routes();
@@ -32,6 +31,7 @@ Route::domain('staff.khbarmdinty.com')->group(function () {
 
 Route::domain('staff.khbarmdinty.com')->group(function () {
     
-     Route::post('seconnecter', 'auth\StaffLoginController@login')->name('partner.login');
+     Route::post('seconnecter', 'auth\StaffLoginController@login')->name('staff.login.submit');
 
 });
+
