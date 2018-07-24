@@ -2,16 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Staff;
+use App\statu;
 use Illuminate\Http\Request;
 
-class StaffController extends Controller
+class StatuController extends Controller
 {
-    public function home()
-    {
-        return view('auth.staff.home');
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -46,10 +41,10 @@ class StaffController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Staff  $staff
+     * @param  \App\statu  $statu
      * @return \Illuminate\Http\Response
      */
-    public function show(Staff $staff)
+    public function show(statu $statu)
     {
         //
     }
@@ -57,10 +52,10 @@ class StaffController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Staff  $staff
+     * @param  \App\statu  $statu
      * @return \Illuminate\Http\Response
      */
-    public function edit(Staff $staff)
+    public function edit(statu $statu)
     {
         //
     }
@@ -69,10 +64,10 @@ class StaffController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Staff  $staff
+     * @param  \App\statu  $statu
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Staff $staff)
+    public function update(Request $request, statu $statu)
     {
         //
     }
@@ -80,10 +75,10 @@ class StaffController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Staff  $staff
+     * @param  \App\statu  $statu
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Staff $staff)
+    public function destroy(statu $statu)
     {
         //
     }

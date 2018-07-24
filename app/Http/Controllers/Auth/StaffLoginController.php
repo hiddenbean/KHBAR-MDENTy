@@ -24,7 +24,7 @@ class StaffLoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new staff login controller instance.
@@ -62,7 +62,7 @@ class StaffLoginController extends Controller
         if(Auth::guard('staff')->attempt(['email'=>$request->input('email'), 'password'=>$request->input('password')], $request->input('remember')))
         {
             //$this->sessionRegenerate();
-            return redirect()->intended(url('/'));
+            return redirect()->intended('/');
         }
         return redirect()->back();
     }
