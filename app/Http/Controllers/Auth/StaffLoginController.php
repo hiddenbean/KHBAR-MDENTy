@@ -37,6 +37,24 @@ class StaffLoginController extends Controller
         $this->middleware('guest:staff')->except('logout');
     }
 
+
+       /**
+     * Get the login used to authenticate by the user.
+     * Returns either user_name, phone_number or email.
+     *
+     * @param /Illuminate\Http\Request $request->email.
+     * l'email in the request in only the input name.
+     * @return string
+     */
+    public function loginType($login)
+    {
+        if (filter_var($login, FILTER_VALIDATE_EMAIL)) {
+            return 'email';
+        }
+        else {
+            return 'username';
+        }
+    }
     /**
      * Show the application's login form for the staff.
      *
@@ -58,14 +76,33 @@ class StaffLoginController extends Controller
      */
     public function login(Request $request)
     {
+        $login = $request->login;
+        $loginType = self::loginType($login);
         $this->validateReqeust($request);
-        if(Auth::guard('staff')->attempt(['email'=>$request->input('email'), 'password'=>$request->input('password')], $request->input('remember')))
+        // dd(Auth::guard('staff')->attempt(['email'=>$request->input('login'), 'password'=>$request->input('password')], $request->remember));
+        if($loginType == 'email')
         {
-            //$this->sessionRegenerate();
-            return redirect()->intended('/');
+            if(Auth::guard('staff')->attempt(['email'=>$request->input('login'), 'password'=>$request->input('password')], $request->remember))
+            {
+                //$this->sessionRegenerate();
+                //dd(Auth::id());
+                return redirect()->intended(url('/'));
+            }
+            //return redirect()->back();
         }
-        return redirect()->back();
+        else
+        {
+            if(Auth::guard('staff')->attempt(['name'=>$request->input('login'), 'password'=>$request->input('password')], $request->remember))
+            {
+                return Auth::id();
+                return redirect()->intended('/');
+            }
+            return redirect()->back();
+        }
+     
     }
+
+
 
     /**
      * Validate the staff's login request.
@@ -76,7 +113,7 @@ class StaffLoginController extends Controller
     public function validateReqeust(Request $request)
     {
         $request->validate([
-            'email' => 'required|email',
+            'login' => 'required',
             'password' => 'required|min:6',
         ]);
     }

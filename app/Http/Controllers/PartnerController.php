@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\statu;
+use App\Partner;
 use Illuminate\Http\Request;
 
-class StatuController extends Controller
+class PartnerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,12 @@ class StatuController extends Controller
      */
     public function index()
     {
-        //
+       $data['partners'] = Partner::all();
+       $appr = isset($data['partners'][0]->statues->last()->is_approved) ? $data['partners'][0]->statues->last()->is_approved : 'tazz';
+    //    return $appr;
+
+        
+       return view('partners.index',$data);
     }
 
     /**
@@ -41,10 +46,10 @@ class StatuController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\statu  $statu
+     * @param  \App\partner  $partner
      * @return \Illuminate\Http\Response
      */
-    public function show(statu $statu)
+    public function show(partner $partner)
     {
         //
     }
@@ -52,10 +57,10 @@ class StatuController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\statu  $statu
+     * @param  \App\partner  $partner
      * @return \Illuminate\Http\Response
      */
-    public function edit(statu $statu)
+    public function edit(partner $partner)
     {
         //
     }
@@ -64,10 +69,10 @@ class StatuController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\statu  $statu
+     * @param  \App\partner  $partner
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, statu $statu)
+    public function update(Request $request, partner $partner)
     {
         //
     }
@@ -75,10 +80,10 @@ class StatuController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\statu  $statu
+     * @param  \App\partner  $partner
      * @return \Illuminate\Http\Response
      */
-    public function destroy(statu $statu)
+    public function destroy(partner $partner)
     {
         //
     }

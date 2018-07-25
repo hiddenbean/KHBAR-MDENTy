@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Auth;
 use App\Staff;
 use Illuminate\Http\Request;
 
@@ -9,6 +9,7 @@ class StaffController extends Controller
 {
     public function home()
     {
+        return auth()->guard('staff')->user()->id;
         return view('auth.staff.home');
     }
 

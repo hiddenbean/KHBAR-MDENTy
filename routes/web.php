@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Auth::routes();
 
@@ -24,8 +22,29 @@ Route::domain('staff.khbarmdinty.com')->group(function () {
     Route::get('/', 'StaffController@home');
     Route::get('seconnecter/', 'auth\StaffLoginController@showLoginForm')->name('staff.login');
     Route::get('deconnecter/', 'auth\StaffLoginController@logout');
-
+    
     Auth::routes();
+     //Partners Statuses routes
+     Route::prefix('partners')->group(function() {
+        Route::get('','PartnerController@index');
+        Route::prefix('{partner}/status')->group(function() {
+            Route::get('','StatusController@check');
+            Route::get('non-approuvé','StatusController@notApprove');
+        });
+    });
+});
+
+
+// domain staff.khbarmdinty.com For Post Routes
+Route::domain('staff.khbarmdinty.com')->group(function () {
+    
+    Route::post('seconnecter', 'auth\StaffLoginController@login')->name('staff.login.submit');
+    
+    Route::prefix('partners/{partner}/status')->group(function() {
+        Route::post('créer','StatusController@store');
+        Route::post('approuver','StatusController@approve');
+    });
+
 });
 
 

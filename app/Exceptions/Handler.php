@@ -51,46 +51,4 @@ class Handler extends ExceptionHandler
         return parent::render($request, $exception);
     }
 
-    /**
-     * Convert an authentication exception into a response.
-     * Deppending on the guard it redirect to the convenient authentication page. 
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Illuminate\Auth\AuthenticationException  $exception
-     * @return \Illuminate\Http\Response
-     */
-    protected function unauthenticated($request, AuthenticationException $exception)
-    {
-        if($request->expectsJson())
-        {
-            return response()->json(['error' => 'Unauthenticated.'], 401);  
-        }
-
-        $guard = array_get($exception->guards(), 0);
-
-        switch($guard)
-        {
-            case 'staff' :
-                $this->authenticationCheck($guard) ? $login = "404" : $login = '/seconnecter';
-                break;
-        }
-        return redirect()->guest(url($login));
-    }
-
-    public function authenticationCheck($guard)
-    {
-        $guards = array("client", "partner", "staff");
-        $authenticated = false;
-        $index = array_search($guard,$guards);
-        $i=0;
-        while($i<3 && !$authenticated)
-        {
-            if($i != $index)
-            {
-                Auth::guard($guards[$i])->check() ?  $authenticated = true :  $authenticated = false;
-            }
-            $i++;
-        }
-        return $authenticated;
-    }
 }
