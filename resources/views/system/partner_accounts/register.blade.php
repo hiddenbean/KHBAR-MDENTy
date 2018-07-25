@@ -2,17 +2,18 @@
 @section('css')
     <link href="{{ asset('plugins/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" media="screen" /> 
 @stop 
-
 @section('body')
 
 <div class="register-container full-height sm-p-t-30">
     <div class="d-flex justify-content-center flex-column full-height ">
         <div class="logo_text"> KHBAR MDINTy</div>
-        <h3>Pages makes it easy to enjoy what matters the most in your life</h3>
+        <h3>Créer un compte de partenaire</h3>
         <p>
-            Create a pages account. If you have a facebook account, log into it for this process. Sign in with
-            <a href="#" class="text-info">Facebook</a> or
-            <a href="#" class="text-info">Google</a>
+            <small> 
+                Si vous avez un compte
+                <a href="#">facebook.</a> ou un compte
+                <a href="#">google.</a>, connectez-vous à ce processus.
+            </small>
         </p>
         <div class="row">
             <div class="col-md-12">
@@ -27,7 +28,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="" data-toggle="tab" href="#tab2" data-target="#tab2" role="tab">
-                                <i class="fa fa-user tab-icon"></i>
+                                <i class="fa fa-building tab-icon"></i>
                                 <span> Partenaire </span>
                             </a>
                         </li>
@@ -88,7 +89,7 @@
                                     </div>
                                     <div class="checkbox check-success  ">
                                         <input type="checkbox" value="1" id="agreement" name="agreement">
-                                        <label for="agreement">J'accepte</label>
+                                        <label for="agreement">J&apos;accepte</label>
                                     </div>
                                 </div>
                             </div>
@@ -97,60 +98,55 @@
                             <div class="row row-same-height">
                                 <div class="col-md-12">
                                     <div class="padding-30 sm-padding-5">
-                                        <p> Informations de base </p>
+                                        <p>Informations de base</p>
                                         <div class="form-group-attached">
                                             <div class="row clearfix">
                                                 <div class="col-sm-6">
                                                     <div class="form-group form-group-default required">
-                                                        <label for="company_name">Nom de la compagnie </label>
-                                                        <input type="text" id="company_name" name="company_name" class="form-control" required="">
-                                                    </div> 
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <div class="form-group form-group-default required">
-                                                        <label for="trade_registry">Registre du commerce </label>
-                                                        <input type="text" id="trade_registry" name="trade_registry" class="form-control" required="">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row clearfix">
-                                                <div class="col-sm-6">
-                                                    <div class="form-group form-group-default required">
-                                                        <label for="ice">Ice </label>
-                                                        <input type="text" id="ice" name="ice" class="form-control" required="">
+                                                        <label for="company_name">Nom de la compagnie</label>
+                                                        <input type="text" id="company_name" name="company_name" class="form-control">
+                                                        <label class='error' for='company_name'></label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <div class="form-group form-group-default required">
-                                                        <label for="taxe_id">Taxe ID</label>
-                                                        <input type="text" id="taxe_id" name="taxe_id" class="form-control" required="">
+                                                    <div class="form-group form-group-default">
+                                                        <label for="image">Photo</label>
+                                                        <input type="file" id="image" name="image" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <br>
                                         <div class="form-group form-group-default required">
-                                            <label for="about">À propos </label>
-                                            <textarea type="text" id="about" name="about" class="form-control" required=""></textarea>
+                                            <label for="about">À propos</label>
+                                            <textarea type="text" id="about" name="about" class="form-control"></textarea>
+                                            <label class='error' for='about'></label>
                                         </div>
                                         <!--  -->
-                                        <p> Adresse Information </p>
+                                        <p> Adresse </p>
                                         <div class="form-group-attached">
                                             <div class="form-group form-group-default required">
-                                                <label for="address"> Adresse </label>
-                                                <input type="text" id="address" name="address" class="form-control" placeholder="" required>
+                                                <label for="address">Adresse</label>
+                                                <input type="text" id="address" name="address" class="form-control" placeholder="">
+                                                <label class='error' for='address'></label>
+                                            </div>
+                                            <div class="form-group form-group-default">
+                                                <label for="address2">Deuxième ligne</label>
+                                                <input type="text" id="address2" name="address2" class="form-control" placeholder="">
                                             </div>
                                             <div class="row clearfix">
                                                 <div class="col-sm-6">
                                                     <div class="form-group form-group-default">
-                                                        <label for="country"> Pays </label>
-                                                        <input type="text" id="country" name="country" class="form-control" placeholder="" required>
+                                                        <label for="country">Pays</label>
+                                                        <input type="text" id="country" name="country" class="form-control" placeholder="">
+                                                        <label class='error' for='country'></label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <div class="form-group form-group-default">
                                                         <label for="city">Ville</label>
                                                         <input type="text" id="city" name="city" class="form-control">
+                                                        <label class='error' for='city'></label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -158,20 +154,22 @@
                                                 <div class="col-sm-9">
                                                     <div class="form-group form-group-default required">
                                                         <label for="full_name">Nom complet</label>
-                                                        <input type="text" id="full_name" name="full_name" class="form-control" placeholder="" required>
+                                                        <input type="text" id="full_name" name="full_name" class="form-control" placeholder="">
+                                                        <label class='error' for='full_name'></label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-3">
                                                     <div class="form-group form-group-default">
                                                         <label for="zip_code">Code postal</label>
                                                         <input type="text" id="zip_code" name="zip_code" class="form-control">
+                                                        <label class='error' for='zip_code'></label>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <!--  -->
                                         <br>
-                                        <p> Téléphone </p>
+                                        <p>Téléphone</p>
                                         <div class="form-group-attached">
                                             <div class="row clearfix">
                                                 <div class="col-md-6">
@@ -196,7 +194,8 @@
                                                         </div>
                                                         <div class="form-input-group flex-1">
                                                             <label>Téléphone N1</label>
-                                                            <input type="text" class="form-control">
+                                                            <input type="text" id="phone" name="phone" class="form-control">
+                                                            <label class='error' for='phone'></label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -221,26 +220,42 @@
                                                             </select>
                                                         </div>
                                                         <div class="form-input-group flex-1">
-                                                            <label>Téléphone N2Mot de passe</label>
-                                                            <input type="text" class="form-control">
+                                                            <label>Téléphone N2</label>
+                                                            <input type="text" id="phone_two" name="phone_two" class="form-control">
+                                                            <label class='error' for='phone_two'></label>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row clearfix">
                                                 <div class="col-sm-12">
-                                                    <div class="form-group form-group-default required">
-                                                        <label for="fax">Fax</label>
-                                                        <input type="text" id="fax" name="fax" class="form-control" placeholder="" required>
+                                                    <div class="form-group form-group-default input-group">
+                                                        <div class="cs-input-group-addon input-group-addon d-flex">
+                                                            <select class="cs-select cs-skin-slide cs-transparent" data-init-plugin="cs-select">
+                                                                <option data-countryCode="GB" value="44" Selected>UK (+44)</option>
+                                                                <option data-countryCode="US" value="1">USA (+1)</option>
+                                                                <option data-countryCode="UZ" value="7">Uzbekistan (+7)</option>
+                                                                <option data-countryCode="VU" value="678">Vanuatu (+678)</option>
+                                                                <option data-countryCode="VA" value="379">Vatican City (+379)</option>
+                                                                <option data-countryCode="VE" value="58">Venezuela (+58)</option>
+                                                                <option data-countryCode="VN" value="84">Vietnam (+84)</option>
+                                                                <option data-countryCode="VG" value="84">Virgin Islands - British (+1284)</option>
+                                                                <option data-countryCode="VI" value="84">Virgin Islands - US (+1340)</option>
+                                                                <option data-countryCode="WF" value="681">Wallis &amp; Futuna (+681)</option>
+                                                                <option data-countryCode="YE" value="969">Yemen (North)(+969)</option>
+                                                                <option data-countryCode="YE" value="967">Yemen (South)(+967)</option>
+                                                                <option data-countryCode="ZM" value="260">Zambia (+260)</option>
+                                                                <option data-countryCode="ZW" value="263">Zimbabwe (+263)</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-input-group flex-1">
+                                                            <label>Fax</label>
+                                                            <input type="text" id="fax" name="fax" class="form-control">
+                                                            <label class='error' for='fax'></label>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <!--  -->
-                                        <br>
-                                        <div class="form-group form-group-default required" aria-required="true">
-                                            <label for="image">Photo </label>
-                                            <input type="file" id="image" name="image" class="form-control" required>
                                         </div>
                                     </div>
                                 </div>
@@ -255,28 +270,47 @@
                                             <div class="row clearfix">
                                                 <div class="col-sm-6">
                                                     <div class="form-group form-group-default required">
-                                                        <label for="first_name"> Prénom </label>
-                                                        <input type="text" id="first_name" name="first_name" class="form-control" required>
+                                                        <label for="first_name">Prénom</label>
+                                                        <input type="text" id="first_name" name="first_name" class="form-control">
+                                                        <label class='error' for='first_name'></label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <div class="form-group form-group-default required">
-                                                        <label for="last_name"> Nom </label>
+                                                        <label for="last_name">Nom</label>
                                                         <input type="text" id="last_name" name="last_name" class="form-control">
+                                                        <label class='error' for='last_name'></label>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group form-group-default required">
                                                 <label for="email">Email</label>
-                                                <input type="text" id="email" name="email" class="form-control" required>
+                                                <input type="text" id="email" name="email" class="form-control">
+                                                <label class='error' for='email'></label>
                                             </div>
                                             <div class="form-group form-group-default required">
-                                                <label for="password"> Mot de passe </label>
-                                                <input type="password" id="password" name="password" class="form-control" required>
+                                                <label for="profession">Profession</label>
+                                                <input type="text" id="profession" name="profession" class="form-control">
+                                                <label class='error' for='profession'></label>
                                             </div>
-                                            <div class="form-group form-group-default required">
-                                                <label for="password_confirmation">Confirmation mot de passe</label>
-                                                <input type="password" id="password_confirmation" name="password_confirmation" class="form-control" required>
+                                            <div class="row clearfix">
+                                                <div class="col-md-6">
+                                                    <div class="form-group form-group-default required">
+                                                        <label for="password"> Mot de passe </label>
+                                                        <input type="password" id="password" name="password" class="form-control">
+                                                        <label class='error' for='password'></label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group form-group-default required">
+                                                        <label for="password_confirmation">Confirmation mot de passe</label>
+                                                        <input type="password" id="password_confirmation" name="password_confirmation" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group form-group-default">
+                                                <label for="image">Photo</label>
+                                                <input type="file" id="image" name="image" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -314,36 +348,30 @@
                                                 <td>
                                                     <div class="form-group form-group-default form-group-default-select2">
                                                         <label class="">Les sujets </label>
-                                                        <select class="full-width" data-placeholder="Select Country" data-init-plugin="select2">
-                                                            <optgroup label="Alaskan/Hawaiian Time Zone">
-                                                                <option value="AK">Alaska</option>
-                                                                <option value="HI">Hawaii</option>
-                                                            </optgroup>
-                                                            <optgroup label="Pacific Time Zone">
-                                                                <option value="CA">California</option>
-                                                                <option value="NV">Nevada</option>
-                                                                <option value="OR">Oregon</option>
-                                                                <option value="WA">Washington</option>
-                                                            </optgroup>
+                                                        <select name="topic" class="full-width" data-placeholder="Select Country" data-init-plugin="select2">
+                                                            <option value="AK">Alaska</option>
+                                                            <option value="HI">Hawaii</option>
+                                                            <option value="CA">California</option>
+                                                            <option value="NV">Nevada</option>
+                                                            <option value="OR">Oregon</option>
+                                                            <option value="WA">Washington</option>
                                                         </select>
                                                     </div>
+                                                    <label for="topic" class="error"></label>
                                                 </td>
                                                 <td>
                                                     <div class="form-group form-group-default form-group-default-select2">
-                                                        <label class="">Project</label>
+                                                        <label class="">sous sujets</label>
                                                         <select class="full-width" data-placeholder="Select Country" data-init-plugin="select2">
-                                                            <optgroup label="Alaskan/Hawaiian Time Zone">
-                                                                <option value="AK">Alaska</option>
-                                                                <option value="HI">Hawaii</option>
-                                                            </optgroup>
-                                                            <optgroup label="Pacific Time Zone">
-                                                                <option value="CA">California</option>
-                                                                <option value="NV">Nevada</option>
-                                                                <option value="OR">Oregon</option>
-                                                                <option value="WA">Washington</option>
-                                                            </optgroup>
+                                                            <option value="AK">Alaska</option>
+                                                            <option value="HI">Hawaii</option>
+                                                            <option value="CA">California</option>
+                                                            <option value="NV">Nevada</option>
+                                                            <option value="OR">Oregon</option>
+                                                            <option value="WA">Washington</option>
                                                         </select>
                                                     </div>
+                                                    <label for="topic" class="error"></label>
                                                 </td>
                                                 <td class=" col-lg-2 col-md-2 col-sm-2 text-right">
                                                     <button class="btn btn-primary">
@@ -360,17 +388,17 @@
                             <h1>MAP.</h1>
                         </div>
                         <div class="tab-pane slide-left padding-20 sm-no-padding" id="tab6">
-                            <h3> Partenaire Information</h3>
+                            <h3>Partenaire Information</h3>
                             <div class="row">
                                 <div class="col-md-4">
-                                    <h5> Nom de la compagnie: </h5>
+                                    <h5>Nom de la compagnie:</h5>
                                     <p>Nom de la compagnie </p>
 
-                                    <h5 class="p-t-15"> Ice: </h5>
-                                    <p>Nom de la compagnie </p>
+                                    <h5 class="p-t-15">Ice:</h5>
+                                    <p>Nom de la compagnie</p>
                                 </div>
                                 <div class="col-md-4">
-                                    <h5> Registre du commerce: </h5>
+                                    <h5>Registre du commerce:</h5>
                                     <p>Registre du commerce </p>
 
                                     <h5 class="p-t-15"> Taxe ID: </h5>
@@ -382,7 +410,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <h5> À propos: </h5>
+                                    <h5>À propos:</h5>
                                     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas optio odio, magnam iste
                                         impedit deserunt eaque nostrum libero dicta ullam officia corrupti! Velit quia explicabo
                                         repellendus iusto praesentium neque adipisci?magnam iste impedit deserunt eaque nostrum
@@ -393,40 +421,61 @@
                             <hr>
                             <div class="row">
                                 <div class="col-md-4">
-                                    <h5> Adresse: </h5>
-                                    <p>77 Rue de Verdun </p>
+                                    <h5>Adresse:</h5>
+                                    <p>77 Rue de Verdun</p>
                                 </div>
                                 <div class="col-md-4">
-                                    <h5> Pays: </h5>
-                                    <p> France </p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <h5> Ville: </h5>
-                                    <p> MONTÉLIMAR </p>
-                                </div>
-                                <div class="col-md-4">
-                                    <h5> Nom complet: </h5>
-                                    <p> Ila A Courcelle </p>
-                                </div>
-                                <div class="col-md-4">
-                                    <h5> Code postal: </h5>
-                                    <p> 26200 </p>
+                                    <h5>Pays:</h5>
+                                    <p>France</p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4">
-                                    <h5> Téléphone N1: </h5>
-                                    <p> (+212) 04.33.00.97070 </p>
+                                    <h5>Ville:</h5>
+                                    <p>MONTÉLIMAR</p>
                                 </div>
                                 <div class="col-md-4">
-                                    <h5> Téléphone N2: </h5>
-                                    <p> (+212) 04.33.00.97070 </p>
+                                    <h5>Nom complet:</h5>
+                                    <p>Ila A Courcelle</p>
                                 </div>
                                 <div class="col-md-4">
-                                    <h5> Fax: </h5>
-                                    <p> 04.33.00.97070 </p>
+                                    <h5>Code postal:</h5>
+                                    <p>26200</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h5>Téléphone N1:</h5>
+                                    <p>(+212) 04.33.00.97070 /p>
+                                </div>
+                                <div class="col-md-4">
+                                    <h5>Téléphone N2:</h5>
+                                    <p>(+212) 04.33.00.97070</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <h5>Fax:</h5>
+                                    <p>04.33.00.97070</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <h3>Partenaire Account</h3>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h5>Nom:</h5>
+                                    <p>Nom de la compagnie </p>
+
+                                    <h5 class="p-t-15">Prénom</h5>
+                                    <p>Nom de la compagnie</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <h5>Email:</h5>
+                                    <p>rachiddaim1@gmial.com</p>
+
+                                    <h5 class="p-t-15">Profession:</h5>
+                                    <p>Administrateur</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <img src="{{ asset('img/profiles/b2x.jpg') }}" alt="" srcset="">
                                 </div>
                             </div>
                         </div>
@@ -434,17 +483,17 @@
                             <ul class="pager wizard no-style">
                                 <li class="next">
                                     <button class="btn btn-primary btn-cons btn-animated from-left fa fa-truck pull-right" type="button">
-                                        <span> Suivant </span>
+                                        <span>Suivant</span>
                                     </button>
                                 </li>
                                 <li class="next finish hidden">
                                     <button class="btn btn-primary btn-cons btn-animated from-left fa fa-cog pull-right" type="button">
-                                        <span> Terminer </span>
+                                        <span>Terminer</span>
                                     </button>
                                 </li>
                                 <li class="previous first hidden">
                                     <button class="btn btn-default btn-cons btn-animated from-left fa fa-cog pull-right" type="button">
-                                        <span> Premier </span>
+                                        <span>Premier</span>
                                     </button>
                                 </li>
                                 <li class="previous">
