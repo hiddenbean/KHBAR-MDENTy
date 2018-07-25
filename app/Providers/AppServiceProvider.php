@@ -3,7 +3,10 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+//Schema DB connection
 use Illuminate\Support\Facades\Schema;
+//Add a mapping for the polymorphic relationships
+use Illuminate\Database\Eloquent\Relations\Relation;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -15,6 +18,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+        Relation::morphMap([
+            'partner_account' => 'App\PartnerAccount',
+            'partner' => 'App\Partner',
+         ]);
     }
 
     /**

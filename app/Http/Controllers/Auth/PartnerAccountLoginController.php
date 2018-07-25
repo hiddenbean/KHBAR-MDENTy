@@ -33,7 +33,7 @@ class PartnerAccountLoginController extends Controller
      */
     public function __construct()
     {
-    //    $this->middleware('guest:partner');
+        $this->middleware('guest:partner-account')->except('logout');
     }
 
 
@@ -78,29 +78,27 @@ class PartnerAccountLoginController extends Controller
      */
     public function login(Request $request)
     {
-
-        $login = $request->email;
+        $login = $request->login;
         $loginType = self::loginType($login);
         $this->validateReqeust($request, $loginType);
 
-        switch ($loginType) {
+        switch ($loginType) 
+        {
             case 'email':
-                if(Auth::guard('partner-account')->attempt($request->only('email', 'password'), $request->remember))
+                if(Auth::guard('partner-account')->attempt(['email' => $request->login, 'password' => $request->password], $request->remember))
                 {
                     // return redirect()->intended('/');
                     return redirect('/');
                 }
                 break;
                 case 'username':
-                if(Auth::guard('partner-account')->attempt(['name' => $request->email, 'password' => $request->password], $request->remember))
+                if(Auth::guard('partner-account')->attempt(['name' => $request->login, 'password' => $request->password], $request->remember))
                 {
                     // return redirect()->intended('/');
                     return redirect('/');
 
                 }
                 break;
-            
-          
         }
         return redirect()->back();
       
@@ -114,10 +112,21 @@ class PartnerAccountLoginController extends Controller
      */
     public function validateReqeust(Request $request, $loginType)
     {
-        $request->validate([
-            'email' => 'required',
-            'password' => 'required|min:6',
-        ]);
+        if($loginType == 'email')
+        {
+            $request->validate([
+                'login' => 'required|email|exists:partner_accounts,email',
+                'password' => 'required|min:6',
+            ]);
+        }
+        else
+        {
+            $request->validate([
+                'login' => 'required|exists:partner_accounts,name',
+                'password' => 'required|min:6',
+            ]);
+        }
+       
     }
    /**
      * Log the partner out of the application.

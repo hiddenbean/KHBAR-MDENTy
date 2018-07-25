@@ -18,10 +18,9 @@ class CreatePartnersTable extends Migration
             $table->string('company_name');
             $table->string('name')->unique();
             $table->text('about')->nullable();
-            $table->string('status');
             $table->string('trade_registry')->nullable();
             $table->string('ice')->nullable();
-            $table->string('taxe_id');
+            $table->string('tax_id');
             $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();

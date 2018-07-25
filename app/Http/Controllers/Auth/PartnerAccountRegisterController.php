@@ -12,7 +12,7 @@ use App\Http\Controllers\Controller;
 // use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
-class PartnerRegisterController extends Controller
+class PartnerAccountRegisterController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
@@ -51,15 +51,14 @@ class PartnerRegisterController extends Controller
      * @param  \Illuminate\Http\Request.
      * @return void.
      */
-    protected function validateRequest(Request $request)
+    public function validateRequest(Request $request)
     {
         $request->validate([
-            'name' => 'required|unique:partners,name',
-            'company_name' => 'required',
-            'trade_registry' => 'required',
-            'ice' => 'required',
-            'taxe_id' => 'required',
-            'about' => 'required',
+            'email' => 'required|unique:partner_accounts,email',
+            'password' => 'required|min:6',
+            'name' => 'required|unique:partner_accounts,name',
+            'first_name' => 'required',
+            'last_name' => 'required',
         ]);
     }
 
@@ -74,21 +73,9 @@ class PartnerRegisterController extends Controller
      * @param  \Illuminate\Http\Request.
      * @return \Illuminate\Http\Response.
      */
-    protected function store(Request $request)
+    public function store(Request $request)
     {
-        $this->validateRequest($request); 
-        
-
-        $partner = Partner::create([
-            $request->only(
-                'company_name', 
-                'name', 'about', 
-                'tax_id', 
-                'ice', 
-                'trade_registry'
-            ), 
-            'status' => '0',
-            ]);
+        $this->validateRequest($request);
         
         
         $password = bcrypt($request->password);
@@ -96,17 +83,19 @@ class PartnerRegisterController extends Controller
         while(PartnerAccount::where('name', $name)->first()){
             $name = $name.'_'.rand(0,9);
         }
-        $partnerAccount = new PartnerAccount();
-        $partnerAccount->first_name = $request->first_name;
-        $partnerAccount->last_name = $request->last_name;
-        $partnerAccount->email = $request->email;
-        $partnerAccount->name = $name;
-        $partnerAccount->password = $password;
-        $partnerAccount->partner_id = $partner->id;
-        $partnerAccount->save();       
+        $partnerAccount = PartnerAccount::create([
+            'email' => $request->email,
+            'password' => $password,
+            'name' => $name,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'partner_id' => $request->partner_id,
+            'taxe_id' => $request->tax_id,
+        ]);       
         
         // return $partnerAccount;
         $this->guardsLogout();
+        return $partnerAccount;
         Auth::guard('partner-account')->login($partnerAccount);
         return redirect('/');
     }

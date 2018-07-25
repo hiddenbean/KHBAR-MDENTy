@@ -18,19 +18,18 @@ Route::get('home', 'HomeController@index')->name('home');
 
 Route::domain('partenaire.khbarmdinty.com')->group(function () {
 
-    Route::get('/', 'PartnerController@index');
+    Route::get('/', 'PartnerController@home');
     Route::get('inscription/', 'auth\PartnerRegisterController@showRegisterForm');
     Route::get('seconnecter/', 'auth\PartnerAccountLoginController@showLoginForm');
     Route::get('deconnecter/', 'auth\PartnerAccountLoginController@logout');
 
-    Auth::routes();
 });
 
 
 Route::domain('partenaire.khbarmdinty.com')->group(function () {
     
      Route::post('seconnecter', 'auth\PartnerAccountLoginController@login')->name('partner.login');
-     Route::post('inscription', 'auth\PartnerRegisterController@store')->name('partner.register.submit');
+     Route::post('inscription', 'PartnerController@store')->name('partner.register.submit');
 
 });
 

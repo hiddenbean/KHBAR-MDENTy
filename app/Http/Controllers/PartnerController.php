@@ -3,27 +3,28 @@
 namespace App\Http\Controllers;
 use Auth;
 use App\Partner;
+use App\PartnerAccount;
+use App\Address;
+use App\Picture;
+use App\Phone;
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\Auth\PartnerAccountRegisterController;
+use App\Http\Controllers\AddressController;
+use App\Http\Controllers\PictureController;
+use App\Http\Controllers\PhoneController;
 class PartnerController extends Controller
 {
 
     public function __construct()
     {
-        $this->middleware('auth:partner-account')->except('stoere');
+        $this->middleware('auth:partner-account')->except('store');
     }
 
-    protected function validateRequest(Request $request)
+    public function home()
     {
-        $request->validate([
-            'name' => 'required|unique:partners,name',
-            'company_name' => 'required',
-            'trade_registry' => 'required',
-            'ice' => 'required',
-            'taxe_id' => 'required',
-            'about' => 'required',
-        ]);
+        return view('partners.home');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -44,6 +45,18 @@ class PartnerController extends Controller
         
     }
 
+    protected function validateRequest(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|unique:partners,name',
+            'company_name' => 'required',
+            'trade_registry' => 'required',
+            'ice' => 'required',
+            'tax_id' => 'required',
+            'about' => 'required',
+        ]);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -53,16 +66,93 @@ class PartnerController extends Controller
     public function store(Request $request)
     {
         $this->validateRequest($request);
+        $PartnerAccountRegisterController = new PartnerAccountRegisterController();
+        $PartnerAccountRegisterController->validateRequest($request);
+        
+        $AddressController = new AddressController();
+        $AddressController->validateRequest($request);
+        
+        $PictureController = new PictureController();
+        $PictureController->validateRequest($request);
+        
+        $PhoneController = new PhoneController();
+        $PhoneController->validateRequest($request);
+        
+        $partner = Partner::create([
+            'company_name' => $request->company_name,
+            'name' => $request->name,
+            'about' => $request->about,
+            'trade_registry' => $request->trade_registry,
+            'ice' => $request->ice,
+            'tax_id' => $request->tax_id,
+            ]);
 
-        $partner = new Partner();
-        $partner->company_name = $request->company_name;
-        $partner->name = $request->name;
-        $partner->about = $request->about;
-        $partner->taxe_id = $request->taxe_id;
-        $partner->ice = $request->ice;
-        $partner->trade_registry = $request->trade_registry;
-        $partner->status = '0';
-        $partner->save();
+        $address = Address::create([
+            'address' => $request->address,
+            'address_two' => $request->address_two,
+            'full_name' => $request->full_name,
+            'country' => $request->country,
+            'city' => $request->city,
+            'zip_code' => $request->zip_code,
+            'longitude' => $request->longitude,
+            'latitude' => $request->latitude,
+            'addressable_type' => 'partner',
+            'addressable_id' => $partner->id,
+        ]);
+
+        if($request->hasFile('path')) 
+        {
+            $picture = Picture::create([
+                'name' => $request->company_name,
+                'tag' => "partner_avatar",
+                'path' => $request->file('path')->store('images/partners', 'public'),
+                'extension' => $request->file('path')->extension(),
+                'pictureable_type' => 'partner',
+                'pictureable_id' => $partner->id,
+            ]);
+        }
+        
+
+        foreach($request->number as $key => $number)
+        {
+            if($number != null)
+            {
+                $phone = Phone::create([
+                    'number' => $number,
+                    'type' => 'fix',
+                    'code_country_id' => $request->code_country[$key],
+                    'phoneable_type' => 'partner',
+                    'phoneable_id' => $partner->id,
+                ]);
+            }
+        }
+
+        if($request->fax_number)
+            {
+                $phone = Phone::create([
+                    'number' => $request->fax_number,
+                    'type' => 'fax',
+                    'code_country_id' => $request->code_country[2],
+                    'phoneable_type' => 'partner',
+                    'phoneable_id' => $partner->id,
+                ]);
+            }
+
+        $password = bcrypt($request->password);
+        $name = str_before($request->email, '@');
+        while(PartnerAccount::where('name', $name)->first()){
+            $name = $name.'_'.rand(0,9);
+        }
+        $partner_account = PartnerAccount::create([
+            'email' => $request->email,
+            'password' => $password,
+            'name' => $name,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'partner_id' => $partner->id,
+        ]);
+        auth()->guard('partner-account')->login($partner_account);
+        return redirect('/');
     }
 
     /**
