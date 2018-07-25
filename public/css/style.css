@@ -101,7 +101,32 @@ fieldset[disabled] .btn-primary.active {
     border-color: #33691E;
 }
 
-.form-group-default textarea.form-control
-{
+.form-group-default textarea.form-control {
     min-height: 150px;
+}
+
+.pg-close {
+    color: red;
+}
+
+.pointer-e-n {
+    pointer-events: none;
+}
+
+.choose_photo {
+    position: absolute;
+    top: 9px;
+    right: 10px;
+    bottom: 10px;
+    left: 10px;
+}
+
+.choose_photo span {
+    padding: 5px;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.choose_photo:hover {
+    color: #33691E;
+    cursor: pointer;
 }
