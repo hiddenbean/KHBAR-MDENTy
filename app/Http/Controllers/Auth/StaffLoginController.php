@@ -79,25 +79,21 @@ class StaffLoginController extends Controller
         $login = $request->login;
         $loginType = self::loginType($login);
         $this->validateReqeust($request);
-        // dd(Auth::guard('staff')->attempt(['email'=>$request->input('login'), 'password'=>$request->input('password')], $request->remember));
         if($loginType == 'email')
         {
             if(Auth::guard('staff')->attempt(['email'=>$request->input('login'), 'password'=>$request->input('password')], $request->remember))
             {
                 //$this->sessionRegenerate();
                 //dd(Auth::id());
-                return redirect()->intended(url('/'));
+                return redirect()->intended(url('/partners'));
             }
-            //return redirect()->back();
         }
         else
         {
             if(Auth::guard('staff')->attempt(['name'=>$request->input('login'), 'password'=>$request->input('password')], $request->remember))
             {
-                return Auth::id();
-                return redirect()->intended('/');
+                return redirect()->intended('/partners');
             }
-            return redirect()->back();
         }
      
     }
