@@ -1,10 +1,5 @@
-@extends('layouts.partner.app') 
-
-@section('css')
-    <link href="{{ asset('plugins/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" media="screen" /> 
-@stop 
-
-@section('body')
+@extends('layouts.partner.app') @section('css')
+<link href="{{ asset('plugins/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" media="screen" /> @stop @section('body')
 
 <div class="register-container full-height sm-p-t-30">
     <div class="d-flex justify-content-center flex-column full-height ">
@@ -279,54 +274,43 @@
                                 <div class="col-md-12">
                                     <div class="padding-30 sm-padding-5">
                                         <p>Partenaire Account</p>
+
                                         <div class="form-group-attached">
                                             <div class="row clearfix">
                                                 <div class="col-sm-8">
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <div class="form-group form-group-default required">
-                                                                <label for="first_name">Prénom</label>
-                                                                <input type="text" id="first_name" name="first_name" class="form-control">
-                                                                <label class='error' for='first_name'></label>
-                                                            </div>
+                                                    <div class="form-group-attached">
+                                                        <div class="form-group form-group-default required">
+                                                            <label for="first_name">Prénom</label>
+                                                            <input type="text" id="first_name" name="first_name" class="form-control">
+                                                            <label class='error' for='first_name'></label>
                                                         </div>
-                                                        <div class="col-md-12">
-                                                            <div class="form-group form-group-default required">
-                                                                <label for="last_name">Nom</label>
-                                                                <input type="text" id="last_name" name="last_name" class="form-control">
-                                                                <label class='error' for='last_name'></label>
-                                                            </div>
+                                                        <div class="form-group form-group-default required">
+                                                            <label for="last_name">Nom</label>
+                                                            <input type="text" id="last_name" name="last_name" class="form-control">
+                                                            <label class='error' for='last_name'></label>
                                                         </div>
-                                                        <div class="col-md-12">
-                                                            <div class="form-group form-group-default required">
-                                                                <label for="profession">Profession</label>
-                                                                <input type="text" id="profession" name="profession" class="form-control">
-                                                                <label class='error' for='profession'></label>
-                                                            </div>
+                                                        <div class="form-group form-group-default required">
+                                                            <label for="post">Post</label>
+                                                            <input type="text" id="post" name="post" class="form-control">
+                                                            <label class='error' for='post'></label>
                                                         </div>
-                                                        <div class="col-md-12">
-                                                            <div class="form-group form-group-default required">
-                                                                <label for="email">Email</label>
-                                                                <input type="text" id="email" name="email" class="form-control">
-                                                                <label class='error' for='email'></label>
-                                                            </div>
+                                                        <div class="form-group form-group-default required">
+                                                            <label for="email">Email</label>
+                                                            <input type="text" id="email" name="email" class="form-control">
+                                                            <label class='error' for='email'></label>
                                                         </div>
-                                                        <div class="col-md-12">
-                                                            <div class="form-group-attached">
-                                                                <div class="row clearfix">
-                                                                    <div class="col-md-6">
-                                                                        <div class="form-group form-group-default required">
-                                                                            <label for="password"> Mot de passe </label>
-                                                                            <input type="password" id="password" name="password" class="form-control">
-                                                                            <label class='error' for='password'></label>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <div class="form-group form-group-default required">
-                                                                            <label for="password_confirmation">Confirmation mot de passe</label>
-                                                                            <input type="password" id="password_confirmation" name="password_confirmation" class="form-control">
-                                                                        </div>
-                                                                    </div>
+                                                        <div class="row clearfix">
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group form-group-default required">
+                                                                    <label for="password"> Mot de passe </label>
+                                                                    <input type="password" id="password" name="password" class="form-control">
+                                                                    <label class='error' for='password'></label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group form-group-default required">
+                                                                    <label for="password_confirmation">Confirmation mot de passe</label>
+                                                                    <input type="password" id="password_confirmation" name="password_confirmation" class="form-control">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -334,7 +318,7 @@
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="form-group form-group-default">
-                                                        <img src="{{ asset('img/img_placeholder.png') }}" id="image_preview_partner_account" alt="" srcset=""width="250">
+                                                        <img src="{{ asset('img/img_placeholder.png') }}" id="image_preview_partner_account" alt="" srcset="" width="250">
                                                         <label for="path_partner_account" class="choose_photo">
                                                             <span>
                                                                 <i class="fa fa-image"></i> Choisir une photo</span>
@@ -550,9 +534,7 @@
 </div>
 
 
-@stop 
-
-@section('script')
+@stop @section('script')
 <script src="{{ asset('plugins/bootstrap-form-wizard/js/jquery.bootstrap.wizard.min.js') }}" type="text/javascript"></script>
 <script type="text/javascript" src="{{ asset('plugins/classie/classie.js') }}"></script>
 <script src="{{ asset('js/form_wizard.js') }} " type="text/javascript"></script>
@@ -576,7 +558,7 @@
             var files = !!_this.files ? _this.files : [];
             if (!files.length || !window.FileReader) return;
 
-            if (/^image/.test(files[0].type)) {  
+            if (/^image/.test(files[0].type)) {
                 var ReaderObj = new FileReader();
                 ReaderObj.readAsDataURL(files[0]);
                 ReaderObj.onloadend = function () {
