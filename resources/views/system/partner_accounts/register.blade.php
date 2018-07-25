@@ -53,7 +53,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="pointer-e-n" data-toggle="tab" href="#tab5" data-target="#tab6" role="tab">
+                            <a class="pointer-e-n" data-toggle="tab" href="#tab6" data-target="#tab6" role="tab">
                                 <i class="fa fa-address-book tab-icon"></i>
                                 <span> Résumé </span>
                             </a>
@@ -134,7 +134,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <!--  -->
+                                        <!--  Information address -->
                                         <br>
                                         <p> Adresse </p>
                                         <div class="form-group-attached">
@@ -180,7 +180,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <!--  -->
+                                        <!-- Phone information -->
                                         <br>
                                         <p>Téléphone</p>
                                         <div class="form-group-attached">
@@ -521,7 +521,7 @@
                         <div class="padding-20 sm-padding-5 sm-m-b-20 sm-m-t-20 bg-white clearfix">
                             <ul class="pager wizard no-style">
                                 <li class="next">
-                                    <button class="btn btn-primary btn-cons btn-animated from-left fa fa-truck pull-right" type="button">
+                                    <button class="btn btn-primary btn-cons btn-animated from-left fa fa-building pull-right" type="button">
                                         <span>Suivant</span>
                                     </button>
                                 </li>
