@@ -11,13 +11,6 @@
 |
 */
 
-
-
-/*
-|--------------------------------------------------------------------------
-| defining all (partenaire) domain GET routes here
-|
-*/
 Route::domain('www.khbarmdenty.com')->group(function (){
 
     Route::get('/', function(){
@@ -31,6 +24,30 @@ Route::domain('www.khbarmdenty.com')->group(function (){
 
 });
 
+/*
+|--------------------------------------------------------------------------
+| defining all (partenaire) domain GET routes here
+|
+*/
+
+Route::get('home', 'HomeController@index')->name('home');
+
+Route::domain('partenaire.khbarmdinty.com')->group(function () {
+
+    Route::get('/', 'PartnerController@home');
+    Route::get('inscription/', 'auth\PartnerRegisterController@showRegisterForm');
+    Route::get('seconnecter/', 'auth\PartnerAccountLoginController@showLoginForm');
+    Route::get('deconnecter/', 'auth\PartnerAccountLoginController@logout');
+
+});
+
+
+Route::domain('partenaire.khbarmdinty.com')->group(function () {
+    
+     Route::post('/seconnecter', 'auth\PartnerAccountLoginController@login')->name('partner.login');
+     Route::post('inscription', 'PartnerController@store')->name('partner.register.submit');
+     Route::post('map/', 'PartnerController@test');
+});
 Route::domain('{partenaire}.khbarmdenty.com')->group(function (){
 
     // partner authentication route start
@@ -75,6 +92,3 @@ Route::domain('staff.khbarmdinty.com')->group(function () {
     });
 
 });
-
-
-
