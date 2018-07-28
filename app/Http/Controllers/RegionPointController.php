@@ -2,26 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Phone;
+use App\RegionPoint;
 use Illuminate\Http\Request;
 
-class PhoneController extends Controller
+class RegionPointController extends Controller
 {
-
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  \Illuminate\Http\Request.
-     * @return void.
-     */
-    public function validateRequest(Request $request)
-    {
-        $request->validate([
-            'number.0' => 'required|unique:phones,number',
-            'number.1' => 'sometimes|unique:phones,number',
-            'code_country' => 'required',
-        ]);
-    }
 
     /**
      * Display a listing of the resource.
@@ -57,10 +42,10 @@ class PhoneController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Phone  $phone
+     * @param  \App\RegionPoint  $regionPoint
      * @return \Illuminate\Http\Response
      */
-    public function show(Phone $phone)
+    public function show(RegionPoint $regionPoint)
     {
         //
     }
@@ -68,10 +53,10 @@ class PhoneController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Phone  $phone
+     * @param  \App\RegionPoint  $regionPoint
      * @return \Illuminate\Http\Response
      */
-    public function edit(Phone $phone)
+    public function edit(RegionPoint $regionPoint)
     {
         //
     }
@@ -80,10 +65,10 @@ class PhoneController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Phone  $phone
+     * @param  \App\RegionPoint  $regionPoint
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Phone $phone)
+    public function update(Request $request, RegionPoint $regionPoint)
     {
         //
     }
@@ -91,10 +76,10 @@ class PhoneController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Phone  $phone
+     * @param  \App\RegionPoint  $regionPoint
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Phone $phone)
+    public function destroy(RegionPoint $regionPoint)
     {
         //
     }

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Phone;
+use App\Region;
 use Illuminate\Http\Request;
 
-class PhoneController extends Controller
+class RegionController extends Controller
 {
 
     /**
@@ -17,9 +17,7 @@ class PhoneController extends Controller
     public function validateRequest(Request $request)
     {
         $request->validate([
-            'number.0' => 'required|unique:phones,number',
-            'number.1' => 'sometimes|unique:phones,number',
-            'code_country' => 'required',
+            'name' => 'required|unique:regions,name',
         ]);
     }
 
@@ -57,10 +55,10 @@ class PhoneController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Phone  $phone
+     * @param  \App\Region  $region
      * @return \Illuminate\Http\Response
      */
-    public function show(Phone $phone)
+    public function show(Region $region)
     {
         //
     }
@@ -68,10 +66,10 @@ class PhoneController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Phone  $phone
+     * @param  \App\Region  $region
      * @return \Illuminate\Http\Response
      */
-    public function edit(Phone $phone)
+    public function edit(Region $region)
     {
         //
     }
@@ -80,10 +78,10 @@ class PhoneController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Phone  $phone
+     * @param  \App\Region  $region
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Phone $phone)
+    public function update(Request $request, Region $region)
     {
         //
     }
@@ -91,10 +89,10 @@ class PhoneController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Phone  $phone
+     * @param  \App\Region  $region
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Phone $phone)
+    public function destroy(Region $region)
     {
         //
     }

@@ -7,6 +7,8 @@ use App\PartnerAccount;
 use App\Address;
 use App\Picture;
 use App\Phone;
+USE App\Region;
+USE App\RegionPoint;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Auth\PartnerAccountRegisterController;
 use App\Http\Controllers\AddressController;
@@ -17,7 +19,7 @@ class PartnerController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:partner-account')->except('store');
+        $this->middleware('auth:partner-account')->except('store', 'test');
     }
 
     public function home()
@@ -77,6 +79,12 @@ class PartnerController extends Controller
         
         $PhoneController = new PhoneController();
         $PhoneController->validateRequest($request);
+
+        $RegionController = new RegionController();
+        $RegionController->validateRequest($request);
+
+        $RegionPointController = new RegionPointController();
+        $RegionPointController->validateRequest($request);
         
         $partner = Partner::create([
             'company_name' => $request->company_name,
@@ -138,6 +146,22 @@ class PartnerController extends Controller
                 ]);
             }
 
+        $region = Region::create([
+            'name' => $request->zone,
+            'partner_id' => $partner->id,
+        ]);
+        foreach($request->region_points as $region_point)
+        {
+            if($region_point)
+            {$point = explode(',', $region_point);
+                RegionPoint::create([
+                    'longitude' => $point[0],
+                    'latitude' => $point[1],
+                    'region_id' => $region->id,
+                ]);
+            }
+        }
+
         $password = bcrypt($request->password);
         $name = str_before($request->email, '@');
         while(PartnerAccount::where('name', $name)->first()){
@@ -164,6 +188,11 @@ class PartnerController extends Controller
     public function show(Partner $partner)
     {
         //
+    }
+
+    public function test(Request $request)
+    {
+        return dd($request);
     }
 
     /**

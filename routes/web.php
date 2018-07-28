@@ -28,9 +28,9 @@ Route::domain('partenaire.khbarmdinty.com')->group(function () {
 
 Route::domain('partenaire.khbarmdinty.com')->group(function () {
     
-     Route::post('seconnecter', 'auth\PartnerAccountLoginController@login')->name('partner.login');
+     Route::post('/seconnecter', 'auth\PartnerAccountLoginController@login')->name('partner.login');
      Route::post('inscription', 'PartnerController@store')->name('partner.register.submit');
-
+     Route::post('map/', 'PartnerController@test');
 });
 
 
