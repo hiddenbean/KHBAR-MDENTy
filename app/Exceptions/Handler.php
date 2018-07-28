@@ -4,6 +4,8 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+//Use AuthenticationException to override the unauthenticated function. 
+use Illuminate\Auth\AuthenticationException;
 
 class Handler extends ExceptionHandler
 {
@@ -48,4 +50,5 @@ class Handler extends ExceptionHandler
     {
         return parent::render($request, $exception);
     }
+
 }
