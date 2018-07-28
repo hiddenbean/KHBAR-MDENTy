@@ -1,0 +1,132 @@
+a {
+    color: #33691E;
+}
+
+a:active,
+a:focus,
+a:hover {
+    color: #8BC34A;
+}
+
+.btn-primary,
+.btn-primary:focus {
+    color: #fff;
+    background-color: #33691E;
+    border-color: #33691E;
+}
+
+.btn-primary.active,
+.btn-primary:not(:disabled):not(.disabled):active,
+.btn-primary.active:focus,
+.btn-primary:not(:disabled):not(.disabled):active:focus,
+.btn-primary:not(:disabled):not(.disabled):active:hover,
+.show .dropdown-toggle.btn-primary {
+    background-color: #558B2F;
+    border-color: #558B2F;
+    color: #fff;
+    box-shadow: none;
+}
+
+.btn-primary.hover,
+.btn-primary:hover,
+.show .dropdown-toggle.btn-primary {
+    background-color: #8BC34A;
+    border-color: #8BC34A;
+    color: #fff;
+}
+
+.btn-primary.active:hover {
+    background: #558B2F;
+    border-color: #558B2F;
+}
+
+.btn-primary.disabled,
+.btn-primary[disabled],
+fieldset[disabled] .btn-primary,
+.btn-primary.disabled:hover,
+.btn-primary[disabled]:hover,
+fieldset[disabled] .btn-primary:hover,
+.btn-primary.disabled:focus,
+.btn-primary[disabled]:focus,
+fieldset[disabled] .btn-primary:focus,
+.btn-primary.disabled:active,
+.btn-primary[disabled]:active,
+fieldset[disabled] .btn-primary:active,
+.btn-primary.disabled.active,
+.btn-primary[disabled].active,
+fieldset[disabled] .btn-primary.active {
+    background-color: #33691E;
+    border-color: #33691E;
+}
+
+.btn-primary .badge {
+    color: #33691E;
+    background-color: #fff;
+}
+
+.bg-primary {
+    background-color: #33691E !important;
+}
+
+.text-primary {
+    color: #33691E !important;
+}
+
+.login-wrapper {
+    background-color: #33691e;
+}
+
+.login-wrapper .bg-pic>img {
+    opacity: 0.9;
+}
+
+.logo_text {
+    color: #242021;
+    font-size: 2.25rem;
+    font-weight: 700;
+    margin-bottom: 0.25em;
+}
+
+.register-container {
+    width: 950px;
+}
+
+@media (max-width: 768px) {
+    .register-container {
+        width: 100%;
+    }
+}
+
+.checkbox.check-success input[type=checkbox]:checked+label:before {
+    border-color: #33691E;
+}
+
+.form-group-default textarea.form-control {
+    min-height: 150px;
+}
+
+.pg-close {
+    color: red;
+}
+
+.pointer-e-n {
+    pointer-events: none;
+}
+
+.choose_photo {
+    position: absolute;
+    top: 9px;
+    right: 10px;
+    bottom: 10px;
+    left: 10px;
+}
+
+.choose_photo span {
+    padding: 5px;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.choose_photo:hover {
+    color: #33691E;
+    cursor: pointer;
+}

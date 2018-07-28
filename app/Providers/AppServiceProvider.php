@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Schema;
 //Add a mapping for the polymorphic relationships
 use Illuminate\Database\Eloquent\Relations\Relation;
 
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -17,6 +18,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        //Fixing "SQLSTATE[42000] - key was too long" - by Hicham
         Schema::defaultStringLength(191);
         Relation::morphMap([
             'partner_account' => 'App\PartnerAccount',

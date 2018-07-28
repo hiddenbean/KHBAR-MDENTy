@@ -1,7 +1,8 @@
 <?php
 
+
 namespace App\Http\Controllers;
-use Auth;
+
 use App\Partner;
 use App\PartnerAccount;
 use App\Address;
@@ -26,7 +27,7 @@ class PartnerController extends Controller
     {
         return view('partners.home');
     }
-
+  
     /**
      * Display a listing of the resource.
      *
@@ -34,7 +35,10 @@ class PartnerController extends Controller
      */
     public function index()
     {
-        return 'You Are A Partner space'.Auth::id();
+       $data['partners'] = Partner::all();
+       $appr = isset($data['partners'][0]->statues->last()->is_approved) ? $data['partners'][0]->statues->last()->is_approved : 'tazz';
+    //    return $appr;
+       return view('partners.index',$data);
     }
 
     /**
@@ -44,7 +48,7 @@ class PartnerController extends Controller
      */
     public function create()
     {
-        
+        //
     }
 
     protected function validateRequest(Request $request)
@@ -182,26 +186,21 @@ class PartnerController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Partner  $partner
+     * @param  \App\partner  $partner
      * @return \Illuminate\Http\Response
      */
-    public function show(Partner $partner)
+    public function show(partner $partner)
     {
         //
-    }
-
-    public function test(Request $request)
-    {
-        return dd($request);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Partner  $partner
+     * @param  \App\partner  $partner
      * @return \Illuminate\Http\Response
      */
-    public function edit(Partner $partner)
+    public function edit(partner $partner)
     {
         //
     }
@@ -210,10 +209,10 @@ class PartnerController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Partner  $partner
+     * @param  \App\partner  $partner
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Partner $partner)
+    public function update(Request $request, partner $partner)
     {
         //
     }
@@ -221,10 +220,10 @@ class PartnerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Partner  $partner
+     * @param  \App\partner  $partner
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Partner $partner)
+    public function destroy(partner $partner)
     {
         //
     }
