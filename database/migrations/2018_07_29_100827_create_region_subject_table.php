@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRegionsTopicTable extends Migration
+class CreateRegionSubjectTable extends Migration
 {
     /**
      * Run the migrations.
@@ -16,7 +16,7 @@ class CreateRegionsTopicTable extends Migration
         Schema::create('regions_topic', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('region_id');
-            $table->integer('topic_id');
+            $table->integer('subject_id');
             $table->timestamps();
         });
     }

@@ -23,7 +23,7 @@ class Partner extends Model
         return $this->hasMany('App\Address');
     }
 
-    public function Regions()
+    public function regions()
     {
         return $this->hasMany('App\Region');
     }

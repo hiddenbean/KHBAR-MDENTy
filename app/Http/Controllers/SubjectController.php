@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Subject;
+use App\Topic;
 use Illuminate\Http\Request;
 
 class SubjectController extends Controller
@@ -13,7 +14,7 @@ class SubjectController extends Controller
         $request->validate([
             'title' => 'required',
             'description' => 'required',
-            'topic_id' => 'required',
+            'topic' => 'required',
         ]);
     }
     /**
@@ -23,7 +24,7 @@ class SubjectController extends Controller
      */
     public function index($topic)
     {
-        $data['subjects'] = Subject::where('topic_id',$topic)->get();
+        $data['topic'] = Topic::findOrfail($topic);
         return view('staffs.subjects.index',$data);
     }
 
@@ -32,9 +33,9 @@ class SubjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($topic)
     {
-        return view('staffs.subjects.create');
+        return view('staffs.subjects.create',['topic' => $topic]);
     }
 
     /**
@@ -45,7 +46,14 @@ class SubjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validateRequest($request);
+
+        $subject = new Subject();
+        $subject->title = $request->title;
+        $subject->description = $request->description;
+        $subject->topic_id = $request->topic;
+        $subject->save();
+        return redirect('sujets/'.$request->topic.'/détail');
     }
 
     /**
@@ -77,9 +85,16 @@ class SubjectController extends Controller
      * @param  \App\Subject  $subject
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Subject $subject)
+    public function update(Request $request,$subject)
     {
-        //
+        $this->validateRequest($request);
+        
+        $subject = Subject::find($subject);
+        $subject->title = $request->title;
+        $subject->description = $request->description;
+
+        $subject->save();
+        return redirect('sujets/'.$request->topic_id.'/détail');
     }
 
     /**

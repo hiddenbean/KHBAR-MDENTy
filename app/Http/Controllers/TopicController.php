@@ -48,6 +48,13 @@ class TopicController extends Controller
     public function store(Request $request)
     {
         $this->validateRequest($request);
+        
+        $topic = new Topic();
+        $topic->title = $request->title;
+        $topic->description = $request->description;
+
+        $topic->save();
+        return redirect('sujets/');
     }
 
     /**
@@ -79,9 +86,15 @@ class TopicController extends Controller
      * @param  \App\Topic  $topic
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Topic $topic)
+    public function update(Request $request,$topic)
     {
         $this->validateRequest($request);
+        $topic = Topic::find($topic);
+        $topic->title = $request->title;
+        $topic->description = $request->description;
+
+        $topic->save();
+        return redirect('sujets/');
     }
 
     /**
