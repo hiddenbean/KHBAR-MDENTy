@@ -39,6 +39,11 @@ Route::domain('partenaire.khbarmdinty.com')->group(function () {
     Route::get('seconnecter/', 'auth\PartnerAccountLoginController@showLoginForm');
     Route::get('deconnecter/', 'auth\PartnerAccountLoginController@logout');
 
+     //Regions Routes
+     Route::prefix('region')->group(function() {
+        Route::get('','RegionController@index');
+    });
+
 });
 
 
@@ -85,6 +90,7 @@ Route::domain('staff.khbarmdinty.com')->group(function () {
 
         });
     });
+   
 });
 
 
@@ -108,6 +114,10 @@ Route::domain('staff.khbarmdinty.com')->group(function () {
                 Route::post('{subject}/supprimer','SubjectController@destroy');
             });
         });
+    });
+    //Regions Routes
+    Route::prefix('region')->group(function() {
+        // Route::post('','RegionController@index');
     });
 });
 // Route::domain('{partenaire}.khbarmdenty.com')->group(function (){

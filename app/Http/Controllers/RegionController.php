@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Region;
+use App\PartnerAccount;
+
 use Illuminate\Http\Request;
 
 class RegionController extends Controller
@@ -28,7 +30,10 @@ class RegionController extends Controller
      */
     public function index()
     {
-        //
+        // Retrieve the partner concerned.
+        isset($request->partner) ? $partner = $request->partner : $partner = Auth::guard('partner-account')->user()->partner_id;
+        $partner = Partner::where('name',$partner)->firstOrFail();
+        $data['regions'] = PartnerAccount::find();
     }
 
     /**

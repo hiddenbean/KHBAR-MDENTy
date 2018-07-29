@@ -18,6 +18,7 @@ class CreateSubjectsTable extends Migration
             $table->string('title');
             $table->text('description');
             $table->integer('topic_id');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -1,3 +1,7 @@
+@extends('layouts.app')
+
+@section('body')
+<div class="container">
 <table border=1>
 
 @foreach($topics as $topic)
@@ -19,3 +23,5 @@
 @endforeach
 </table>
 <a href="{{url('sujets/ajouter')}}" >ajouter</a>
+</div>
+@endsection

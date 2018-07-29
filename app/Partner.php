@@ -12,4 +12,12 @@ class Partner extends Model
     {
         return $this->hasMany('App\Status');
     }
+    public function partnerAccounts()
+    {
+        return $this->hasMany('App\PartnerAccount');
+    }
+    public function regions()
+    {
+        return $this->hasMany('App\Region');
+    }
 }
