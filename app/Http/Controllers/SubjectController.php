@@ -1,27 +1,30 @@
 <?php
 
 namespace App\Http\Controllers;
-use Auth;
-use App\Staff;
+
+use App\Subject;
 use Illuminate\Http\Request;
 
-class StaffController extends Controller
+class SubjectController extends Controller
 {
-    public function home()
-    {
-        // return 1000;
-        return auth()->guard('staff')->user()->id;
-        return view('auth.staff.home');
-    }
 
+    protected function validateRequest(Request $request)
+    {
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'topic_id' => 'required',
+        ]);
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($topic)
     {
-        //
+        $data['subjects'] = Subject::where('topic_id',$topic)->get();
+        return view('staffs.subjects.index',$data);
     }
 
     /**
@@ -31,7 +34,7 @@ class StaffController extends Controller
      */
     public function create()
     {
-        //
+        return view('staffs.subjects.create');
     }
 
     /**
@@ -48,10 +51,10 @@ class StaffController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Staff  $staff
+     * @param  \App\Subject  $subject
      * @return \Illuminate\Http\Response
      */
-    public function show(Staff $staff)
+    public function show(Subject $subject)
     {
         //
     }
@@ -59,10 +62,10 @@ class StaffController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Staff  $staff
+     * @param  \App\Subject  $subject
      * @return \Illuminate\Http\Response
      */
-    public function edit(Staff $staff)
+    public function edit(Subject $subject)
     {
         //
     }
@@ -71,10 +74,10 @@ class StaffController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Staff  $staff
+     * @param  \App\Subject  $subject
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Staff $staff)
+    public function update(Request $request, Subject $subject)
     {
         //
     }
@@ -82,11 +85,13 @@ class StaffController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Staff  $staff
+     * @param  \App\Subject  $subject
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Staff $staff)
+    public function destroy($topic,$subject)
     {
-        //
+        $subject = Subject::findOrfail($subject);
+        $subject->delete();
+        return redirect()->back();
     }
 }

@@ -1,9 +1,4 @@
-@extends('layouts.partner.app') 
-@section('css') 
-
-@stop 
-
-@section('body')
+@extends('layouts.partner.app') @section('css') @stop @section('body')
 
 <div class="login-wrapper ">
     <!-- START Login Background Pic Wrapper-->
@@ -27,7 +22,7 @@
     <!-- START Login Right Container-->
     <div class="login-container bg-white">
         <div class="p-l-50 m-l-20 p-r-50 m-r-20 p-t-50 m-t-30 sm-p-l-15 sm-p-r-15 sm-p-t-40">
-            <div class="logo_text"> KHBAR MDINTy </div>
+            <div class="logo_text"> {{ config('app.name', 'KHBAR MDINTy') }}z </div>
             <p>Connectez-vous à votre espace
                 <strong>{{-- $partner->company_name --}}.khbarmdenty.com</strong>
             </p>
@@ -68,13 +63,18 @@
                 <!-- START Form Control-->
                 <div class="row">
                     <div class="col-md-6 no-padding sm-p-l-10">
+<<<<<<< HEAD
                         <div class="checkbox ">
                             <input type="checkbox" value="1" id="checkbox1" name="remember">
+=======
+                        <div class="checkbox check-success">
+                            <input type="checkbox" value="1" id="checkbox1">
+>>>>>>> 55cd3b92c502bae979f1141e0b21b1938e92873c
                             <label for="checkbox1">Me tenir connecté</label>
                         </div>
                     </div>
                     <div class="col-md-6 text-right">
-                        <a href="#" class="small">Aidez-moi ?</a>
+                        <a href="#" class="small float-right">Aidez-moi?</a>
                         <br>
                         <a href="#" class="small">Contacter l&apos;assistance</a>
                     </div>
@@ -87,19 +87,20 @@
             <!--END Login Form-->
             <div class="pull-bottom sm-pull-bottom">
                 <div class="m-b-30 p-r-80 sm-m-t-20 sm-p-r-15 sm-p-b-20 clearfix">
-                    <div class="col-sm-12">
+                    <div class="col-sm-12 text-center">
                         <p>
-                            <small class="m-r-10">
+                            <small class="border-right m-r-5 text-primary">
+                                  © Hiddenbean 2018.  
+                            </small>
+                            <small class="border-right m-r-5">
+                                <a href="#"> Confidentialité </a>
+                            </small>
+                            <small class="border-right m-r-5">
                                 <a href="#">
-                                    Informations légales .
+                                    Conditions générales
                                 </a>
                             </small>
-                            <small class="m-r-10">
-                                <a href="#"> Conditions agrément. </a>
-                            </small>
-                            <small class="m-r-10">
-                                <a href="#"> © Hiddenbean 2018. </a>
-                            </small>
+
                         </p>
                     </div>
                 </div>
@@ -111,8 +112,4 @@
     <!-- END Login Right Container-->
 </div>
 
-@stop 
-
-@section('script') 
-
-@stop
+@stop @section('script') @stop

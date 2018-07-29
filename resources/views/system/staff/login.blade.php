@@ -1,0 +1,57 @@
+@extends('layouts.partner.app') @section('css')
+<link href="{{ asset('plugins/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" media="screen" /> @stop @section('body')
+<div class="register-container full-height sm-p-t-30">
+    <div class="d-flex justify-content-center flex-column full-height ">
+        <div class="logo_text">{{ config('app.name', 'KHBAR MDINTy') }}</div>
+        <h3>Connectez-vous à votre espace</h3>
+        <div class="row">
+            <div class="col-md-12">
+                <form id="form-register" class="p-t-15" role="form" action="index.html" novalidate="novalidate">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group form-group-default input-group">
+                                <div class="form-input-group">
+                                    <label>Saisissez votre nom d'utilisateur</label>
+                                    <input type="login" class="form-control">
+                                </div>
+                                <div class="input-group-append ">
+                                    <span class="input-group-text">@khbarmdenty.com
+                                    </span>
+                                </div> 
+                            </div>
+                            <label for="login" class="error"></label>
+                        </div>
+                    </div> 
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group form-group-default">
+                                <label>Mot de passe</label>
+                                <input type="password" name="password" class="form-control">
+                                <label for="password" class="error"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 no-padding sm-p-l-10">
+                            <div class="checkbox check-success ">
+                                <input type="checkbox" value="1">
+                                <label for="checkbox1">Me tenir connecté</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <a href="#" class="small">Mot de passe oublié</a> 
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-cons m-t-10" type="submit">Se connecter</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+@stop @section('script') @stop

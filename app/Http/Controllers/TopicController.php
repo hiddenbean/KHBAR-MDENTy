@@ -1,19 +1,22 @@
 <?php
 
 namespace App\Http\Controllers;
-use Auth;
-use App\Staff;
+
+use App\Topic;
 use Illuminate\Http\Request;
 
-class StaffController extends Controller
+class TopicController extends Controller
 {
-    public function home()
-    {
-        // return 1000;
-        return auth()->guard('staff')->user()->id;
-        return view('auth.staff.home');
-    }
 
+
+    
+    protected function validateRequest(Request $request)
+    {
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+        ]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -21,7 +24,9 @@ class StaffController extends Controller
      */
     public function index()
     {
-        //
+       $data['topics'] = Topic::all();
+
+       return view('staffs.topics.index',$data);
     }
 
     /**
@@ -31,7 +36,7 @@ class StaffController extends Controller
      */
     public function create()
     {
-        //
+        return view('staffs.topics.create');
     }
 
     /**
@@ -42,16 +47,16 @@ class StaffController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validateRequest($request);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Staff  $staff
+     * @param  \App\Topic  $topic
      * @return \Illuminate\Http\Response
      */
-    public function show(Staff $staff)
+    public function show(Topic $topic)
     {
         //
     }
@@ -59,10 +64,10 @@ class StaffController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Staff  $staff
+     * @param  \App\Topic  $topic
      * @return \Illuminate\Http\Response
      */
-    public function edit(Staff $staff)
+    public function edit(Topic $topic)
     {
         //
     }
@@ -71,22 +76,24 @@ class StaffController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Staff  $staff
+     * @param  \App\Topic  $topic
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Staff $staff)
+    public function update(Request $request, Topic $topic)
     {
-        //
+        $this->validateRequest($request);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Staff  $staff
+     * @param  \App\Topic  $topic
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Staff $staff)
+    public function destroy($topic)
     {
-        //
+        $topic = Topic::findOrfail($topic);
+        $topic->delete();
+        return redirect()->back();
     }
 }

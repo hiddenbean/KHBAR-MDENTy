@@ -20,7 +20,7 @@ class PartnerController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:partner-account')->except('store', 'test');
+        // $this->middleware('auth:partner-account')->except('store', 'test');
     }
 
     public function home()
@@ -36,8 +36,7 @@ class PartnerController extends Controller
     public function index()
     {
        $data['partners'] = Partner::all();
-       $appr = isset($data['partners'][0]->statues->last()->is_approved) ? $data['partners'][0]->statues->last()->is_approved : 'tazz';
-    //    return $appr;
+      
        return view('partners.index',$data);
     }
 
