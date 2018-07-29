@@ -49,9 +49,9 @@ Route::domain('partenaire.khbarmdinty.com')->group(function () {
      Route::post('map/', 'PartnerController@test');
 });
 
-// Return View Partner (UI)  
+// Return View (UI)  
 Route::domain('www.khbarmdinty.com')->group(function (){ 
- 
+    
     Route::get('/home-view', function(){ 
         return view('system.partners.login');
     })->name('partner.login'); 

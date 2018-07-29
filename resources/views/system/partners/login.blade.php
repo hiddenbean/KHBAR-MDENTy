@@ -29,7 +29,7 @@
                 <small>
                     <strong>
                         <a href="#">
-                            Devenir un partenaire de KHBAR MDINTy.
+                            Devenir un partenaire de KHBAR MDINTy
                         </a>
                     </strong> 
                 </small>
