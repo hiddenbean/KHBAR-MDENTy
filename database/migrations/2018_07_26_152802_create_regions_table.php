@@ -17,6 +17,7 @@ class CreateRegionsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->integer('partner_id');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

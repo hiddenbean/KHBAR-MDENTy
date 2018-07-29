@@ -107,19 +107,37 @@ Route::domain('staff.khbarmdinty.com')->group(function () {
     });
 });
 
-Route::domain('{partenaire}.khbarmdinty.com')->group(function (){
+    Route::domain('{partenaire}.khbarmdinty.com')->group(function (){
 
-    // partner authentication route start
-    // Singin page route
-    Route::get('seconnecter', 'Auth\PartnerAccountLoginController@showLoginForm');
-    Route::get('/deconnecter', 'Auth\PartnerAccountLoginController@logout');
-    Route::get('/', 'PartnerAccountController@home');
-});
+        // partner authentication route start
+        // Singin page route
+        Route::get('/seconnecter', 'Auth\PartnerAccountLoginController@showLoginForm');
+        // Singout page route
+        Route::get('/deconnecter', 'Auth\PartnerAccountLoginController@logout');
+        // Home page
+        Route::get('/', 'PartnerAccountController@home');
 
-Route::domain('{partenaire}.khbarmdinty.com')->group(function (){
+        // Regions route start
+        Route::prefix('/regions')->group(function(){
+            Route::get('/', 'RegionController@index');
+            Route::get('/ajouter', 'RegionController@create');
+                Route::prefix('/{region}')->group(function(){
+                    Route::get('/', 'RegionController@show');
+                    Route::get('/modifier', 'RegionController@edit');
+                });
+            });
+        // Regions route end
+    });
 
-    // partner authentication route start
-    // Singin page route   
-    //Route::post('/seconnecter', 'auth\PartnerAccountLoginController@login');
-    Route::post('/seconnecter', 'auth\PartnerAccountLoginController@login');
-});
+    Route::domain('{partenaire}.khbarmdinty.com')->group(function (){
+
+        // partner authentication route start
+        // Singin page route
+        Route::post('/seconnecter', 'auth\PartnerAccountLoginController@login');
+
+        // Regions routes start
+        Route::post('/regions/ajouter', 'RegionController@store');
+        Route::post('/regions/{region}/modifier', 'RegionController@update');
+        Route::delete('/regions/{region}', 'RegionController@delete');
+
+    });
