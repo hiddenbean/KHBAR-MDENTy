@@ -20,4 +20,9 @@ class PartnerAccount extends Authenticatable
         'status',
         'partner_id',
     ];
+
+    public function partner()
+    {
+        return $this->belongsTo('App\Partner');
+    }
 }

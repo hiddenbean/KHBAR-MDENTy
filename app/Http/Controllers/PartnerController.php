@@ -82,16 +82,14 @@ class PartnerController extends Controller
         
         $PhoneController = new PhoneController();
         $PhoneController->validateRequest($request);
-
-        $RegionController = new RegionController();
-        $RegionController->validateRequest($request);
-
-        $RegionPointController = new RegionPointController();
-        $RegionPointController->validateRequest($request);
         
+        $name = $request->name;
+        while(PartnerAccount::where('name', $name)->first()){
+            $name = $name.'_'.rand(0,9);
+        }
         $partner = Partner::create([
             'company_name' => $request->company_name,
-            'name' => $request->name,
+            'name' => $name,
             'about' => $request->about,
             'trade_registry' => $request->trade_registry,
             'ice' => $request->ice,
@@ -148,22 +146,6 @@ class PartnerController extends Controller
                     'phoneable_id' => $partner->id,
                 ]);
             }
-
-        $region = Region::create([
-            'name' => $request->zone,
-            'partner_id' => $partner->id,
-        ]);
-        foreach($request->region_points as $region_point)
-        {
-            if($region_point)
-            {$point = explode(',', $region_point);
-                RegionPoint::create([
-                    'longitude' => $point[0],
-                    'latitude' => $point[1],
-                    'region_id' => $region->id,
-                ]);
-            }
-        }
 
         $password = bcrypt($request->password);
         $name = str_before($request->email, '@');
