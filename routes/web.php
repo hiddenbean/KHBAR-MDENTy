@@ -42,7 +42,6 @@ Route::domain('partenaire.khbarmdinty.com')->group(function () {
 
 Route::domain('partenaire.khbarmdinty.com')->group(function () {
     
-<<<<<<< HEAD
     Route::post('/seconnecter/nom-compagnie', 'auth\PartnerAccountLoginController@loginForm');
     // Singup page route   
     Route::post('inscription', 'auth\PartnerController@store');
@@ -51,17 +50,6 @@ Route::domain('partenaire.khbarmdinty.com')->group(function () {
 
 
 Route::get('/home', 'HomeController@index')->name('home');
-=======
-     Route::post('/seconnecter', 'auth\PartnerAccountLoginController@login')->name('partner.login');
-     Route::post('inscription', 'PartnerController@store')->name('partner.register.submit');
-     Route::post('map/', 'PartnerController@test');
-});
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-
-
->>>>>>> 55cd3b92c502bae979f1141e0b21b1938e92873c
 
 // domain staff.khbarmdinty.com For GET Routes
 Route::domain('staff.khbarmdinty.com')->group(function () {
@@ -118,7 +106,6 @@ Route::domain('staff.khbarmdinty.com')->group(function () {
         });
     });
 });
-<<<<<<< HEAD
 
 Route::domain('{partenaire}.khbarmdinty.com')->group(function (){
 
@@ -136,18 +123,3 @@ Route::domain('{partenaire}.khbarmdinty.com')->group(function (){
     //Route::post('/seconnecter', 'auth\PartnerAccountLoginController@login');
     Route::post('/seconnecter', 'auth\PartnerAccountLoginController@login');
 });
-=======
-// Route::domain('{partenaire}.khbarmdenty.com')->group(function (){
-
-//     // partner authentication route start
-//     // Singin page route   
-//     Route::get('seconnecter', function(){
-//         return view('system.partner_accounts.login');
-//     })->name('partner.login');
-
-//     // Singup page route   
-//     Route::get('inscription', function(){
-//         return view('system.partner_accounts.register');
-//     })->name('partner.register');
-// });
->>>>>>> 55cd3b92c502bae979f1141e0b21b1938e92873c

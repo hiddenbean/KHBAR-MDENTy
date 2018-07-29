@@ -6,15 +6,9 @@
 <div class="register-container full-height sm-p-t-30">
     <div class="d-flex justify-content-center flex-column full-height ">
         <div class="logo_text"> KHBAR MDINTy</div> 
-<<<<<<< HEAD
         <h3>Connectez-vous à votre espace de travail </h3> 
         <form id="form-register" class="p-t-15" role="form" action="{{ url('/seconnecter/nom-compagnie') }}" method="post">
             @csrf
-=======
-        <h3>Connectez-vous à votre espace </h3> 
-        <form id="form-register" class="p-t-15" role="form" action="index.html">
-
->>>>>>> 55cd3b92c502bae979f1141e0b21b1938e92873c
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group form-group-default input-group">
@@ -27,11 +21,7 @@
                             </span>
                         </div>
                     </div>
-<<<<<<< HEAD
-                    
-=======
                     <label class='error' for='name'></label>
->>>>>>> 55cd3b92c502bae979f1141e0b21b1938e92873c
                 </div>
                 @if ($errors->has('company_name'))
                     <span class="invalid-feedback" role="alert">

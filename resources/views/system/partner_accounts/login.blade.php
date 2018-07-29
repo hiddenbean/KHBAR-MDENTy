@@ -63,13 +63,8 @@
                 <!-- START Form Control-->
                 <div class="row">
                     <div class="col-md-6 no-padding sm-p-l-10">
-<<<<<<< HEAD
                         <div class="checkbox ">
                             <input type="checkbox" value="1" id="checkbox1" name="remember">
-=======
-                        <div class="checkbox check-success">
-                            <input type="checkbox" value="1" id="checkbox1">
->>>>>>> 55cd3b92c502bae979f1141e0b21b1938e92873c
                             <label for="checkbox1">Me tenir connecté</label>
                         </div>
                     </div>
