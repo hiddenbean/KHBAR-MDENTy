@@ -32,7 +32,7 @@
                 <strong>{{-- $partner->company_name --}}.khbarmdenty.com</strong>
             </p>
             <!-- START Login Form -->
-            <form id="form-login" class="p-t-15" role="form" action="#">
+            <form class="p-t-15" role="form" action="{{ url('/seconnecter') }}" method="POST">
                 <!--  Generate hidden input for token -->
                 {{ csrf_field() }}
 
@@ -44,6 +44,11 @@
                     </div>
                 </div>
                 <label class='error' for='login'></label>
+                @if ($errors->has('login'))
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('login') }}</strong>
+                    </span>
+                @endif
 
                 <!-- END Form Control-->
                 <!-- START Form Control-->
@@ -51,6 +56,11 @@
                     <label> Mot de passe </label>
                     <div class="controls">
                         <input type="password" class="form-control" name="password" placeholder="Saisissez votre mot de passe">
+                        @if ($errors->has('password'))
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $errors->first('password') }}</strong>
+                            </span>
+                        @endif
                     </div>
                 </div>
                 <label class='error' for='password'></label>
@@ -59,7 +69,7 @@
                 <div class="row">
                     <div class="col-md-6 no-padding sm-p-l-10">
                         <div class="checkbox ">
-                            <input type="checkbox" value="1" id="checkbox1">
+                            <input type="checkbox" value="1" id="checkbox1" name="remember">
                             <label for="checkbox1">Me tenir connecté</label>
                         </div>
                     </div>

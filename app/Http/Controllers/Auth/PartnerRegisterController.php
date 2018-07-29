@@ -128,10 +128,7 @@ class PartnerRegisterController extends Controller
      */
     public function showRegisterForm()
     {
-       
-                return view('system.partners.register');
-          
-    
+        return view('system.partner_accounts.register');
     }
 }
 

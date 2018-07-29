@@ -27,6 +27,16 @@ class PartnerAccountController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function home()
+    {
+        return view('partners.home');
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         return 'You Are A Partner '.Auth::id();

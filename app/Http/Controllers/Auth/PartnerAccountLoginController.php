@@ -61,9 +61,32 @@ class PartnerAccountLoginController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function showLoginForm()
+    public function showCompanyform()
     {
         return view('system.partners.login');
+    }
+
+    /**
+     * Show the application's login form for the finale client.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showLoginForm()
+    {
+        return view('system.partner_accounts.login');
+    }
+
+    /**
+     * Show the application's login form for the finale client.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function loginForm(Request $request)
+    {
+        $request->validate([
+            'company_name' => 'required|exists:partners,company_name',
+        ]);
+        return redirect(url('https://'.$request->company_name.'.khbarmdinty.com/seconnecter'));
     }
 
     /**
