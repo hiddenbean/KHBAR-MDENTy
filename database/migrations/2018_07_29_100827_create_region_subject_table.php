@@ -13,7 +13,7 @@ class CreateRegionSubjectTable extends Migration
      */
     public function up()
     {
-        Schema::create('regions_topic', function (Blueprint $table) {
+        Schema::create('region_subject', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('region_id');
             $table->integer('subject_id');

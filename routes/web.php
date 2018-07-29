@@ -37,15 +37,12 @@ Route::domain('partenaire.khbarmdinty.com')->group(function () {
     Route::get('inscription/', 'auth\PartnerRegisterController@showRegisterForm');
     Route::get('seconnecter/', 'auth\PartnerAccountLoginController@showCompanyForm');
 
-     //Regions Routes
-     Route::prefix('region')->group(function() {
-        Route::get('','RegionController@index');
-    });
+    
 
 });
 
 
-Route::domain('partenaire.khbarmdinty.com')->group(function () {
+Route::domain('{partenaire}.khbarmdinty.com')->group(function () {
     
     Route::post('/seconnecter/nom-compagnie', 'auth\PartnerAccountLoginController@loginForm');
     // Singup page route   
@@ -124,6 +121,15 @@ Route::domain('{partenaire}.khbarmdinty.com')->group(function (){
     Route::get('seconnecter', 'Auth\PartnerAccountLoginController@showLoginForm');
     Route::get('/deconnecter', 'Auth\PartnerAccountLoginController@logout');
     Route::get('/', 'PartnerAccountController@home');
+
+     //Regions Routes
+     Route::prefix('regions')->group(function() {
+        Route::get('','RegionController@index');
+        Route::prefix('{region}')->group(function() {
+            Route::get('afichier','RegionController@show');
+            Route::get('subject/ajouter','RegionController@subjectShow');
+        });
+    });
 });
 
 Route::domain('{partenaire}.khbarmdinty.com')->group(function (){
@@ -132,4 +138,13 @@ Route::domain('{partenaire}.khbarmdinty.com')->group(function (){
     // Singin page route   
     //Route::post('/seconnecter', 'auth\PartnerAccountLoginController@login');
     Route::post('/seconnecter', 'auth\PartnerAccountLoginController@login');
+
+     //Regions Routes
+     Route::prefix('regions')->group(function() {
+        Route::post('','RegionController@index');
+        Route::prefix('{region}/subject')->group(function() {
+            Route::post('ajouter','RegionController@subjectStore');
+            Route::post('{subject}/supprimer','RegionController@subjectDestroy');
+        });
+    });
 });
