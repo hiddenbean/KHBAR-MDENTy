@@ -1,17 +1,15 @@
-@extends('layouts.partner.app') @section('css')
-<link href="{{ asset('plugins/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" media="screen" /> @stop @section('body')
+@extends('layouts.partner.app') 
+
+@section('css')
+    <link href="{{ asset('plugins/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" media="screen" /> 
+@stop 
+
+@section('body')
 
 <div class="register-container full-height sm-p-t-30">
     <div class="d-flex justify-content-center flex-column full-height ">
-        <div class="logo_text"> KHBAR MDINTy</div>
-        <h3>Créer un compte de partenaire</h3>
-        <p>
-            <small>
-                Si vous avez un compte
-                <a href="#">facebook.</a> ou un compte
-                <a href="#">google.</a>, connectez-vous à ce processus.
-            </small>
-        </p>
+        <div class="logo_text">{{ config('app.name', 'KHBAR MDINTy') }}</div>
+        <h3>Créer un compte de partenaire</h3> 
         <div class="row">
             <div class="col-md-12">
                 <div id="rootwizard" class="m-t-5">
@@ -20,37 +18,25 @@
                         <li class="nav-item">
                             <a class="pointer-e-n active" data-toggle="tab" href="#tab1" data-target="#tab1" role="tab">
                                 <i class="fa fa-check tab-icon"></i>
-                                <span> Agrément </span>
+                                <span>Agrément</span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="pointer-e-n" data-toggle="tab" href="#tab2" data-target="#tab2" role="tab">
                                 <i class="fa fa-building tab-icon"></i>
-                                <span> Partenaire </span>
+                                <span>Partenaire</span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="pointer-e-n" data-toggle="tab" href="#tab3" data-target="#tab3" role="tab">
                                 <i class="fa fa-user tab-icon"></i>
-                                <span> Partenaire Account </span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="pointer-e-n" data-toggle="tab" href="#tab4" data-target="#tab4" role="tab">
-                                <i class="fa fa-cogs tab-icon"></i>
-                                <span> Services </span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="pointer-e-n" data-toggle="tab" href="#tab5" data-target="#tab5" role="tab">
-                                <i class="fa fa-map-marker tab-icon"></i>
-                                <span> Région </span>
+                                <span>Partenaire Account</span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="pointer-e-n" data-toggle="tab" href="#tab6" data-target="#tab6" role="tab">
                                 <i class="fa fa-address-book tab-icon"></i>
-                                <span> Résumé </span>
+                                <span>Résumé</span>
                             </a>
                         </li>
                     </ul>
@@ -331,84 +317,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="tab-pane slide-left padding-20 sm-no-padding" id="tab4">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <table class="table table-condensed">
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <a>
-                                                        <i class="fa fa-check"></i>
-                                                    </a>
-                                                    <span class="m-l-10 ">Dashboard UI Pack</span>
-                                                </td>
-                                                <td colspan="2">
-                                                    <span class="m-l-10 font-montserrat fs-11 all-caps">Webarch UI Framework</span>
-                                                    <a href="#" class="remove-item float-right">
-                                                        <i class="pg-close"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <a>
-                                                        <i class="fa fa-check"></i>
-                                                    </a>
-                                                    <span class="m-l-10 ">Profile</span>
-                                                </td>
-                                                <td colspan="2">
-                                                    <span class="m-l-10 font-montserrat fs-11 all-caps">Webarch UI Framework</span>
-                                                    <a href="#" class="remove-item float-right">
-                                                        <i class="pg-close"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="col-lg-2 col-md-5 col-sm-2">
-                                                    <div class="form-group form-group-default form-group-default-select2">
-                                                        <label class="">Les sujets </label>
-                                                        <select name="topic" class="full-width" data-placeholder="Select Country" data-init-plugin="select2">
-                                                            <option value="AK">Alaska</option>
-                                                            <option value="HI">Hawaii</option>
-                                                            <option value="CA">California</option>
-                                                            <option value="NV">Nevada</option>
-                                                            <option value="OR">Oregon</option>
-                                                            <option value="WA">Washington</option>
-                                                        </select>
-                                                    </div>
-                                                    <label for="topic" class="error"></label>
-                                                </td>
-                                                <td class="col-lg-2 col-md-5 col-sm-2">
-                                                    <div class="form-group form-group-default form-group-default-select2">
-                                                        <label class="">sous sujets</label>
-                                                        <select class="full-width" data-placeholder="Select Country" data-init-plugin="select2">
-                                                            <option value="AK">Alaska</option>
-                                                            <option value="HI">Hawaii</option>
-                                                            <option value="CA">California</option>
-                                                            <option value="NV">Nevada</option>
-                                                            <option value="OR">Oregon</option>
-                                                            <option value="WA">Washington</option>
-                                                        </select>
-                                                    </div>
-                                                    <label for="topic" class="error"></label>
-                                                </td>
-                                                <td class="col-lg-2 col-md-2 col-sm-2 text-right">
-                                                    <button class="btn btn-primary">
-                                                        <i class="fa fa-plus"></i> Ajouter
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane slide-left padding-20 sm-no-padding" id="tab5">
-                            <h1>MAP.</h1>
-                            <input type="hidden" name="long">
-                            <input type="hidden" name="lat">
                         </div>
                         <div class="tab-pane slide-left padding-20 sm-no-padding" id="tab6">
                             <h3>Partenaire Information</h3>

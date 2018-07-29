@@ -48,19 +48,40 @@ Route::domain('partenaire.khbarmdinty.com')->group(function () {
      Route::post('inscription', 'PartnerController@store')->name('partner.register.submit');
      Route::post('map/', 'PartnerController@test');
 });
-Route::domain('{partenaire}.khbarmdenty.com')->group(function (){
 
+// Return View Partner (UI)  
+Route::domain('www.khbarmdinty.com')->group(function (){ 
+ 
+    Route::get('/home-view', function(){ 
+        return view('system.partners.login');
+    })->name('partner.login'); 
+}); 
+
+Route::domain('partenaire.khbarmdinty.com')->group(function (){ 
     // partner authentication route start
     // Singin page route   
-    Route::get('seconnecter', function(){
+    Route::get('seconnecter-view', function(){ 
         return view('system.partner_accounts.login');
     })->name('partner.login');
 
     // Singup page route   
-    Route::get('inscription', function(){
+    Route::get('inscription-view', function(){
         return view('system.partner_accounts.register');
     })->name('partner.register');
+}); 
+
+Route::domain('staff.khbarmdinty.com')->group(function (){ 
+  
+    // partner authentication route start
+    // Singin page route   
+    Route::get('seconnecter-view', function(){
+        return view('system.staff.login');
+    })->name('partner.login');
+ 
 });
+
+
+
 
 Route::get('/home', 'HomeController@index')->name('home');
 
