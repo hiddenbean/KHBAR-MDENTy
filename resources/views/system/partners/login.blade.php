@@ -7,33 +7,36 @@
     <div class="d-flex justify-content-center flex-column full-height ">
         <div class="logo_text"> KHBAR MDINTy</div> 
         <h3>Connectez-vous à votre espace de travail </h3> 
-        <form id="form-register" class="p-t-15" role="form" action="index.html">
-
+        <form id="form-register" class="p-t-15" role="form" action="{{ url('/seconnecter/nom-compagnie') }}" method="post">
+            @csrf
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group form-group-default input-group">
                         <div class="form-input-group">
                             <label>Entrez le nom de votre espace.</label>
-                            <input type="name" class="form-control">
+                            <input type="name" name="company_name" value="{{ old('company_name') }}" class="form-control">
                         </div>
                         <div class="input-group-append ">
                             <span class="input-group-text">.khbarmdenty.com
                             </span>
                         </div>
                     </div>
+                    <label class='error' for='name'></label>
                 </div>
+                @if ($errors->has('company_name'))
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('company_name') }}</strong>
+                    </span>
+                @endif
             </div>
             <button class="btn btn-primary btn-cons m-t-10" type="submit">Continuer &nbsp; <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
-            <p>
+            <p class="m-t-10">
                 <small>
                     <strong>
                         <a href="#">
-                            Devenir un compte de KHBAR MDINTy.
+                            Devenir un partenaire de KHBAR MDINTy
                         </a>
-                    </strong>
-                    Si vous avez un compte
-                    <a href="#">facebook.</a> ou un compte
-                    <a href="#">google.</a>, connectez-vous à ce processus.
+                    </strong> 
                 </small>
             </p>
         </form>

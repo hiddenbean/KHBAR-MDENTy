@@ -1,18 +1,22 @@
+/* 
+*  primaryColor: #558B2F
+*  secondaryColor: #33691E
+*/
 a {
-    color: #33691E;
+    color: #558B2F;
 }
 
 a:active,
 a:focus,
 a:hover {
-    color: #8BC34A;
+    color: #33691E;
 }
 
 .btn-primary,
 .btn-primary:focus {
     color: #fff;
-    background-color: #33691E;
-    border-color: #33691E;
+    background-color: #558B2F;
+    border-color: #558B2F;
 }
 
 .btn-primary.active,
@@ -30,14 +34,14 @@ a:hover {
 .btn-primary.hover,
 .btn-primary:hover,
 .show .dropdown-toggle.btn-primary {
-    background-color: #8BC34A;
-    border-color: #8BC34A;
+    background-color: #33691E;
+    border-color: #33691E;
     color: #fff;
 }
 
 .btn-primary.active:hover {
-    background: #558B2F;
-    border-color: #558B2F;
+    background: #33691E;
+    border-color: #33691E;
 }
 
 .btn-primary.disabled,
@@ -60,20 +64,20 @@ fieldset[disabled] .btn-primary.active {
 }
 
 .btn-primary .badge {
-    color: #33691E;
+    color: #558B2F;
     background-color: #fff;
 }
 
 .bg-primary {
-    background-color: #33691E !important;
+    background-color: #558B2F !important;
 }
 
 .text-primary {
-    color: #33691E !important;
+    color: #558B2F !important;
 }
 
 .login-wrapper {
-    background-color: #33691e;
+    background-color: #558B2F;
 }
 
 .login-wrapper .bg-pic>img {
@@ -81,7 +85,7 @@ fieldset[disabled] .btn-primary.active {
 }
 
 .logo_text {
-    color: #242021;
+    color: #252525;
     font-size: 2.25rem;
     font-weight: 700;
     margin-bottom: 0.25em;
@@ -98,7 +102,7 @@ fieldset[disabled] .btn-primary.active {
 }
 
 .checkbox.check-success input[type=checkbox]:checked+label:before {
-    border-color: #33691E;
+    border-color: #558B2F;
 }
 
 .form-group-default textarea.form-control {
@@ -127,6 +131,13 @@ fieldset[disabled] .btn-primary.active {
 }
 
 .choose_photo:hover {
-    color: #33691E;
+    color: #558B2F;
     cursor: pointer;
+}
+
+.login-wrapper .bg-pic>img {
+    height: auto;
+    width: auto; 
+    min-height: 100%;
+    min-width: 100%;
 }
