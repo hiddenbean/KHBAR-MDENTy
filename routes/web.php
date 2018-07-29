@@ -48,34 +48,41 @@ Route::domain('partenaire.khbarmdinty.com')->group(function () {
      Route::post('inscription', 'PartnerController@store')->name('partner.register.submit');
      Route::post('map/', 'PartnerController@test');
 });
-Route::domain('{partenaire}.khbarmdenty.com')->group(function (){
 
-    // partner authentication route start
-    // Singin page route   
-    Route::get('seconnecter', function(){
-        return view('system.partner_accounts.login');
-    })->name('partner.login');
-
-    // Singup page route   
-    Route::get('inscription', function(){
-        return view('system.partner_accounts.register');
-    })->name('partner.register');
-});
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+
+
+
+// domain staff.khbarmdinty.com For GET Routes
 Route::domain('staff.khbarmdinty.com')->group(function () {
 
-    Route::get('/', 'StaffController@home');
+        Route::get('/', 'StaffController@home');
     Route::get('seconnecter/', 'auth\StaffLoginController@showLoginForm')->name('staff.login');
     Route::get('deconnecter/', 'auth\StaffLoginController@logout');
 
-     //Partners Statuses routes
-     Route::prefix('partners')->group(function() {
+
+    //Partners Statuses routes
+    Route::prefix('partners')->group(function() {
         Route::get('','PartnerController@index');
         Route::prefix('{partner}/status')->group(function() {
             Route::get('','StatusController@check');
             Route::get('non-approuvé','StatusController@notApprove');
+        });
+    });
+    //Topics Routes
+    Route::prefix('sujets')->group(function() {
+        Route::get('','TopicController@index');
+        Route::get('ajouter','TopicController@create');
+        Route::prefix('{topic}/détail')->group(function() {
+            Route::get('','SubjectController@index');
+            Route::get('ajouter','SubjectController@create');
+            Route::prefix('détail')->group(function() {
+                Route::get('ajouter','SubjectController@create');
+                Route::post('{subject}/modifier','SubjectController@edit');
+            });
+
         });
     });
 });
@@ -91,4 +98,28 @@ Route::domain('staff.khbarmdinty.com')->group(function () {
         Route::post('approuver','StatusController@approve');
     });
 
+    //Topics Routes
+    Route::prefix('sujets')->group(function() {
+        Route::post('ajouter','TopicController@store');
+        Route::prefix('{topic}')->group(function() {
+            Route::post('supprimer','TopicController@destroy');
+            Route::prefix('détail')->group(function() {
+                Route::post('ajouter','SubjectController@store');
+                Route::post('{subject}/supprimer','SubjectController@destroy');
+            });
+        });
+    });
 });
+// Route::domain('{partenaire}.khbarmdenty.com')->group(function (){
+
+//     // partner authentication route start
+//     // Singin page route   
+//     Route::get('seconnecter', function(){
+//         return view('system.partner_accounts.login');
+//     })->name('partner.login');
+
+//     // Singup page route   
+//     Route::get('inscription', function(){
+//         return view('system.partner_accounts.register');
+//     })->name('partner.register');
+// });
