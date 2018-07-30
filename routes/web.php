@@ -73,12 +73,13 @@ Route::domain('staff.khbarmdinty.com')->group(function () {
     Route::prefix('sujets')->group(function() {
         Route::get('','TopicController@index');
         Route::get('ajouter','TopicController@create');
+        Route::get('{topic}/modifier','TopicController@edit');
         Route::prefix('{topic}/détail')->group(function() {
             Route::get('','SubjectController@index');
             Route::get('ajouter','SubjectController@create');
+            Route::get('{subject}/modifier','SubjectController@edit');
             Route::prefix('détail')->group(function() {
                 Route::get('ajouter','SubjectController@create');
-                Route::post('{subject}/modifier','SubjectController@edit');
             });
 
         });
@@ -101,10 +102,13 @@ Route::domain('staff.khbarmdinty.com')->group(function () {
     Route::prefix('sujets')->group(function() {
         Route::post('ajouter','TopicController@store');
         Route::prefix('{topic}')->group(function() {
+            Route::post('modifier','TopicController@update');
             Route::post('supprimer','TopicController@destroy');
             Route::prefix('détail')->group(function() {
                 Route::post('ajouter','SubjectController@store');
                 Route::post('{subject}/supprimer','SubjectController@destroy');
+                Route::post('{subject}/modifier','SubjectController@update');
+
             });
         });
     });

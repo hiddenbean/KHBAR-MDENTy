@@ -73,9 +73,10 @@ class SubjectController extends Controller
      * @param  \App\Subject  $subject
      * @return \Illuminate\Http\Response
      */
-    public function edit(Subject $subject)
+    public function edit($topic,$subject)
     {
-        //
+        $data['subject'] = Subject::find($subject);
+        return view('staffs.subjects.edit',$data);
     }
 
     /**
@@ -85,16 +86,15 @@ class SubjectController extends Controller
      * @param  \App\Subject  $subject
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$subject)
+    public function update(Request $request,$topic,$subject)
     {
         $this->validateRequest($request);
         
         $subject = Subject::find($subject);
         $subject->title = $request->title;
         $subject->description = $request->description;
-
         $subject->save();
-        return redirect('sujets/'.$request->topic_id.'/détail');
+        return redirect('sujets/'.$request->topic.'/détail');
     }
 
     /**
