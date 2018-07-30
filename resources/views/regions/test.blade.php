@@ -8,12 +8,9 @@
 </head>
 <body>
     <div id="map" style="width:500px;height:500px"></div>
-    <form action="{{ url('test') }}" method="post" id="form">
-        @csrf
+    <form action="{{ url('') }}" method="post" id="form">
         <div id="region"></div>
-        <input type="text" name="latitude" placeholder="latitude">
-        <input type="text" name="longitude" placeholder="longitude">
-        <button type="submit" id="submit">ajouter la region</button>
+        <button type="button" id="submit" onclick="submit()">ajouter la region</button>
     </form>
     
 
@@ -34,15 +31,8 @@
             // This event listener calls addMarker() when the map is clicked.
             google.maps.event.addListener(map, 'click', function(event) {
             longlat.push({lat : event.latLng.lat(), lng : event.latLng.lng()});
-            console.log(event.latLng.lat()+','+event.latLng.lng());
             clearPolygone();
             setMapOnAll(map, longlat);
-            var region_point = document.createElement('input');
-            region_point.type = 'text';
-            region_point.name = 'region_points[]';
-            region_point.value = event.latLng.lat()+','+event.latLng.lng();
-            var div = document.getElementById('region');
-            div.append(region_point);
         });
         }
         
@@ -109,7 +99,7 @@
                 div.append(region_point);
             }
             //document.getElementById("form").submit(); 
-        }
+        });
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBXinhnpgReXMJ-SzB7STNPyNM1mrzyQ8w&callback=initMap" async defer></script>
 </body>

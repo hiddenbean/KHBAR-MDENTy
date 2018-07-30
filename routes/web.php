@@ -35,7 +35,7 @@ Route::domain('partenaire.khbarmdinty.com')->group(function () {
 
     Route::get('/', 'PartnerController@home');
     Route::get('inscription/', 'auth\PartnerRegisterController@showRegisterForm');
-    Route::get('seconnecter/', 'auth\PartnerAccountLoginController@showCompanyForm');
+    Route::get('seconnecter/', 'auth\PartnerAccountLoginController@showCompanyForm')->name('partner.login');
 
     
 
@@ -46,7 +46,7 @@ Route::domain('{partenaire}.khbarmdinty.com')->group(function () {
     
     Route::post('/seconnecter/nom-compagnie', 'auth\PartnerAccountLoginController@loginForm');
     // Singup page route   
-    Route::post('inscription', 'auth\PartnerController@store');
+    Route::post('inscription', 'auth\PartnerRegisterController@store');
     
 });
 
@@ -127,6 +127,7 @@ Route::domain('staff.khbarmdinty.com')->group(function () {
         Route::get('/deconnecter', 'Auth\PartnerAccountLoginController@logout');
         // Home page
         Route::get('/', 'PartnerAccountController@home');
+        Route::post('/test', 'RegionController@test');
 
         // Regions route start
         Route::prefix('/regions')->group(function(){

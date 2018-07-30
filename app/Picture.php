@@ -12,9 +12,9 @@ class Picture extends Model
     {
         return $this->morphOne('App\Reaction', 'reaction');
     }
-    
-    public function partner()
+
+    public function pictureable()
     {
-        return $this->belongsTo('App\Partner');
+        return $this->morphTo();
     }
 }

@@ -7,10 +7,14 @@ use Illuminate\Http\Request;
 
 class StaffController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:staff');
+    }
+    
     public function home()
     {
         // return 1000;
-        return auth()->guard('staff')->user()->id;
         return view('auth.staff.home');
     }
 

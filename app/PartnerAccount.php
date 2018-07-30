@@ -31,4 +31,9 @@ class PartnerAccount extends Authenticatable
         return $this->morphMany('App\Reaction', 'reactionable');
     }
 
+
+    public function picture()
+    {
+        return $this->morphOne('App\Picture', 'pictureable');
+    }
 }
