@@ -67,6 +67,13 @@ fieldset[disabled] .btn-primary.active {
     color: #558B2F;
     background-color: #fff;
 }
+.btn-transparent{
+    border: none
+}
+.btn-transparent:hover{
+    border: none
+}
+
 
 .bg-primary {
     background-color: #558B2F !important;
@@ -94,9 +101,14 @@ fieldset[disabled] .btn-primary.active {
 .register-container {
     width: 950px;
 }
-
+.register-staff-width{
+    width: 640px;
+}
 @media (max-width: 768px) {
     .register-container {
+        width: 100%;
+    }
+    .register-staff-width{
         width: 100%;
     }
 }
@@ -140,4 +152,17 @@ fieldset[disabled] .btn-primary.active {
     width: auto; 
     min-height: 100%;
     min-width: 100%;
+}
+
+ 
+.sidebar-logo-black{
+    color: #252525;
+    font-size: 1.15rem;  
+    font-weight: 700;
+    margin-left: 50px;
+}
+.sidebar-logo-white{
+    color: #ffffff;
+    font-size: 1.15rem;  
+    font-weight: 700;
 }

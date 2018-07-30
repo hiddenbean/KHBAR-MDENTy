@@ -1,6 +1,12 @@
-@extends('layouts.partner.app') @section('css')
-<link href="{{ asset('plugins/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" media="screen" /> @stop @section('body')
-<div class="register-container full-height sm-p-t-30">
+@extends('layouts.app') 
+
+@section('css')
+
+
+@stop 
+
+@section('body')
+<div class="register-container full-height sm-p-t-30 register-staff-width" >
     <div class="d-flex justify-content-center flex-column full-height ">
         <div class="logo_text">{{ config('app.name', 'KHBAR MDINTy') }}</div>
         <h3>Connectez-vous à votre espace</h3>
@@ -12,7 +18,7 @@
                         <div class="col-md-12">
                             <div class="form-group form-group-default input-group">
                                 <div class="form-input-group">
-                                    <label>Saisissez votre nom d'utilisateur</label>
+                                    <label>Saisissez votre nom d&apos;utilisateur</label>
                                     <input type="login" class="form-control">
                                 </div>
                                 <div class="input-group-append ">
@@ -54,4 +60,8 @@
 
 
 
-@stop @section('script') @stop
+@stop 
+
+@section('script') 
+
+@stop
