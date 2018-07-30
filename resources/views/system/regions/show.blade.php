@@ -2,17 +2,18 @@
 
 @section('body')
 <div class="container">
+<h1>{{$region->name}}</h1>
 
+<br>
 <table border=1>
 
-@foreach($topic->subjects as $subject)
+@foreach($region->subjects as $subject)
 
 <tr>
     <td> {{$subject->title}}</td>
     <td> {{$subject->description}}</td>
-    <td> <a href="{{url('sujets/'.$subject->topic->id.'/détail/'.$subject->id.'/modifier')}}" >modifer</a></td>
     <td> 
-        <form action="{{url('sujets/'.$subject->topic->id.'/détail/'.$subject->id.'/supprimer')}}" method="POST">
+        <form action="{{url('regions/'.$region->id.'/subject/'.$subject->id.'/supprimer')}}" method="POST">
     {{ csrf_field() }}
     {{ method_field('POST') }}
         <button type="submit" class="btn btn-primary">
@@ -23,6 +24,7 @@
 </tr>
 @endforeach
 </table>
-<a href="{{url('sujets/'.$topic->id.'/détail/ajouter')}}" >ajouter</a>
+<a href="{{url('regions/'.$region->id.'/subject/ajouter')}}" >ajouter des des sujects</a>
+
 </div>
 @endsection

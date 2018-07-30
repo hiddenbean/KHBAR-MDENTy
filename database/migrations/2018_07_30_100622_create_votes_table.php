@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRegionSubjectTable extends Migration
+class CreateVotesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateRegionSubjectTable extends Migration
      */
     public function up()
     {
-        Schema::create('region_subject', function (Blueprint $table) {
+        Schema::create('votes', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('region_id');
-            $table->integer('subject_id');
+            $table->boolean('vote');
+            $table->integer('client_id');
+            $table->integer('voteable_id');
+            $table->string('voteable_type');
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateRegionSubjectTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('regions_topic');
+        Schema::dropIfExists('votes');
     }
 }

@@ -74,9 +74,11 @@ class TopicController extends Controller
      * @param  \App\Topic  $topic
      * @return \Illuminate\Http\Response
      */
-    public function edit(Topic $topic)
+    public function edit($topic)
     {
-        //
+        $data['topic'] = Topic::find($topic);
+        return view('staffs.topics.edit',$data);
+
     }
 
     /**

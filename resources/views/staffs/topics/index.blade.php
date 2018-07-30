@@ -10,6 +10,7 @@
     <td> {{$topic->title}}</td>
     <td> {{$topic->description}}</td>
     <td> <a href="{{url('sujets/'.$topic->id.'/détail')}}" >Detail</a></td>
+    <td> <a href="{{url('sujets/'.$topic->id.'/modifier')}}" >modifer</a></td>
     <td> 
         <form action="{{url('sujets/'.$topic->id.'/supprimer')}}" method="POST">
     {{ csrf_field() }}

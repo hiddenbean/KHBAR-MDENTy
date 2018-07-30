@@ -23,6 +23,8 @@ class AppServiceProvider extends ServiceProvider
         Relation::morphMap([
             'partner_account' => 'App\PartnerAccount',
             'partner' => 'App\Partner',
+            'video' => 'App\Video',
+            'picture' => 'App\Picture',
          ]);
     }
 

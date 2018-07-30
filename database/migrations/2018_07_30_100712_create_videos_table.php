@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRegionSubjectTable extends Migration
+class CreateVideosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,13 @@ class CreateRegionSubjectTable extends Migration
      */
     public function up()
     {
-        Schema::create('region_subject', function (Blueprint $table) {
+        Schema::create('videos', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('region_id');
-            $table->integer('subject_id');
+            $table->string('name');
+            $table->string('path');
+            $table->string('extension');
+            $table->string('tag');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -28,6 +31,6 @@ class CreateRegionSubjectTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('regions_topic');
+        Schema::dropIfExists('videos');
     }
 }

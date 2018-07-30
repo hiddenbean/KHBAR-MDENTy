@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRegionSubjectTable extends Migration
+class CreateReactionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateRegionSubjectTable extends Migration
      */
     public function up()
     {
-        Schema::create('region_subject', function (Blueprint $table) {
+        Schema::create('reactions', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('region_id');
-            $table->integer('subject_id');
+            $table->integer('reaction_id');
+            $table->string('reaction_type');
+            $table->integer('reactionable_id');
+            $table->string('reactionable_type');
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateRegionSubjectTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('regions_topic');
+        Schema::dropIfExists('reactions');
     }
 }

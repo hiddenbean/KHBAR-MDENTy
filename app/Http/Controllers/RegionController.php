@@ -6,6 +6,7 @@ use App\Region;
 use Auth;
 use App\Partner;
 use App\PartnerAccount;
+use App\Topic;
 use Illuminate\Http\Request;
 
 class RegionController extends Controller
@@ -42,9 +43,9 @@ class RegionController extends Controller
     public function index()
     {
         // Retrieve the partner concerned.
-        isset($request->partner) ? $partner = $request->partner : $partner = Auth::guard('partner-account')->user()->partner_id;
-        $partner = Partner::where('name',$partner)->firstOrFail();
-        $data['regions'] = PartnerAccount::find();
+        isset($request->partner) ? $partner = Partner::where('name',$request->partner)->firstOrFail() : $partner = Partner::find(Auth::guard('partner-account')->user()->partner_id);
+        $data['partner'] = $partner;
+        return view('system.regions.index',$data);
     }
 
     /**
@@ -102,6 +103,36 @@ class RegionController extends Controller
 
         return redirect(url('/regions/'.$region->name));
     }
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function subjectStore(Request $request)
+    {
+        $region = Region::find($request->region);
+        $region->subjects()->detach();
+        foreach($request->subjects as $subject)
+        {
+            $region->subjects()->attach($subject);
+
+        }
+        return redirect()->back();
+    }
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function subjectShow($name,$region)
+    {
+        $data['topics'] = Topic::all();
+        $data['region'] = $region;
+        // return $data['topics'][0]->regions()->where('region_id',$region)->first();
+        return view('system.topics.index',$data);
+    }
 
     /**
      * Display the specified resource.
@@ -109,9 +140,12 @@ class RegionController extends Controller
      * @param  \App\Region  $region
      * @return \Illuminate\Http\Response
      */
-    public function show(Region $region)
+    public function show($name,$region)
     {
-        
+       $data['region'] = Region::find($region);
+       $data['topics'] = Topic::all();
+       // return $data['topics'][0]->regions()->where('region_id',$region)->first();
+       return view('system.topics.index',$data);
     }
 
     /**
@@ -178,6 +212,18 @@ class RegionController extends Controller
         return redirect(url('/regions/'.$region->name));
     }
 
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Region  $region
+     * @return \Illuminate\Http\Response
+     */
+    public function subjectDestroy($name,$region,$subject)
+    {
+        $region = Region::find($region);
+        $region->subjects()->detach($subject);
+        return redirect()->back();
+    }
     /**
      * Remove the specified resource from storage.
      *

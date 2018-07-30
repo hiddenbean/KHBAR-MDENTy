@@ -25,6 +25,12 @@ class PartnerAccount extends Authenticatable
     {
         return $this->belongsTo('App\Partner');
     }
+    
+    public function reactions()
+    {
+        return $this->morphMany('App\Reaction', 'reactionable');
+    }
+
 
     public function picture()
     {
