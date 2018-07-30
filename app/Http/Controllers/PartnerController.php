@@ -10,7 +10,8 @@ class PartnerController extends Controller
 
     public function __construct()
     {
-         $this->middleware('auth:partner-account')->except( 'test');
+        $this->middleware('auth:partner-account')->except('index');
+        $this->middleware('auth:staff,partner-account')->only('index');
     }
 
     public function home()
