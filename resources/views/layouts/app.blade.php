@@ -20,7 +20,7 @@
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
         @yield('css')
     </head> 
-    <body class="fixed-header">
+    <body class="fixed-header windows desktop pace-done">
 
         @yield('body')
 
