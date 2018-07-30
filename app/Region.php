@@ -3,9 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Region extends Model
 {
+    // SoftDeletes
+    use SoftDeletes;
+
     protected $fillable = ['name', 'partner_id'];
 
 
@@ -16,5 +20,15 @@ class Region extends Model
     public function partner()
     {
         return $this->belongsTo('App\Partner');
+    }
+
+    public function partner()
+    {
+        return $this->belongsTo('App\Partner');
+    }
+
+    public function regionPoints()
+    {
+        return $this->hasMany('App\RegionPoint');
     }
 }

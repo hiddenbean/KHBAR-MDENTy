@@ -118,7 +118,27 @@ Route::domain('staff.khbarmdinty.com')->group(function () {
     });
 });
 
-Route::domain('{partenaire}.khbarmdinty.com')->group(function (){
+    Route::domain('{partenaire}.khbarmdinty.com')->group(function (){
+
+        // partner authentication route start
+        // Singin page route
+        Route::get('/seconnecter', 'Auth\PartnerAccountLoginController@showLoginForm');
+        // Singout page route
+        Route::get('/deconnecter', 'Auth\PartnerAccountLoginController@logout');
+        // Home page
+        Route::get('/', 'PartnerAccountController@home');
+
+        // Regions route start
+        Route::prefix('/regions')->group(function(){
+            Route::get('/', 'RegionController@index');
+            Route::get('/ajouter', 'RegionController@create');
+                Route::prefix('/{region}')->group(function(){
+                    Route::get('/', 'RegionController@show');
+                    Route::get('/modifier', 'RegionController@edit');
+                });
+            });
+        // Regions route end
+
 
     // partner authentication route start
     // Singin page route
@@ -135,8 +155,11 @@ Route::domain('{partenaire}.khbarmdinty.com')->group(function (){
         });
     });
 });
+    Route::domain('{partenaire}.khbarmdinty.com')->group(function (){
 
-Route::domain('{partenaire}.khbarmdinty.com')->group(function (){
+        // partner authentication route start
+        // Singin page route
+        Route::post('/seconnecter', 'auth\PartnerAccountLoginController@login');
 
     // partner authentication route start
     // Singin page route   
@@ -145,7 +168,10 @@ Route::domain('{partenaire}.khbarmdinty.com')->group(function (){
 
      //Regions Routes
      Route::prefix('regions')->group(function() {
-        Route::post('','RegionController@index');
+        Route::post('/','RegionController@index');
+        Route::post('/ajouter', 'RegionController@store');
+        Route::post('/{region}/modifier', 'RegionController@update');
+        Route::delete('/{region}', 'RegionController@delete');
         Route::prefix('{region}/subject')->group(function() {
             Route::post('ajouter','RegionController@subjectStore');
             Route::post('{subject}/supprimer','RegionController@subjectDestroy');

@@ -1,4 +1,10 @@
-@extends('layouts.partner.app') @section('css') @stop @section('body')
+@extends('layouts.app') 
+
+@section('css') 
+
+@stop 
+
+@section('body')
 
 <div class="login-wrapper ">
     <!-- START Login Background Pic Wrapper-->
@@ -107,4 +113,8 @@
     <!-- END Login Right Container-->
 </div>
 
-@stop @section('script') @stop
+@stop 
+
+@section('script') 
+
+@stop
