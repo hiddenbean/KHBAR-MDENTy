@@ -17,11 +17,7 @@ class Region extends Model
     {
         return $this->belongsToMany('App\Subject')->withTimestamps();
     }
-    public function partner()
-    {
-        return $this->belongsTo('App\Partner');
-    }
-
+    
     public function partner()
     {
         return $this->belongsTo('App\Partner');

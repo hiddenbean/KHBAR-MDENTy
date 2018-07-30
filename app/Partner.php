@@ -15,12 +15,12 @@ class Partner extends Model
 
     public function partnerAccounts()
     {
-        return $this->hasMany('App\Partner');
+        return $this->hasMany('App\PartnerAccount');
     }
 
-    public function addresses()
+    public function address()
     {
-        return $this->hasMany('App\Address');
+        return $this->morphOne('App\Address', 'addressable');
     }
 
     public function regions()
@@ -28,13 +28,13 @@ class Partner extends Model
         return $this->hasMany('App\Region');
     }
 
-    public function Pictures()
+    public function picture()
     {
-        return $this->hasMany('App\Picture');
+        return $this->morphOne('App\Picture', 'pictureable');
     }
 
-    public function Phones()
+    public function phones()
     {
-        return $this->hasMany('App\Phone');
+        return $this->morphMany('App\Phone', 'phoneable');
     }
 }

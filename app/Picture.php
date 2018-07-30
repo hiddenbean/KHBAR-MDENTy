@@ -8,8 +8,8 @@ class Picture extends Model
 {
     protected $fillable = ['name', 'tag', 'extension', 'path', 'pictureable_type', 'pictureable_id'];
 
-    public function partner()
+    public function pictureable()
     {
-        return $this->belongsTo('App\Partner');
+        return $this->morphTo();
     }
 }

@@ -1,23 +1,12 @@
 <?php
 
-
 namespace App\Http\Controllers;
 
-use App\Partner;
+use App\Khbar;
+use Illuminate\Http\Request;
 
-class PartnerController extends Controller
+class KhbarController extends Controller
 {
-
-    public function __construct()
-    {
-         $this->middleware('auth:partner-account')->except( 'test');
-    }
-
-    public function home()
-    {
-        return view('partners.home');
-    }
-  
     /**
      * Display a listing of the resource.
      *
@@ -25,9 +14,7 @@ class PartnerController extends Controller
      */
     public function index()
     {
-       $data['partners'] = Partner::all();
-      
-       return view('partners.index',$data);
+        //
     }
 
     /**
@@ -38,18 +25,6 @@ class PartnerController extends Controller
     public function create()
     {
         //
-    }
-
-    protected function validateRequest(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|unique:partners,name',
-            'company_name' => 'required',
-            'trade_registry' => 'required',
-            'ice' => 'required',
-            'tax_id' => 'required',
-            'about' => 'required',
-        ]);
     }
 
     /**
@@ -66,10 +41,10 @@ class PartnerController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\partner  $partner
+     * @param  \App\Khbar  $khbar
      * @return \Illuminate\Http\Response
      */
-    public function show(partner $partner)
+    public function show(Khbar $khbar)
     {
         //
     }
@@ -77,10 +52,10 @@ class PartnerController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\partner  $partner
+     * @param  \App\Khbar  $khbar
      * @return \Illuminate\Http\Response
      */
-    public function edit(partner $partner)
+    public function edit(Khbar $khbar)
     {
         //
     }
@@ -89,10 +64,10 @@ class PartnerController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\partner  $partner
+     * @param  \App\Khbar  $khbar
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, partner $partner)
+    public function update(Request $request, Khbar $khbar)
     {
         //
     }
@@ -100,10 +75,10 @@ class PartnerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\partner  $partner
+     * @param  \App\Khbar  $khbar
      * @return \Illuminate\Http\Response
      */
-    public function destroy(partner $partner)
+    public function destroy(Khbar $khbar)
     {
         //
     }

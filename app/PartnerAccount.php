@@ -25,4 +25,9 @@ class PartnerAccount extends Authenticatable
     {
         return $this->belongsTo('App\Partner');
     }
+
+    public function picture()
+    {
+        return $this->morphOne('App\Picture', 'pictureable');
+    }
 }
