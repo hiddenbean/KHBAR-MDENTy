@@ -138,6 +138,12 @@ Route::domain('staff.khbarmdinty.com')->group(function () {
                 });
             });
         // Regions route end
+
+        //Khbarat routes start
+        Route::get('khbarat', 'KhbarController@partnerFeed');
+        //Khbarat end
+        Route::get('check', 'KhbarController@test');
+
     });
 
     Route::domain('{partenaire}.khbarmdinty.com')->group(function (){

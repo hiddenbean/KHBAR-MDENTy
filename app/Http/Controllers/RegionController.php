@@ -201,7 +201,7 @@ class RegionController extends Controller
     function test(Request $request, $pointOnVertex = true) {
         $this->pointOnVertex = $pointOnVertex;
         
-        $point = '33.516182538616825,-6.614384468750018';
+        $point = '33.5207622325163,-6.608891304687518';
         // Transform string coordinates into arrays with x and y values
         $point = $this->pointStringToCoordinates($point);
         $vertices = array(); 
