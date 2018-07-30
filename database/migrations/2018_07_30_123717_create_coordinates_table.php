@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateKhbarsTable extends Migration
+class CreateCoordinatesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,12 @@ class CreateKhbarsTable extends Migration
      */
     public function up()
     {
-        Schema::create('khbars', function (Blueprint $table) {
+        Schema::create('coordinates', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
-            $table->integer('coordinate_id');
-            $table->integer('partner_id');
-            $table->integer('subject_id');
+            $table->double('latitude');
+            $table->double('longitude');
             $table->timestamps();
         });
-        Schema::rename('khbars', 'khbarat');
     }
 
     /**
@@ -31,6 +28,6 @@ class CreateKhbarsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('khbars');
+        Schema::dropIfExists('coordinates');
     }
 }

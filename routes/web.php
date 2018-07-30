@@ -137,7 +137,28 @@ Route::domain('staff.khbarmdinty.com')->group(function () {
                 });
             });
         // Regions route end
+
+        //Khbarat routes start
+        Route::get('khbarat', 'KhbarController@partnerFeed');
+        //Khbarat end
+        Route::get('check', 'KhbarController@test');
+
+
+    // partner authentication route start
+    // Singin page route
+    Route::get('seconnecter', 'Auth\PartnerAccountLoginController@showLoginForm');
+    Route::get('/deconnecter', 'Auth\PartnerAccountLoginController@logout');
+    Route::get('/', 'PartnerAccountController@home');
+
+     //Regions Routes
+     Route::prefix('regions')->group(function() {
+        Route::get('','RegionController@index');
+        Route::prefix('{region}')->group(function() {
+            Route::get('afichier','RegionController@show');
+            Route::get('subject/ajouter','RegionController@subjectShow');
+        });
     });
+});
 
     Route::domain('{partenaire}.khbarmdinty.com')->group(function (){
 
