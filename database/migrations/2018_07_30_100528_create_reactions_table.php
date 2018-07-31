@@ -15,6 +15,7 @@ class CreateReactionsTable extends Migration
     {
         Schema::create('reactions', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('khbar_id');
             $table->integer('reaction_id');
             $table->string('reaction_type');
             $table->integer('reactionable_id');

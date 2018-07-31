@@ -24,4 +24,9 @@ class Khbar extends Model
     {
         return $this->belongsTo('App\Subject');
     }
+
+    public function reactions()
+    {
+        return $this->hasMany('App\Reaction');
+    }
 }

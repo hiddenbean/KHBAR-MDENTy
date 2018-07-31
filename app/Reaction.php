@@ -15,4 +15,9 @@ class Reaction extends Model
     {
         return $this->morphTo();
     }
+
+    public function Khbar()
+    {
+        return $this->belongsTo('App\Khbar');
+    }
 }

@@ -6,7 +6,6 @@ use App\Region;
 use Auth;
 use App\Partner;
 use App\PartnerAccount;
-use App\Topic;
 use Illuminate\Http\Request;
 
 class RegionController extends Controller
@@ -43,9 +42,9 @@ class RegionController extends Controller
     public function index()
     {
         // Retrieve the partner concerned.
-        isset($request->partner) ? $partner = Partner::where('name',$request->partner)->firstOrFail() : $partner = Partner::find(Auth::guard('partner-account')->user()->partner_id);
-        $data['partner'] = $partner;
-        return view('system.regions.index',$data);
+        isset($request->partner) ? $partner = $request->partner : $partner = Auth::guard('partner-account')->user()->partner_id;
+        $partner = Partner::where('name',$partner)->firstOrFail();
+        $data['regions'] = PartnerAccount::find();
     }
 
     /**
@@ -71,7 +70,7 @@ class RegionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($subdomaine ,Ajax $ajax, Request $request)
     {
         $this->validateRequest($request);
 
@@ -100,38 +99,9 @@ class RegionController extends Controller
                 ]);
             }
         }
-
+        $ajax->redrawView();
+        return $ajax->view('');
         return redirect(url('/regions/'.$region->name));
-    }
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function subjectStore(Request $request)
-    {
-        $region = Region::find($request->region);
-        $region->subjects()->detach();
-        foreach($request->subjects as $subject)
-        {
-            $region->subjects()->attach($subject);
-
-        }
-        return redirect()->back();
-    }
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function subjectShow($name,$region)
-    {
-        $data['topics'] = Topic::all();
-        $data['region'] = $region;
-        // return $data['topics'][0]->regions()->where('region_id',$region)->first();
-        return view('system.topics.index',$data);
     }
 
     /**
@@ -140,12 +110,9 @@ class RegionController extends Controller
      * @param  \App\Region  $region
      * @return \Illuminate\Http\Response
      */
-    public function show($name,$region)
+    public function show(Region $region)
     {
-       $data['region'] = Region::find($region);
-       $data['topics'] = Topic::all();
-       // return $data['topics'][0]->regions()->where('region_id',$region)->first();
-       return view('system.topics.index',$data);
+        
     }
 
     /**
@@ -172,7 +139,7 @@ class RegionController extends Controller
      * @param  \App\Region  $region
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $region_name)
+    public function update($subdomaine ,Ajax $ajax, Request $request, $region_name)
     {
         $this->validateRequest($request);
 
@@ -196,7 +163,7 @@ class RegionController extends Controller
             $region->name = $name;
         }
         $region->save();
-
+        $region->regionPoints->delete();
         foreach($request->region_points as $region_point)
         {
             if($region_point)
@@ -208,22 +175,11 @@ class RegionController extends Controller
                 ]);
             }
         }
-
+        $ajax->redrawView();
+        return $ajax->view('');
         return redirect(url('/regions/'.$region->name));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Region  $region
-     * @return \Illuminate\Http\Response
-     */
-    public function subjectDestroy($name,$region,$subject)
-    {
-        $region = Region::find($region);
-        $region->subjects()->detach($subject);
-        return redirect()->back();
-    }
     /**
      * Remove the specified resource from storage.
      *
@@ -247,7 +203,7 @@ class RegionController extends Controller
     function test(Request $request, $pointOnVertex = true) {
         $this->pointOnVertex = $pointOnVertex;
         
-        $point = '33.5207622325163,-6.608891304687518';
+        $point = '33.5207622325163,-6.614384468750018';
         // Transform string coordinates into arrays with x and y values
         $point = $this->pointStringToCoordinates($point);
         $vertices = array(); 

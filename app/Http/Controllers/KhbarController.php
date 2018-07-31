@@ -6,6 +6,7 @@ use App\Khbar;
 use App\Partner;
 use App\Region;
 use Illuminate\Http\Request;
+use DateTime;
 use App\Http\Controller\RegionController;
 
 class KhbarController extends Controller
@@ -96,19 +97,57 @@ class KhbarController extends Controller
         $partner = Partner::where('name',$partner_name)->firstOrFail();
         $regions = Region::where('partner_id', $partner->id)->get();
         
-        $khbarat = Khbar::all();
+        $khbarat = $partner->khbars()->get();
         $khbarat_partner = [];
-        $test = 0;
+        $khbarat_id = [];
+        
         foreach($khbarat as $khbar)
         {
             $point = $this->pointStringToCoordinates($khbar->coordinate->latitude , $khbar->coordinate->longitude);
-            $test++;
             if($this->checkBelonging($point, $regions) == 'inside')
             {
                 $khbarat_partner[] = $khbar;
+                $khbarat_id[] = $khbar->id;
             }
         }
-        return $khbarat_partner;
+        return $this->sortKhbarat($khbarat, $khbarat_id);
+    }
+
+    public function sortKhbarat($khbarat, $khbarat_id)
+    {
+        $finale_khbarat = Khbar::whereIn('id', $khbarat_id)->get();
+        $khbarat= $finale_khbarat;
+        $date = new DateTime();
+        for($i = 0; $i<count($khbarat); $i++)
+        {
+            for($j=1; $j<count($khbarat); $j++)
+            {
+                $khbar1 = $khbarat[$j-1]->reactions->count()/$this->dateDiff($khbarat[$j-1]->created_at);
+                $khbar2 = $khbarat[$j]->reactions->count()/$this->dateDiff($khbarat[$j]->created_at);
+                if($khbar2 > $khbar1)
+                {
+                    $var = $khbarat[$j];
+                    $khbarat[$j] = $khbarat[$j-1];
+                    $khbarat[$j-1] = $var;
+                    $j--;
+                }
+            }
+            if($j == (count($khbarat)+1) )
+            {
+                break;
+            }
+        }
+        return $khbarat;
+    }
+
+    public function dateDiff($created_at)
+    {
+        $date = date('Y-m-d H:i:s', strtotime(date_format(new DateTime(), 'Y-m-d')));
+        $diff = date(strtotime($date)-strtotime(date_format($created_at, 'Y-m-d')));
+        $years = floor($diff / (365*60*60*24));
+        $months = floor(($diff - $years * 365*60*60*24) / (30*60*60*24));
+        $days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));
+        return $days;
     }
     
     public function checkBelonging($point, $regions)
