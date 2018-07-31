@@ -3,18 +3,18 @@
 
 <table class="table table-condensed">
         <tbody>
-            @if (isset($region))
+            @if (isset($regions))
              
-                {{-- @foreach ($regions as $region) --}}
+                @foreach ($regions as $region)
                     <tr>
                         <td class="v-align-middle no-padding" width="5%">
                             <i class="fa fa-map"></i>
                         </td>
                         <td class="v-align-middle padding-5" width="85%">
-                            <strong><a href="#" class="text-black">{{ $region }}</a></strong>
+                            <strong><a href="#" class="text-black">{{ $region->name }}</a></strong>
                         </td>
                     </tr> 
-                {{-- @endforeach --}}
+                @endforeach
             
              @endif 
         </tbody>

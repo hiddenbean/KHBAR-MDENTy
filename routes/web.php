@@ -255,11 +255,7 @@ Route::domain('{partenaire}.khbarmdinty.com')->group(function (){
        $ajax->redrawView('container_create_region');
        return $ajax->view('regions.shows.create');
     });
-
-    Route::get('region', function(Ajax $ajax){
-        $ajax->redrawView('container_create_region');
-        return $ajax->view('regions.shows.region');
-     });
+ 
 
     Route::post('region/store', function(Ajax $ajax, Request $request){
         $name = $request->input('name');
