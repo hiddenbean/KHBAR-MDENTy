@@ -7,7 +7,7 @@
             <div class="panel panel-default">
 
                 <div class="panel-body">
-                    <form class="form-horizontal" method="post" action="{{ url('khbarat/'.$khbar.'/réactions/pictures/ajouter') }}" enctype="multipart/form-data">
+                    <form class="form-horizontal" method="post" action="{{ url('khbarat/'.$khbar.'/reactions/pictures/ajouter') }}" enctype="multipart/form-data">
                         {{ csrf_field() }}
                           <div class="form-group{{ $errors->has('picture') ? ' has-error' : '' }}">
                             <label for="picture" class="col-md-4 control-label">picture</label>
@@ -35,6 +35,7 @@
                             </div>
                         </div>
                         <input type=hidden name=khbar_id value={{$khbar}}>
+                        <input type=hidden name=reaction_id value={{$reaction}}>
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">

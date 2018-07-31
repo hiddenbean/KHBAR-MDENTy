@@ -123,12 +123,12 @@ Route::domain('staff.khbarmdinty.com')->group(function () {
 
         //interventions Routes
         Route::prefix('khbarat/{khbar}')->group(function(){
-            Route::get('/',function(){return view('test');});
+            Route::get('/','ReactionController@index');
             Route::prefix('interventions')->group(function(){
                 Route::get('comments/ajouter', 'InterventionController@createComment');
                 Route::get('pictures/ajouter', 'InterventionController@createPicture');
             });
-            Route::prefix('réactions')->group(function(){
+            Route::prefix('reactions')->group(function(){
                 Route::get('{reaction}/comments/ajouter', 'ReactionController@createComment');
                 Route::get('{reaction}/pictures/ajouter', 'ReactionController@createPicture');
             });
@@ -187,7 +187,7 @@ Route::domain('staff.khbarmdinty.com')->group(function () {
                 Route::post('pictures/ajouter', 'InterventionController@storePicture');
 
             });
-            Route::prefix('réactions')->group(function(){
+            Route::prefix('reactions')->group(function(){
                 Route::post('comments/ajouter', 'ReactionController@storeComment');
                 Route::post('pictures/ajouter', 'ReactionController@storePicture');
 
@@ -198,6 +198,8 @@ Route::domain('staff.khbarmdinty.com')->group(function () {
         Route::prefix('regions')->group(function() {
             Route::post('ajouter', 'RegionController@store');
             Route::prefix('{region}')->group(function() {
+                
+            Route::post('subject/ajouter','RegionController@subjectStore');
                 Route::post('/modifier', 'RegionController@update');
                 Route::delete('', 'RegionController@delete');
             });

@@ -15,14 +15,14 @@ class ReactionController extends Controller
 {
     public function validateRequest(Request $request)
     {
-        $request->validate([
-            'khbar_id' => 'required',
+    $request->validate([
+        'khbar_id' => 'required',
         ]);
     }
     public function validateRequestComment(Request $request)
     {
-        $request->validate([
-            'comment' => 'required',
+    $request->validate([
+        'comment' => 'required',
         ]);
     }
     public function validateRequestPicture(Request $request)
@@ -30,9 +30,20 @@ class ReactionController extends Controller
         $request->validate([
             'picture' => 'required',
             'description' => 'required',
-        ]);
+            ]);
     }
-     /**
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index($name,$khbar)
+    {
+        $data['reactions'] = Reaction::where('khbar_id',$khbar)->get();
+        // return $data;
+        return view('test',$data);
+    }
+    /**
      * show a  created view for a comment.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -114,15 +125,6 @@ class ReactionController extends Controller
         $reaction->save();
         return redirect('khbarat/'.$request->khbar_id);
 
-    }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $reaction = Reaction::find(1);
     }
 
     /**
