@@ -14,7 +14,7 @@
                     <h4> les régions </h4>
                     <hr>  
                     <div  class="row no-padding no-margin">
-                        <div class="col-md-12 no-padding">  
+                        <div class="col-md-12 no-padding">
                             <div id="container_create_region">
                             
                                 @include('regions.shows.regions')
@@ -37,7 +37,8 @@
     var longlat = [];
     var polygone = [];
     var triangle;
-
+    var geocoder;
+    var address;
     function initMap() {
         var mapOptions = {
             zoom: 8,
@@ -160,6 +161,7 @@
         };
 
         map = new google.maps.Map(document.getElementById('google-map'), mapOptions); 
+        geocoder = new google.maps.Geocoder;
         google.maps.event.addListener(map, 'click', function (event) {
            
            var name_region = $('#name_region').val(); 
@@ -175,8 +177,8 @@
                 region_point.name = 'region_points[]';
                 region_point.value = event.latLng.lat() + ',' + event.latLng.lng();
                 var div = document.getElementById('region');
-                div.append(region_point);
-                pointsTable(event);
+                div.append(region_point); 
+                pointsTable(event,map,geocoder, address);
            }
 
         }); 
@@ -228,19 +230,33 @@
         path.removeAt(vertex);
     }
   
-    function pointsTable(event) { 
-        var points =`<tr>
+    function pointsTable(event,map,geocoder) {  
+          var latlng = {lat: parseFloat(event.latLng.lat()), lng: parseFloat(event.latLng.lng())};
+            geocoder.geocode({'location': latlng}, function(results, status) {
+            if (status === 'OK') {
+                if (results[0]) {
+                    
+                    var points =`<tr>
                     <td class="v-align-middle no-padding" width="5%">
                         <i class="fa fa-map-marker"></i>
-                    </td>
-                    <td class="v-align-middle padding-5" width="85%">
-                           ${ event.latLng.lat() }  ,  ${ event.latLng.lng() }
-                    </td>
-                </tr>`; 
-          var table_points = document.getElementById('table_points');  
-          table_points.innerHTML += points;  
-    }
+                            </td>
+                            <td class="v-align-middle padding-5" width="85%">` 
+                                    +results[0].formatted_address+
+                            `</td>
+                        </tr>`; 
+                var table_points = document.getElementById('table_points');  
+                table_points.innerHTML += points;
 
+                } else {
+                window.alert('No results found');
+                }
+            } else {
+                window.alert('Geocoder failed due to: ' + status);
+            }
+       }); 
+    }
+    
+ 
 
 </script>  
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBXinhnpgReXMJ-SzB7STNPyNM1mrzyQ8w&callback=initMap" async
