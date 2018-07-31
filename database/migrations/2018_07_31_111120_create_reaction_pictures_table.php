@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateReactionsTable extends Migration
+class CreateReactionPicturesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateReactionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('reactions', function (Blueprint $table) {
+        Schema::create('reaction_pictures', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('khbar_id');
-            $table->integer('reaction_id');
-            $table->integer('reactionable_id');
-            $table->string('reactionable_type');
-            $table->integer('userable_id');
-            $table->string('userable_type');
+            $table->string('name');
+            $table->string('path');
+            $table->text('description');
+            $table->string('extension');
+            $table->string('tag');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -32,6 +32,6 @@ class CreateReactionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reactions');
+        Schema::dropIfExists('reaction_pictures');
     }
 }
