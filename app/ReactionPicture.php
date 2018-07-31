@@ -4,14 +4,15 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Comment extends Model
+class ReactionPicture extends Model
 {
     public function reaction()
     {
         return $this->morphOne('App\Reaction', 'reactionable');
     }
+
     public function intervention()
     {
-        return $this->morphOne('App\Intervention', 'intervention');
+        return $this->morphOne('App\Intervention', 'interventionable');
     }
 }

@@ -10,4 +10,8 @@ class Video extends Model
     {
         return $this->morphOne('App\Reaction', 'reaction');
     }
+    public function intervention()
+    {
+        return $this->morphOne('App\Intervention', 'intervention');
+    }
 }

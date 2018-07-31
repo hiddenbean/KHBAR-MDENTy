@@ -38,8 +38,8 @@ class Partner extends Model
         return $this->morphMany('App\Phone', 'phoneable');
     }
 
-    public function khbar()
+    public function khbars()
     {
-        return $this->hasOne('App\Khbar');
+        return $this->hasMany('App\Khbar');
     }
 }
