@@ -47,7 +47,8 @@ class RegionController extends Controller
         isset($request->partner) ? $partner = Partner::where('name',$request->partner)->firstOrFail() : $partner = Partner::find(Auth::guard('partner-account')->user()->partner_id);
         $data['partner'] = $partner;
         // return $data;
-        return view('system.regions.index',$data);
+        // return view('system.regions.index',$data);
+        return view('regions.index',$data);
     }
 
     /**
@@ -249,7 +250,7 @@ class RegionController extends Controller
     function test(Request $request, $pointOnVertex = true) {
         $this->pointOnVertex = $pointOnVertex;
         
-        $point = '33.516182538616825,-6.614384468750018';
+        $point = '33.5207622325163,-6.608891304687518';
         // Transform string coordinates into arrays with x and y values
         $point = $this->pointStringToCoordinates($point);
         $vertices = array(); 

@@ -31,7 +31,7 @@
   <div class="page-content-wrapper ">
 
     <!-- START PAGE CONTENT -->
-    <div class="content ">
+    <div class="content">
             @yield('content')
     </div>
     <!-- END PAGE CONTENT -->

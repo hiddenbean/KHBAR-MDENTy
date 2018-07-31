@@ -18,4 +18,9 @@ class Subject extends Model
     {
         return $this->belongsToMany('App\Region')->withTimestamps();
     }
+
+    public function khbar()
+    {
+        return $this->hasOne('App\Khbar');
+    }
 }

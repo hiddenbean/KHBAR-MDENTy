@@ -35,18 +35,21 @@ Route::domain('partenaire.khbarmdinty.com')->group(function () {
 
     Route::get('/', 'PartnerController@home');
     Route::get('inscription/', 'auth\PartnerRegisterController@showRegisterForm');
-    Route::get('seconnecter/', 'auth\PartnerAccountLoginController@showCompanyForm')->name('partner.login');
+    Route::get('seconnecter/', 'auth\PartnerAccountLoginController@showCompanyForm');
 
-    
+     //Regions Routes
+     Route::prefix('region')->group(function() {
+        Route::get('','RegionController@index');
+    });
 
 });
 
 
-Route::domain('{partenaire}.khbarmdinty.com')->group(function () {
+Route::domain('partenaire.khbarmdinty.com')->group(function () {
     
     Route::post('/seconnecter/nom-compagnie', 'auth\PartnerAccountLoginController@loginForm');
     // Singup page route   
-    Route::post('inscription', 'auth\PartnerRegisterController@store');
+    Route::post('inscription', 'auth\PartnerController@store');
     
 });
 
@@ -73,13 +76,12 @@ Route::domain('staff.khbarmdinty.com')->group(function () {
     Route::prefix('sujets')->group(function() {
         Route::get('','TopicController@index');
         Route::get('ajouter','TopicController@create');
-        Route::get('{topic}/modifier','TopicController@edit');
         Route::prefix('{topic}/détail')->group(function() {
             Route::get('','SubjectController@index');
             Route::get('ajouter','SubjectController@create');
-            Route::get('{subject}/modifier','SubjectController@edit');
             Route::prefix('détail')->group(function() {
                 Route::get('ajouter','SubjectController@create');
+                Route::post('{subject}/modifier','SubjectController@edit');
             });
 
         });
@@ -102,13 +104,10 @@ Route::domain('staff.khbarmdinty.com')->group(function () {
     Route::prefix('sujets')->group(function() {
         Route::post('ajouter','TopicController@store');
         Route::prefix('{topic}')->group(function() {
-            Route::post('modifier','TopicController@update');
             Route::post('supprimer','TopicController@destroy');
             Route::prefix('détail')->group(function() {
                 Route::post('ajouter','SubjectController@store');
                 Route::post('{subject}/supprimer','SubjectController@destroy');
-                Route::post('{subject}/modifier','SubjectController@update');
-
             });
         });
     });
@@ -141,7 +140,6 @@ Route::domain('staff.khbarmdinty.com')->group(function () {
         Route::get('/deconnecter', 'Auth\PartnerAccountLoginController@logout');
         // Home page
         Route::get('/', 'PartnerAccountController@home');
-        Route::post('/test', 'RegionController@test');
 
         // Regions route start
         Route::prefix('regions')->group(function(){
@@ -153,6 +151,11 @@ Route::domain('staff.khbarmdinty.com')->group(function () {
                 });
         });
         // Regions route end
+
+        //Khbarat routes start
+        Route::get('khbarat', 'KhbarController@partnerFeed');
+        //Khbarat end
+        Route::get('check', 'KhbarController@test');
 
 
     // partner authentication route start
@@ -170,6 +173,7 @@ Route::domain('staff.khbarmdinty.com')->group(function () {
         });
     });
 });
+
     Route::domain('{partenaire}.khbarmdinty.com')->group(function (){
 
         // partner authentication route start
@@ -190,20 +194,57 @@ Route::domain('staff.khbarmdinty.com')->group(function () {
             });
         });
 
-    // partner authentication route start
-    // Singin page route   
-    //Route::post('/seconnecter', 'auth\PartnerAccountLoginController@login');
-    Route::post('/seconnecter', 'auth\PartnerAccountLoginController@login');
-
-     //Regions Routes
-     Route::prefix('regions')->group(function() {
-        Route::post('/','RegionController@index');
-        Route::post('/ajouter', 'RegionController@store');
-        Route::post('/{region}/modifier', 'RegionController@update');
-        Route::delete('/{region}', 'RegionController@delete');
-        Route::prefix('{region}/subject')->group(function() {
-            Route::post('ajouter','RegionController@subjectStore');
-            Route::post('{subject}/supprimer','RegionController@subjectDestroy');
+        // Regions routes start
+        Route::prefix('regions')->group(function() {
+            Route::post('ajouter', 'RegionController@store');
+            Route::prefix('{region}')->group(function() {
+                Route::post('/modifier', 'RegionController@update');
+                Route::delete('', 'RegionController@delete');
+            });
         });
     });
+
+
+
+// Return View (UI)  
+Route::domain('www.khbarmdinty.com')->group(function (){ 
+    
+    Route::get('/home-view', function(){ 
+        return view('system.partners.login');
+    })->name('partner.login'); 
+
+    Route::get('/confidentialite-view', function(){ 
+        return view('system.privacy');
+    });
+
+    Route::get('/conditions-generales-view', function(){ 
+        return view('system.terms');
+    }); 
+}); 
+
+Route::domain('partenaire.khbarmdinty.com')->group(function (){ 
+    // partner authentication route start
+    // Singin page route   
+    Route::get('seconnecter-view', function(){ 
+        return view('system.partner_accounts.login');
+    })->name('partner.login');
+
+    // Singup page route   
+    Route::get('inscription-view', function(){
+        return view('system.partner_accounts.register');
+    })->name('partner.register');
+}); 
+
+Route::domain('staff.khbarmdinty.com')->group(function (){ 
+  
+    // partner authentication route start
+    // Singin page route   
+    Route::get('seconnecter-view', function(){
+        return view('system.staff.login');
+    })->name('partner.login');
+
+    Route::get('regions-view', function(){
+        return view('system.regions.login');
+    });
+ 
 });

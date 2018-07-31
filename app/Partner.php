@@ -37,4 +37,9 @@ class Partner extends Model
     {
         return $this->morphMany('App\Phone', 'phoneable');
     }
+
+    public function khbar()
+    {
+        return $this->hasOne('App\Khbar');
+    }
 }

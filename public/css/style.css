@@ -78,6 +78,9 @@ fieldset[disabled] .btn-primary.active {
 .bg-primary {
     background-color: #558B2F !important;
 }
+.label-success {
+    background-color: #558B2F;
+}
 
 .text-primary {
     color: #558B2F !important;
@@ -165,4 +168,16 @@ fieldset[disabled] .btn-primary.active {
     color: #ffffff;
     font-size: 1.15rem;  
     font-weight: 700;
+}
+.table-scrollable{
+    height: 570px;
+} 
+
+.card-control-map{
+    position: absolute;
+    top: 150px;
+    bottom: 150px;
+    right: 50px;
+    width: 350px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.13);
 }
