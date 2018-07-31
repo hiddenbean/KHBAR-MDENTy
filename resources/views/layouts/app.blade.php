@@ -37,6 +37,7 @@
         <!-- END VENDOR JS -->
         <script src="{{ asset('plugins/select2/js/select2.full.min.js') }} " type="text/javascript"></script>
         <script src="{{ asset('pages/js/pages.min.js') }}"></script>
+        <script src="{{ asset('js/laravel.ajax.js') }}"></script>
         @yield('script')
 
         <!-- Laravel ajax header  -->
