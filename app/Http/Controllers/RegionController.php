@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Region;
 use Auth;
 use App\Partner;
+use App\Topic;
 use App\PartnerAccount;
 use Illuminate\Http\Request;
 
@@ -107,15 +108,48 @@ class RegionController extends Controller
         return redirect(url('/regions/'.$region->name));
     }
 
+     /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function subjectStore(Request $request)
+    {
+        $region = Region::find($request->region);
+        $region->subjects()->detach();
+        foreach($request->subjects as $subject)
+        {
+            $region->subjects()->attach($subject);
+
+        }
+        return redirect()->back();
+    }
     /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function subjectShow($name,$region)
+    {
+        $data['topics'] = Topic::all();
+        $data['region'] = $region;
+        // return $data['topics'][0]->regions()->where('region_id',$region)->first();
+        return view('system.topics.index',$data);
+    }
+     /**
      * Display the specified resource.
      *
      * @param  \App\Region  $region
      * @return \Illuminate\Http\Response
      */
-    public function show(Region $region)
+    public function show($name,$region)
     {
-        
+       $data['region'] = Region::find($region);
+       $data['topics'] = Topic::all();
+       // return $data['topics'][0]->regions()->where('region_id',$region)->first();
+       return view('system.topics.index',$data);
     }
 
     /**

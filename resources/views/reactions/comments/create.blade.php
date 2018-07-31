@@ -7,7 +7,7 @@
             <div class="panel panel-default">
 
                 <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ url('khbarat/'.$khbar.'/réactions/comments/ajouter') }}">
+                    <form class="form-horizontal" method="POST" action="{{ url('khbarat/'.$khbar.'/reactions/comments/ajouter') }}">
                         {{ csrf_field() }}
                         {{ method_field('POST') }}
                     
