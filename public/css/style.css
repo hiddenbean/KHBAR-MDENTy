@@ -85,6 +85,9 @@ fieldset[disabled] .btn-primary.active {
 .text-primary {
     color: #558B2F !important;
 }
+.text-black {
+    color: #252525 !important;
+}
 
 .login-wrapper {
     background-color: #558B2F;
@@ -169,8 +172,8 @@ fieldset[disabled] .btn-primary.active {
     font-size: 1.15rem;  
     font-weight: 700;
 }
-.table-scrollable{
-    height: 570px;
+.card-scrollable{
+    height: 600px;
 } 
 
 .card-control-map{
@@ -180,4 +183,13 @@ fieldset[disabled] .btn-primary.active {
     right: 50px;
     width: 350px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.13);
+}
+.padding-y-7{
+    padding-right: 7px;
+    padding-left: 7px;
+}
+
+.table-left{
+    width: 90%;
+    margin-left: 20px;
 }

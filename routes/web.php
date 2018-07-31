@@ -1,5 +1,5 @@
 <?php
-
+ 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -209,6 +209,9 @@ Route::domain('staff.khbarmdinty.com')->group(function () {
 
 
 // Return View (UI)  
+use App\Services\Ajax\Ajax;
+use Illuminate\Http\Request; 
+
 Route::domain('www.khbarmdinty.com')->group(function (){ 
     
     Route::get('/home-view', function(){ 
@@ -238,15 +241,36 @@ Route::domain('partenaire.khbarmdinty.com')->group(function (){
 }); 
 
 Route::domain('staff.khbarmdinty.com')->group(function (){ 
-  
     // partner authentication route start
     // Singin page route   
     Route::get('seconnecter-view', function(){
         return view('system.staff.login');
     })->name('partner.login');
-
-    Route::get('regions-view', function(){
-        return view('system.regions.login');
+  
+});
+Route::domain('{partenaire}.khbarmdinty.com')->group(function (){ 
+    // partner authentication route start
+    // Singin page route   
+    Route::get('region/create', function(Ajax $ajax){
+       $ajax->redrawView('container_create_region');
+       return $ajax->view('regions.shows.create');
     });
+
+    Route::get('region', function(Ajax $ajax){
+        $ajax->redrawView('container_create_region');
+        return $ajax->view('regions.shows.region');
+     });
+
+    Route::post('region/store', function(Ajax $ajax, Request $request){
+        $name = $request->input('name');
+        $ajax->redrawView('container_create_region');
+        return $ajax->view('regions.shows.region', ['name'=>$name]);
+     });
+
+    Route::post('region/store-points', function(Ajax $ajax, Request $request){
+        $region =  $request->input('name');
+        $ajax->redrawView('container_create_region');
+        return $ajax->view('regions.shows.regions', ['region'=> $region]);
+     });
  
 });
