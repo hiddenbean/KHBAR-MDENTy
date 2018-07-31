@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Reaction;
+use App\Intervention;
 use App\PartnerAccount;
 use App\Comment;
 use App\ReactionPicture;
@@ -11,8 +11,16 @@ use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
-class ReactionController extends Controller
+class InterventionController extends Controller
 {
+
+
+     /**
+     * Get a validator for an incoming registration request.
+     *
+     * @param  \Illuminate\Http\Request.
+     * @return void.
+     */
     public function validateRequest(Request $request)
     {
         $request->validate([
@@ -32,15 +40,35 @@ class ReactionController extends Controller
             'description' => 'required',
         ]);
     }
-     /**
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        //
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
      * show a  created view for a comment.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function createComment($name,$khbar,$reaction)
+    public function createComment($name,$khbar)
     {
-        return view('reactions.comments.create',['khbar'=>$khbar,'reaction' =>$reaction ]);
+        return view('interventions.comments.create',['khbar'=>$khbar]);
     }
     
 
@@ -60,15 +88,12 @@ class ReactionController extends Controller
         $comment->comment = $request->comment;
         $comment->save();
     
-        $reaction = new Reaction();
-        if($request->reaction_id!=0)$reaction->reaction_id = $request->reaction_id;
-
-        $reaction->khbar_id = $request->khbar_id;
-        $reaction->userable_id = Auth::guard('partner-account')->user()->partner_id;
-        $reaction->userable_type = 'partner';
-        $reaction->reactionable_id = $comment->id;
-        $reaction->reactionable_type = 'comment';
-        $reaction->save();
+        $intervention = new Intervention();
+        $intervention->partner_id = Auth::guard('partner-account')->user()->partner_id;
+        $intervention->khbar_id = $request->khbar_id;
+        $intervention->interventionable_id = $comment->id;
+        $intervention->interventionable_type = 'comment';
+        $intervention->save();
         return redirect('khbarat/'.$request->khbar_id);
     }
 
@@ -78,9 +103,9 @@ class ReactionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function createPicture($name,$khbar,$reaction)
+    public function createPicture($name,$khbar)
     {
-        return view('reactions.pictures.create',['khbar'=>$khbar,'reaction' =>$reaction ]);
+        return view('interventions.pictures.create',['khbar'=>$khbar]);
     }
     /**
      * Store a newly created resource in storage.
@@ -103,36 +128,14 @@ class ReactionController extends Controller
 
          $picture->save();
     
-        $reaction = new Reaction();
-        if($request->reaction_id!=0)$reaction->reaction_id = $request->reaction_id;
-
-        $reaction->khbar_id = $request->khbar_id;
-        $reaction->userable_id = Auth::guard('partner-account')->user()->partner_id;
-        $reaction->userable_type = 'partner';
-        $reaction->reactionable_id = $picture->id;
-        $reaction->reactionable_type = 'reaction_picture';
-        $reaction->save();
+        $intervention = new Intervention();
+        $intervention->partner_id = Auth::guard('partner-account')->user()->partner_id;
+        $intervention->khbar_id = $request->khbar_id;
+        $intervention->interventionable_id = $picture->id;
+        $intervention->interventionable_type = 'reaction_picture';
+        $intervention->save();
         return redirect('khbarat/'.$request->khbar_id);
 
-    }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $reaction = Reaction::find(1);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -141,29 +144,42 @@ class ReactionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function storeVideo(Request $request)
     {
-        //
+        $this->validateRequest($request);
+
+
+        $video = new Video();
+        $video->video = $request->video;
+        $video->save();
+    
+        $intervention = new Intervention();
+        $intervention->partner_id = Auth::guard('partner-account')->user()->partner_id;
+        $intervention->khbar_id = $request->khbar_id;
+        $intervention->interventionable_id = $comment->id;
+        $intervention->interventionable_type = 'comment';
+        $intervention->save();
     }
+
+
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Reaction  $reaction
+     * @param  \App\Intervention  $intervention
      * @return \Illuminate\Http\Response
      */
-    public function show(Reaction $reaction)
+    public function show(Intervention $intervention)
     {
-        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Reaction  $reaction
+     * @param  \App\Intervention  $intervention
      * @return \Illuminate\Http\Response
      */
-    public function edit(Reaction $reaction)
+    public function edit(Intervention $intervention)
     {
         //
     }
@@ -172,10 +188,10 @@ class ReactionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Reaction  $reaction
+     * @param  \App\Intervention  $intervention
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Reaction $reaction)
+    public function update(Request $request, Intervention $intervention)
     {
         //
     }
@@ -183,10 +199,10 @@ class ReactionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Reaction  $reaction
+     * @param  \App\Intervention  $intervention
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Reaction $reaction)
+    public function destroy(Intervention $intervention)
     {
         //
     }

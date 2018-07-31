@@ -42,9 +42,11 @@ class RegionController extends Controller
      */
     public function index()
     {
+        
         // Retrieve the partner concerned.
         isset($request->partner) ? $partner = Partner::where('name',$request->partner)->firstOrFail() : $partner = Partner::find(Auth::guard('partner-account')->user()->partner_id);
         $data['partner'] = $partner;
+        // return $data;
         return view('system.regions.index',$data);
     }
 

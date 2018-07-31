@@ -11,7 +11,7 @@ class Reaction extends Model
         return $this->morphTo();
     }
 
-    public function reaction()
+    public function userable()
     {
         return $this->morphTo();
     }

@@ -120,6 +120,20 @@ Route::domain('staff.khbarmdinty.com')->group(function () {
 
     Route::domain('{partenaire}.khbarmdinty.com')->group(function (){
 
+        
+
+        //interventions Routes
+        Route::prefix('khbarat/{khbar}')->group(function(){
+            Route::get('/',function(){return view('test');});
+            Route::prefix('interventions')->group(function(){
+                Route::get('comments/ajouter', 'InterventionController@createComment');
+                Route::get('pictures/ajouter', 'InterventionController@createPicture');
+            });
+            Route::prefix('réactions')->group(function(){
+                Route::get('{reaction}/comments/ajouter', 'ReactionController@createComment');
+                Route::get('{reaction}/pictures/ajouter', 'ReactionController@createPicture');
+            });
+        });
         // partner authentication route start
         // Singin page route
         Route::get('/seconnecter', 'Auth\PartnerAccountLoginController@showLoginForm');
@@ -130,14 +144,14 @@ Route::domain('staff.khbarmdinty.com')->group(function () {
         Route::post('/test', 'RegionController@test');
 
         // Regions route start
-        Route::prefix('/regions')->group(function(){
+        Route::prefix('regions')->group(function(){
             Route::get('/', 'RegionController@index');
             Route::get('/ajouter', 'RegionController@create');
                 Route::prefix('/{region}')->group(function(){
                     Route::get('/', 'RegionController@show');
                     Route::get('/modifier', 'RegionController@edit');
                 });
-            });
+        });
         // Regions route end
 
 
@@ -151,7 +165,7 @@ Route::domain('staff.khbarmdinty.com')->group(function () {
      Route::prefix('regions')->group(function() {
         Route::get('','RegionController@index');
         Route::prefix('{region}')->group(function() {
-            Route::get('afichier','RegionController@show');
+            Route::get('afficher','RegionController@show');
             Route::get('subject/ajouter','RegionController@subjectShow');
         });
     });
@@ -161,6 +175,20 @@ Route::domain('staff.khbarmdinty.com')->group(function () {
         // partner authentication route start
         // Singin page route
         Route::post('/seconnecter', 'auth\PartnerAccountLoginController@login');
+
+         //interventions Routes
+         Route::prefix('khbarat/{khbar}')->group(function(){
+            Route::prefix('interventions')->group(function(){
+                Route::post('comments/ajouter', 'InterventionController@storeComment');
+                Route::post('pictures/ajouter', 'InterventionController@storePicture');
+
+            });
+            Route::prefix('réactions')->group(function(){
+                Route::post('comments/ajouter', 'ReactionController@storeComment');
+                Route::post('pictures/ajouter', 'ReactionController@storePicture');
+
+            });
+        });
 
     // partner authentication route start
     // Singin page route   
