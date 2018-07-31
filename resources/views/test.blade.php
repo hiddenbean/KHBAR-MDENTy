@@ -32,13 +32,13 @@
     </div>
     <div class="card-footer">
       <small class="text-muted">Last updated 3 mins ago</small>
-@foreach($reactions->where('reaction_id',NULL) as $reaction)
+@foreach($reactions->where('reaction_id',NULL)->sortBy('created_at') as $reaction)
       <div class="card">
         <div class="card-body">
         <!-- {{ $reaction->userable->company_name ? $name = $reaction->userable->company_name : $name = $reaction->userable->last_name.' '.$reaction->userable->first_name }} -->
           <h5 class="card-title">{{$name}}</h5>
         <!-- {{ $reaction->reactionable->comment ? $comment = $reaction->reactionable->comment : $comment = $reaction->reactionable->description }} -->
-          <p class="card-text">{{$comment}}.</p>
+          <p class="card-text">{{$comment}}</p>
           @if($reaction->reactionable->path)
           <img width="100%" src="{{ Storage::url($reaction->reactionable->path) }}"/>
           @endif
@@ -52,14 +52,14 @@
             </div><br><br>
         </div>
       </div>
-                      @foreach($reactions->where('reaction_id',$reaction->id) as $replay_reaction)
+                      @foreach($reactions->where('reaction_id',$reaction->id)->sortBy('created_at') as $replay_reaction)
                       <div class="card" style="width:90%;float:right;">
                         <div class="card-body">
                                 <!-- {{ $replay_reaction->userable->company_name ? $name = $replay_reaction->userable->company_name : $name = $replay_reaction->userable->last_name.' '.$replay_reaction->userable->first_name }} -->
 
                           <h5 class="card-title">{{$name}}</h5>
                      <!-- {{ $replay_reaction->reactionable->comment ? $comment = $replay_reaction->reactionable->comment : $comment = $replay_reaction->reactionable->description }} -->
-                          <p class="card-text">{{$comment}}.</p>
+                          <p class="card-text">{{$comment}}</p>
                             @if($replay_reaction->reactionable->path)
                             <img width="100%" src="{{ Storage::url($replay_reaction->reactionable->path) }}"/>
                             @endif
@@ -75,7 +75,9 @@
                             </div> --}}
                         </div>
                       </div>
+            <br>
                       @endforeach
+        <br>
 @endforeach
     </div>
   </div>

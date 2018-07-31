@@ -129,8 +129,8 @@ Route::domain('staff.khbarmdinty.com')->group(function () {
                 Route::get('pictures/ajouter', 'InterventionController@createPicture');
             });
             Route::prefix('reactions')->group(function(){
-                Route::get('{reaction}/comments/ajouter', 'ReactionController@createComment');
-                Route::get('{reaction}/pictures/ajouter', 'ReactionController@createPicture');
+                Route::get('{reaction}/comments/ajouter', 'CommentController@create');
+                Route::get('{reaction}/pictures/ajouter', 'ReactionPictureController@create');
             });
         });
         // partner authentication route start
@@ -188,8 +188,8 @@ Route::domain('staff.khbarmdinty.com')->group(function () {
 
             });
             Route::prefix('reactions')->group(function(){
-                Route::post('comments/ajouter', 'ReactionController@storeComment');
-                Route::post('pictures/ajouter', 'ReactionController@storePicture');
+                Route::post('comments/ajouter', 'CommentController@store');
+                Route::post('pictures/ajouter', 'ReactionPictureController@sotre');
 
             });
         });
