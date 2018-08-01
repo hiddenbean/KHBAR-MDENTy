@@ -12,7 +12,11 @@
             </span>
             <ul class="sub-menu">
                 <li>
-                    <a href="">Les régions</a>
+                    <a href="{{url('regions')}}">Les régions</a>
+                    <span class="icon-thumbnail">LR</span>
+                </li> 
+                <li>
+                    <a href="{{url('regions/sujets')}}">Les sujets</a>
                     <span class="icon-thumbnail">LR</span>
                 </li> 
             </ul>

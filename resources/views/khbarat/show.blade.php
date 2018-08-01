@@ -189,19 +189,17 @@
             map = new google.maps.Map(document.getElementById('google-map'), mapOptions); 
            
 
-                $.get("{{url('khbar/bulles')}}", function( data ) { 
-         
-                        
+                $.get("{{url('get-bubbles/'.$khbar->name)}}", function( data ) { 
+          
                           
-                        var data = [ 
+                        var datas = [ 
                             {lat: 41.878, lng: -87.629} ,
                             {lat: 40.714, lng: -74.005} , 
                             {lat: 34.052, lng: -118.243} , 
-                            {lat: 49.25, lng: -123.1}
-                           
+                            {lat: 49.25, lng: -123.1} 
                        ];
          
-                       $.each(data, function( index, bubble ) {  
+                       $.each(datas, function( index, bubble ) {  
                          var cityCircle = new google.maps.Circle({
                              strokeColor: '#FF0000',
                              strokeOpacity: 0.8,
