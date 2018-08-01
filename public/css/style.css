@@ -82,6 +82,10 @@ fieldset[disabled] .btn-primary.active {
     background-color: #558B2F;
 }
 
+.badge-primary {
+    background: #558B2F;
+    color: #fff;
+}
 .text-primary {
     color: #558B2F !important;
 }
@@ -192,4 +196,13 @@ fieldset[disabled] .btn-primary.active {
 .table-left{
     width: 90%;
     margin-left: 20px;
+}
+
+.card .card-body {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.13); 
+}
+.comment-up{
+    position: relative;
+    background: rgba(204, 204, 204, 0.1);
+    padding: 5px 15px;
 }

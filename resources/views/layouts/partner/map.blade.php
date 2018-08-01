@@ -17,7 +17,7 @@
   </div>
   <!-- END SIDEBAR MENU HEADER-->
   <!-- START SIDEBAR MENU -->
-    @include('layouts.partner.components.menu')
+    @include('layouts.partner.components_map.menu')
   <!-- END SIDEBAR MENU -->
 </nav>
 <!-- END SIDEBAR -->
@@ -25,19 +25,19 @@
 <!-- START PAGE-CONTAINER -->
 <div class="page-container ">
   <!-- START HEADER -->
-  @include('layouts.partner.components.header')
+  @include('layouts.partner.components_map.header')
   <!-- END HEADER -->
   <!-- START PAGE CONTENT WRAPPER -->
-  <div class="page-content-wrapper ">
+  <div class="page-content-wrapper full-height">
 
     <!-- START PAGE CONTENT -->
-    <div class="content">
+    <div class="content full-width full-height overlay-footer no-padding">
             @yield('content')
     </div>
     <!-- END PAGE CONTENT -->
 
     <!-- START FOOTER -->  
-    @include('layouts.partner.components.footer')
+    @include('layouts.partner.components_map.footer')
     <!-- END FOOTER -->  
 
   </div>

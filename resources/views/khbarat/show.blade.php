@@ -11,13 +11,40 @@
         <div class="card-body">
             <div class="scrollable">
                 <div class="card-scrollable">
-                    <h4> les régions </h4>
+                    <h4> Khbar </h4>
                     <hr>  
                     <div  class="row no-padding no-margin">
                         <div class="col-md-12 no-padding">
-                            <div id="container_create_region"> 
-                                @include('regions.shows.regions') 
-                            </div>
+                                <div class="comment">
+                                    <img src="{{ asset('img/social/cover.jpg') }}" class="img-fluid p-t-5 p-b-5" alt="" srcset="">
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                                    <div class="profile-img-wrapper m-t-5 inline">
+                                        <img width="35" height="35" data-src-retina="{{ asset('img/profiles/avatar_small2x.jpg') }}" data-src="{{ asset('img/profiles/avatar_small.jpg') }}"
+                                            alt="" src="{{ asset('img/profiles/avatar_small.jpg') }}">
+                                        <div class="chat-status available">
+                                        </div>
+                                    </div>
+                                    <div class="inline m-l-10">
+                                        <p class="small hint-text m-t-5">Name  <br>
+                                            Lorem ipsum dolor sit amet consectetur 
+                                        </p>
+                                    </div> 
+                                </div> 
+                                <hr>
+                                <div class="comment"> 
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia dolore repellendus recusandae eum nemo eius, corrupti, labore numquam facere necessitatibus aperiam est ad cumque ea repudiandae obcaecati quis ipsum debitis?</p>
+                                    <div class="profile-img-wrapper m-t-5 inline">
+                                        <img width="35" height="35" data-src-retina="{{ asset('img/profiles/avatar_small2x.jpg') }}" data-src="{{ asset('img/profiles/avatar_small.jpg') }}"
+                                            alt="" src="{{ asset('img/profiles/avatar_small.jpg') }}">
+                                        <div class="chat-status available">
+                                        </div>
+                                    </div>
+                                    <div class="inline m-l-10">
+                                        <p class="small hint-text m-t-5">Name  <br>
+                                            Lorem ipsum dolor sit amet consectetur 
+                                        </p>
+                                    </div> 
+                                </div> 
                         </div>
                     </div> 
                 </div>
@@ -160,124 +187,40 @@
             };
     
             map = new google.maps.Map(document.getElementById('google-map'), mapOptions); 
-            geocoder = new google.maps.Geocoder;
-            google.maps.event.addListener(map, 'click', function (event) {
-               
-               var name_region = $('#name_region').val(); 
-               if(name_region){
-                    longlat.push({
-                        lat: event.latLng.lat(),
-                        lng: event.latLng.lng()
-                    }); 
-                    clearPolygone();
-                    setMapOnAll(map, longlat);
-                    var region_point = document.createElement('input');
-                    region_point.type = 'text';
-                    region_point.name = 'region_points[]';
-                    region_point.value = event.latLng.lat() + ',' + event.latLng.lng();
-                    var div = document.getElementById('region');
-                    div.append(region_point); 
-                    pointsTable(event,map,geocoder, address);
-               }
-    
-            }); 
+           
 
-
-            $.get("{{url('regions-points')}}", function( data ) { 
-                $.each(data, function( index, value ) { 
-                   
-                    var longlat = [ ];
-    
-                    for(var i=0; i < value['points'].length ; i++ ){
-                        var longlatpoint = {
-                            'lat': value['points'][i]['longitude'],
-                            'lng': value['points'][i]['latitude']
-                        } 
-                        longlat.push(longlatpoint);
-                    } 
-                    
-                        // Construct the polygon.
-                        var trianglePoints = new google.maps.Polygon({
-                            paths: longlat,
-                            strokeColor: '#FF0000',
-                            strokeOpacity: 0.8,
-                            strokeWeight: 2,
-                            fillColor: '#FF0000',
-                            fillOpacity: 0.35
-                        });
-                        trianglePoints.setMap(map);
-                           
-                }); 
-              }); 
-    
-        } 
-    
-    
-        // Sets the map on all markers in the array.
-        function setMapOnAll(map, longlat) {
-            if (map) {
-                triangle = new google.maps.Polygon({
-                    editable: true,
-                    paths: longlat,
-                    strokeColor: '#FF0000',
-                    strokeOpacity: 0.8,
-                    strokeWeight: 2,
-                    fillColor: '#FF0000',
-                    fillOpacity: 0.35
-                });
-                triangle.setMap(map);
-                polygone.push(triangle); 
-                google.maps.event.addListener(triangle, 'rightclick', function (event) {
-                    if (event.vertex == undefined) {
-                        return;
-                    } else {
-                        removeVertex(event.vertex);
-                        longlat.splice(event.vertex, event.vertex);
-                    }
-                });
-    
-            } else {
-                if (polygone[0]) {
-                    polygone[0].setMap(null);
-                }
-            }
-        }
-    
-        function clearPolygone() {
-            setMapOnAll(null, longlat);
-            polygone = [];
-        }
-    
-        function removeVertex(vertex) {
-            var path = triangle.getPath();
-            path.removeAt(vertex);
-        }
-      
-        function pointsTable(event,map,geocoder) {  
-              var latlng = {lat: parseFloat(event.latLng.lat()), lng: parseFloat(event.latLng.lng())};
-                geocoder.geocode({'location': latlng}, function(results, status) {
-                if (status === 'OK') {
-                    if (results[0]) {
+                $.get("{{url('khbar/bulles')}}", function( data ) { 
+         
                         
-                        var points =`<tr>
-                        <td class="v-align-middle no-padding" width="5%">
-                            <i class="fa fa-map-marker"></i>
-                                </td>
-                                <td class="v-align-middle padding-5" width="85%">` 
-                                        +results[0].formatted_address+
-                                `</td>
-                            </tr>`; 
-                    var table_points = document.getElementById('table_points');  
-                    table_points.innerHTML += points;
+                          
+                        var data = [ 
+                            {lat: 41.878, lng: -87.629} ,
+                            {lat: 40.714, lng: -74.005} , 
+                            {lat: 34.052, lng: -118.243} , 
+                            {lat: 49.25, lng: -123.1}
+                           
+                       ];
+         
+                       $.each(data, function( index, bubble ) {  
+                         var cityCircle = new google.maps.Circle({
+                             strokeColor: '#FF0000',
+                             strokeOpacity: 0.8,
+                             strokeWeight: 2,
+                             fillColor: '#FF0000',
+                             fillOpacity: 0.35,
+                             map: map,
+                             center: bubble,
+                             radius: 120000
+                           });
+                                
+                    });  
+                       
+            }); 
+            
+       
+ }
     
-                    } else {
-                    window.alert('No results found');
-                    }
-                } else {
-                    window.alert('Geocoder failed due to: ' + status);
-                }
-           }); 
-        }
+        
  
     
  
