@@ -1,4 +1,4 @@
-<div class="header">
+<div class="header  transparent no-border">
         <!-- START MOBILE SIDEBAR TOGGLE -->
         <a href="#" class="btn-link toggle-sidebar d-lg-none pg pg-menu" data-toggle="sidebar">
         </a>

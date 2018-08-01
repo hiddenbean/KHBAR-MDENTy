@@ -11,9 +11,12 @@
                             <i class="fa fa-map"></i>
                         </td>
                         <td class="v-align-middle padding-5" width="85%">
-                            <strong><a href="#" class="text-black">{{ $region->name }}</a></strong>
+                            <strong><a href="regions/{{$region->id}}" class="text-black ajax">{{ $region->name }}</a></strong>
                         </td>
                     </tr> 
+                    <tr id="container_show_region_{{$region->id}}">
+
+                    </tr>
                 @endforeach
             
              @endif 
