@@ -26,6 +26,8 @@ class DatabaseSeeder extends Seeder
              ReasonSeeder::class,
              KhbarSeeder::class,
              CoordinateSeeder::class,
+             BubbleSeeder::class,
+             RadiusSeeder::class,
          ]);
     }
 }

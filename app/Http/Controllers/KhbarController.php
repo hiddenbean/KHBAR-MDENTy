@@ -25,7 +25,7 @@ class KhbarController extends Controller
      */
     public function index($subdomaine)
     {
-        $citizen = Citizen::find(2);
+        $citizen = Citizen::find(1);
         $khbarat = Khbar::all();
         $bubble = new BubbleController();
         $citizen_khbarat = [];
@@ -35,7 +35,6 @@ class KhbarController extends Controller
             if($khbar_distance < $khbar->bubble->radius->radius)
             {
                 array_push($citizen_khbarat, $khbar);
-                array_push($citizen_khbarat, $khbar_distance);
                 continue;
             }
             //return $bubble->circleDistance($citizen->coordinate, $khbar->reactions[0]->bubble->coordinate);
@@ -46,7 +45,6 @@ class KhbarController extends Controller
                 if($distance < $khbar->bubble->radius->radius)
                 {
                     array_push($citizen_khbarat, $khbar);
-                    
                 }
             }
         }
@@ -142,20 +140,24 @@ class KhbarController extends Controller
      */
     public function show($subdomaine, $khbar)
     {
-        $khbar = Khbar::findOrFail($khbar);
-        return view('', compact('khbar'));
+        $khbar = Khbar::where('name',$khbar)->firstOrFail();
+        return view('khbarat.show', compact('khbar'));
+      
     }
 
 
     public function getBubbles($subdmaine, $khbar)
     {
-        $khbar = Khbar::findOrFail($khbar);
+        $khbar = Khbar::where('name',$khbar)->firstOrFail();
         $bubbles = [];
         foreach($khbar->reactions as $reaction)
         {
-            array_push($bubbles, $reaction->bubble);
+            if($reaction->bubble)
+            {
+                array_push($bubbles, $reaction->bubble);
+            }
         }
-        return $bubbles;
+        return $bubbles; 
     }
 
     /**
@@ -217,7 +219,8 @@ class KhbarController extends Controller
         {
             return $this->sortKhbarat($khbarat_partner);
         }
-        return count($khbarat_partner);
+        
+        return view('khbarat.index',['khbarat'=>$khbarat_partner]); 
     }
 
     public function sortKhbarat($khbarat)
