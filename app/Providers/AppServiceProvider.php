@@ -29,6 +29,7 @@ class AppServiceProvider extends ServiceProvider
             'comment' => 'App\Comment',
             'khbar' => 'App\Khbar',
             'reaction' => 'App\Reaction',
+            'citizen' => 'App\Citizen',
          ]);
     }
 

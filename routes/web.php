@@ -1,5 +1,5 @@
 <?php
-
+ 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -123,14 +123,14 @@ Route::domain('staff.khbarmdinty.com')->group(function () {
 
         //interventions Routes
         Route::prefix('khbarat/{khbar}')->group(function(){
-            Route::get('/',function(){return view('test');});
+            Route::get('/','ReactionController@index');
             Route::prefix('interventions')->group(function(){
                 Route::get('comments/ajouter', 'InterventionController@createComment');
                 Route::get('pictures/ajouter', 'InterventionController@createPicture');
             });
-            Route::prefix('réactions')->group(function(){
-                Route::get('{reaction}/comments/ajouter', 'ReactionController@createComment');
-                Route::get('{reaction}/pictures/ajouter', 'ReactionController@createPicture');
+            Route::prefix('reactions')->group(function(){
+                Route::get('{reaction}/comments/ajouter', 'CommentController@create');
+                Route::get('{reaction}/pictures/ajouter', 'ReactionPictureController@create');
             });
         });
         // partner authentication route start
@@ -196,9 +196,9 @@ Route::domain('staff.khbarmdinty.com')->group(function () {
                 Route::post('pictures/ajouter', 'InterventionController@storePicture');
 
             });
-            Route::prefix('réactions')->group(function(){
-                Route::post('comments/ajouter', 'ReactionController@storeComment');
-                Route::post('pictures/ajouter', 'ReactionController@storePicture');
+            Route::prefix('reactions')->group(function(){
+                Route::post('comments/ajouter', 'CommentController@store');
+                Route::post('pictures/ajouter', 'ReactionPictureController@sotre');
 
             });
         });
@@ -207,6 +207,8 @@ Route::domain('staff.khbarmdinty.com')->group(function () {
         Route::prefix('regions')->group(function() {
             Route::post('ajouter', 'RegionController@store');
             Route::prefix('{region}')->group(function() {
+                
+            Route::post('subject/ajouter','RegionController@subjectStore');
                 Route::post('/modifier', 'RegionController@update');
                 Route::delete('', 'RegionController@delete');
             });
@@ -216,6 +218,9 @@ Route::domain('staff.khbarmdinty.com')->group(function () {
 
 
 // Return View (UI)  
+use App\Services\Ajax\Ajax;
+use Illuminate\Http\Request; 
+
 Route::domain('www.khbarmdinty.com')->group(function (){ 
     
     Route::get('/home-view', function(){ 
@@ -245,15 +250,32 @@ Route::domain('partenaire.khbarmdinty.com')->group(function (){
 }); 
 
 Route::domain('staff.khbarmdinty.com')->group(function (){ 
-  
     // partner authentication route start
     // Singin page route   
     Route::get('seconnecter-view', function(){
         return view('system.staff.login');
     })->name('partner.login');
-
-    Route::get('regions-view', function(){
-        return view('system.regions.login');
+  
+});
+Route::domain('{partenaire}.khbarmdinty.com')->group(function (){ 
+    // partner authentication route start
+    // Singin page route   
+    Route::get('region/create', function(Ajax $ajax){
+       $ajax->redrawView('container_create_region');
+       return $ajax->view('regions.shows.create');
     });
+ 
+
+    Route::post('region/store', function(Ajax $ajax, Request $request){
+        $name = $request->input('name');
+        $ajax->redrawView('container_create_region');
+        return $ajax->view('regions.shows.region', ['name'=>$name]);
+     });
+
+    Route::post('region/store-points', function(Ajax $ajax, Request $request){
+        $region =  $request->input('name');
+        $ajax->redrawView('container_create_region');
+        return $ajax->view('regions.shows.regions', ['region'=> $region]);
+     });
  
 });

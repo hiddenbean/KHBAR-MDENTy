@@ -1,139 +1,27 @@
-@extends('layouts.partner.app') @section('css') @stop @section('content')
+@extends('layouts.partner.app') 
+
+@section('css') 
+
+@stop 
+
+@section('content')
 <div class="map-container full-width full-height">
     <div id="google-map" class="full-width full-height"></div>
     <div data-pages="card" class="card card-default card-control-map" id="card-basic">
         <div class="card-body">
             <div class="scrollable">
-                <div class="table-scrollable">
-                    <h3> les régions </h3>
-                    <hr>
-
-                    <div class="row no-padding no-margin">
-                        <div class="col-md-8 no-padding">
-                            <div class="form-group m-b-10">
-                                <input type="text" placeholder="Default input" class="form-control">
+                <div class="card-scrollable">
+                    <h4> les régions </h4>
+                    <hr>  
+                    <div  class="row no-padding no-margin">
+                        <div class="col-md-12 no-padding">
+                            <div id="container_create_region">
+                            
+                                @include('regions.shows.regions')
+                            
                             </div>
                         </div>
-                        <div class="col-md-4 no-padding p-t-5 p-l-15">
-                            <a href="#">
-                                <i class="fa fa-plus"></i> Ajouter
-                            </a>
-                        </div>
-                    </div>
-                    <div class="row no-padding no-margin">
-                        <div class="col-md-12 no-padding">
-
-                            <table class="table table-condensed">
-                                <thead>
-                                    <th colspan="3">
-                                        Name region
-                                    </th>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="col-md-5 v-align-middle">
-                                            <a>
-                                                <i class="fa fa-map-marker"></i>
-                                            </a>
-                                            <span class="m-l-10">lat: 22222.222222</span>
-                                        </td>
-                                        <td class="col-md-5 v-align-middle">
-                                            <span class="m-l-10">lat: 22222.22222245454545</span>
-                                        </td>
-                                        <td width="30" class="v-align-middle">
-                                            <a href="#" class="remove-item float-right">
-                                                <i class="pg-close"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="col-md-5">
-                                            <a>
-                                                <i class="fa fa-map-marker"></i>
-                                            </a>
-                                            <span class="m-l-10">lat: 22222.222222</span>
-                                        </td>
-                                        <td class="col-md-5">
-                                            <span class="m-l-10">lat: 22222.22222245454545</span>
-                                        </td>
-                                        <td width="30">
-                                            <a href="#" class="remove-item float-right">
-                                                <i class="pg-close"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="col-md-5">
-                                            <a>
-                                                <i class="fa fa-map-marker"></i>
-                                            </a>
-                                            <span class="m-l-10">lat: 22222.222222</span>
-                                        </td>
-                                        <td class="col-md-5">
-                                            <span class="m-l-10">lat: 22222.22222245454545</span>
-                                        </td>
-                                        <td width="30">
-                                            <a href="#" class="remove-item float-right">
-                                                <i class="pg-close"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="col-md-5">
-                                            <a>
-                                                <i class="fa fa-map-marker"></i>
-                                            </a>
-                                            <span class="m-l-10">lat: 22222.222222</span>
-                                        </td>
-                                        <td class="col-md-5">
-                                            <span class="m-l-10">lat: 22222.22222245454545</span>
-                                        </td>
-                                        <td width="30">
-                                            <a href="#" class="remove-item float-right">
-                                                <i class="pg-close"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="col-md-5">
-                                            <a>
-                                                <i class="fa fa-map-marker"></i>
-                                            </a>
-                                            <span class="m-l-10">lat: 22222.222222</span>
-                                        </td>
-                                        <td class="col-md-5">
-                                            <span class="m-l-10">lat: 22222.22222245454545</span>
-                                        </td>
-                                        <td width="30">
-                                            <a href="#" class="remove-item float-right">
-                                                <i class="pg-close"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="col-md-5">
-                                            <a>
-                                                <i class="fa fa-map-marker"></i>
-                                            </a>
-                                            <span class="m-l-10">lat: 22222.222222</span>
-                                        </td>
-                                        <td class="col-md-5">
-                                            <span class="m-l-10">lat: 22222.22222245454545</span>
-                                        </td>
-                                        <td width="30">
-                                            <a href="#" class="remove-item float-right">
-                                                <i class="pg-close"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <button class="btn btn-primary float-right m-t-10">
-                                Terminer
-                            </button>
-                        </div>
-
-                    </div>
+                    </div> 
                 </div>
             </div>
         </div>
@@ -146,11 +34,11 @@
 @section('script')
 <script>
     var map;
-    var markers = [];
     var longlat = [];
     var polygone = [];
-    var bermudaTriangle;
-
+    var triangle;
+    var geocoder;
+    var address;
     function initMap() {
         var mapOptions = {
             zoom: 8,
@@ -159,19 +47,20 @@
                 lat: 33.927382,
                 lng: -6.900029
             },
-            styles: [{
-                featureType: 'water',
-                elementType: 'all',
-                stylers: [{
-                    hue: '#e9ebed'
+            styles: [
+                {
+                    featureType: 'water',
+                    elementType: 'all',
+                    stylers: [{
+                        hue: '#e9ebed'
+                    }, {
+                        saturation: -78
+                    }, {
+                        lightness: 67
+                    }, {
+                        visibility: 'simplified'
+                    }]
                 }, {
-                    saturation: -78
-                }, {
-                    lightness: 67
-                }, {
-                    visibility: 'simplified'
-                }]
-            }, {
                 featureType: 'landscape',
                 elementType: 'all',
                 stylers: [{
@@ -267,32 +156,44 @@
                 }, {
                     visibility: 'simplified'
                 }]
-            }]
+            }
+            ]
         };
 
-        map = new google.maps.Map(document.getElementById('google-map'), mapOptions);
-        // This event listener calls addMarker() when the map is clicked.
+        map = new google.maps.Map(document.getElementById('google-map'), mapOptions); 
+        geocoder = new google.maps.Geocoder;
         google.maps.event.addListener(map, 'click', function (event) {
-            longlat.push({
-                lat: event.latLng.lat(),
-                lng: event.latLng.lng()
-            });
-            console.log(event.latLng.lat() + ',' + event.latLng.lng());
-            clearPolygone();
-            setMapOnAll(map, longlat);
-            var region_point = document.createElement('input');
-            region_point.type = 'text';
-            region_point.name = 'region_points[]';
-            region_point.value = event.latLng.lat() + ',' + event.latLng.lng();
-            var div = document.getElementById('region');
-            div.append(region_point);
-        });
-    }
+           
+           var name_region = $('#name_region').val(); 
+           if(name_region){
+                longlat.push({
+                    lat: event.latLng.lat(),
+                    lng: event.latLng.lng()
+                }); 
+                clearPolygone();
+                setMapOnAll(map, longlat);
+                var region_point = document.createElement('input');
+                region_point.type = 'text';
+                region_point.name = 'region_points[]';
+                region_point.value = event.latLng.lat() + ',' + event.latLng.lng();
+                var div = document.getElementById('region');
+                div.append(region_point); 
+                pointsTable(event,map,geocoder, address);
+           }
+
+        }); 
+
+
+
+        
+
+    } 
+
 
     // Sets the map on all markers in the array.
     function setMapOnAll(map, longlat) {
         if (map) {
-            bermudaTriangle = new google.maps.Polygon({
+            triangle = new google.maps.Polygon({
                 editable: true,
                 paths: longlat,
                 strokeColor: '#FF0000',
@@ -301,10 +202,9 @@
                 fillColor: '#FF0000',
                 fillOpacity: 0.35
             });
-            bermudaTriangle.setMap(map);
-            polygone.push(bermudaTriangle);
-            google.maps.event.addListener(bermudaTriangle, 'rightclick', function (event) {
-                console.log(event.vertex);
+            triangle.setMap(map);
+            polygone.push(triangle); 
+            google.maps.event.addListener(triangle, 'rightclick', function (event) {
                 if (event.vertex == undefined) {
                     return;
                 } else {
@@ -312,6 +212,7 @@
                     longlat.splice(event.vertex, event.vertex);
                 }
             });
+
         } else {
             if (polygone[0]) {
                 polygone[0].setMap(null);
@@ -325,27 +226,39 @@
     }
 
     function removeVertex(vertex) {
-        var path = bermudaTriangle.getPath();
-
+        var path = triangle.getPath();
         path.removeAt(vertex);
     }
+  
+    function pointsTable(event,map,geocoder) {  
+          var latlng = {lat: parseFloat(event.latLng.lat()), lng: parseFloat(event.latLng.lng())};
+            geocoder.geocode({'location': latlng}, function(results, status) {
+            if (status === 'OK') {
+                if (results[0]) {
+                    
+                    var points =`<tr>
+                    <td class="v-align-middle no-padding" width="5%">
+                        <i class="fa fa-map-marker"></i>
+                            </td>
+                            <td class="v-align-middle padding-5" width="85%">` 
+                                    +results[0].formatted_address+
+                            `</td>
+                        </tr>`; 
+                var table_points = document.getElementById('table_points');  
+                table_points.innerHTML += points;
 
-</script>
-<script>
-    function submit() {
-
-        for (var i = 0; i < longlat.length; i++) {
-            var region_point = document.createElement('input');
-            region_point.type = 'text';
-            region_point.name = 'region_points[]';
-            region_point.value = event.latLng.lat() + ',' + event.latLng.lng();
-            var div = document.getElementById('region');
-            div.append(region_point);
-        }
-        //document.getElementById("form").submit(); 
+                } else {
+                window.alert('No results found');
+                }
+            } else {
+                window.alert('Geocoder failed due to: ' + status);
+            }
+       }); 
     }
+    
+ 
 
-</script>
+</script>  
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBXinhnpgReXMJ-SzB7STNPyNM1mrzyQ8w&callback=initMap" async
     defer></script>
 @stop
