@@ -164,6 +164,7 @@ Route::domain('staff.khbarmdinty.com')->group(function () {
             Route::get('/{khbar}', 'KhbarController@show');
         });
         Route::get('get-bubbles/{khbar}', 'KhbarController@getBubbles');
+        Route::get('khbars/{khbar}/reactions', 'ReactionController@index2');
         
 
 

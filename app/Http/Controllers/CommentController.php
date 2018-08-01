@@ -27,7 +27,7 @@ class CommentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($subdomaine)
     {
         //
     }
@@ -42,6 +42,7 @@ class CommentController extends Controller
     public function show(Comment $comment)
     {
         //
+
     }
       /**
      * show a  created view for a comment.

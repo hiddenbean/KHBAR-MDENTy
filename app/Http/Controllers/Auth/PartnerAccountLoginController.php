@@ -86,7 +86,7 @@ class PartnerAccountLoginController extends Controller
         $request->validate([
             'company_name' => 'required|exists:partners,company_name',
         ]);
-        return redirect(url('https://'.$request->company_name.'.khbarmdinty.com/seconnecter'));
+        return redirect(url('http://'.$request->company_name.'.khbarmdinty.com/seconnecter'));
     }
 
     /**

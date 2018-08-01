@@ -25,4 +25,14 @@ class Reaction extends Model
     {
         return $this->morphOne('App\Bubble', 'bubbleable');
     }
+
+    public function parent()
+    {
+        return $this->belongsTo('App\Reaction', 'reaction_id');
+    }
+
+    public function children()
+    {
+        return $this->hasMany('App\Reaction', 'reaction_id');
+    }
 }

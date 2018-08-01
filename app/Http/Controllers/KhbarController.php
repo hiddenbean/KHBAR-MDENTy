@@ -202,7 +202,11 @@ class KhbarController extends Controller
         $partner_name = $partner_account->partner->name;
         $partner = Partner::where('name',$partner_name)->firstOrFail();
         $regions = Region::where('partner_id', $partner->id)->get();
-        
+        if(empty($regions))
+        {
+            return 'you have no khbar for now thank you for checking your feed';
+        }
+        return $regions;
         $khbarat = $partner->khbars()->get();
         $khbarat_partner = [];
         
@@ -211,14 +215,14 @@ class KhbarController extends Controller
             $point = $this->pointStringToCoordinates($khbar->bubble->coordinate->latitude , $khbar->bubble->coordinate->longitude);
             if($this->checkBelonging($point, $regions))
             {
-                $khbarat_partner[] = $khbar;;
+                $khbarat_partner[] = $khbar;
             }
         }
         if(count($khbarat_partner) > 1)
         {
             return $this->sortKhbarat($khbarat_partner);
         }
-        return count($khbarat_partner);
+        return $khbarat_partner;
     }
 
     public function sortKhbarat($khbarat)
