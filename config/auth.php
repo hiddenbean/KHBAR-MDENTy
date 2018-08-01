@@ -55,11 +55,20 @@ return [
             'driver' => 'session',
             'provider' => 'staff',
         ],
+        'staff' => [
+            'driver' => 'session',
+            'provider' => 'staff',
+        ],
 
         'staff-api' => [
             'driver' => 'token',
             'provider' => 'staff',
         ],
+
+        'citizen' => [
+            'driver' => 'session',
+            'provider' => 'citizens',
+        ]
     ],
 
     /*
@@ -92,6 +101,11 @@ return [
         'staff' => [
             'driver' => 'eloquent',
             'model' => App\Staff::class,
+        ],
+
+        'citizens' => [
+            'driver' => 'eloquent',
+            'model' => App\Citizen::class,
         ],
 
         // 'users' => [
@@ -130,6 +144,12 @@ return [
 
         'staff' => [
             'provider' => 'staff',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+
+        'citizens' => [
+            'provider' => 'citizens',
             'table' => 'password_resets',
             'expire' => 60,
         ],

@@ -8,11 +8,11 @@ class Khbar extends Model
 {
     protected $table = 'khbarat';
 
-    protected $fillable = ['title', 'coordinate_id', 'partner_id', 'subject_id'];
+    protected $fillable = ['name', 'title', 'partner_id', 'subject_id'];
     
-    public function coordinate()
+    public function bubble()
     {
-        return $this->belongsTo('App\Coordinate');
+        return $this->morphOne('App\Bubble', 'bubbleable');
     }
 
     public function partner()

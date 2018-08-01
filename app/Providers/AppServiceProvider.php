@@ -27,6 +27,8 @@ class AppServiceProvider extends ServiceProvider
             'picture' => 'App\Picture',
             'reaction_picture' => 'App\ReactionPicture',
             'comment' => 'App\Comment',
+            'khbar' => 'App\Khbar',
+            'reaction' => 'App\Reaction',
             'citizen' => 'App\Citizen',
          ]);
     }

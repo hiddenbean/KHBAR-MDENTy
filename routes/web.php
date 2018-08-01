@@ -129,8 +129,8 @@ Route::domain('staff.khbarmdinty.com')->group(function () {
                 Route::get('pictures/ajouter', 'InterventionController@createPicture');
             });
             Route::prefix('reactions')->group(function(){
-                Route::get('{reaction}/comments/ajouter', 'ReactionController@createComment');
-                Route::get('{reaction}/pictures/ajouter', 'ReactionController@createPicture');
+                Route::get('{reaction}/comments/ajouter', 'CommentController@create');
+                Route::get('{reaction}/pictures/ajouter', 'ReactionPictureController@create');
             });
         });
         // partner authentication route start
@@ -155,7 +155,16 @@ Route::domain('staff.khbarmdinty.com')->group(function () {
         //Khbarat routes start
         Route::get('khbarat', 'KhbarController@partnerFeed');
         //Khbarat end
-        Route::get('check', 'KhbarController@test');
+        // // Route::get('check', 'KhbarController@test');
+        // // Route::get('notification', 'KhbarController@store');
+        // Route::get('calculer-distance', 'BubbleController@circleDistance');
+        Route::prefix('khbars')->group(function(){
+            Route::get('/ajouter', 'KhbarController@create');
+            Route::get('/', 'KhbarController@index');
+            Route::get('/{khbar}', 'KhbarController@show');
+        });
+        Route::get('get-bubbles/{khbar}', 'KhbarController@getBubbles');
+        
 
 
     // partner authentication route start
@@ -188,12 +197,12 @@ Route::domain('staff.khbarmdinty.com')->group(function () {
 
             });
             Route::prefix('reactions')->group(function(){
-                Route::post('comments/ajouter', 'ReactionController@storeComment');
-                Route::post('pictures/ajouter', 'ReactionController@storePicture');
+                Route::post('comments/ajouter', 'CommentController@store');
+                Route::post('pictures/ajouter', 'ReactionPictureController@sotre');
 
             });
         });
-
+        Route::post('khbars/ajouter', 'KhbarController@store');
         // Regions routes start
         Route::prefix('regions')->group(function() {
             Route::post('ajouter', 'RegionController@store');
