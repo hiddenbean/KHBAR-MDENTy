@@ -11,7 +11,7 @@
         <div class="card-body">
             <div class="scrollable">
                 <div class="card-scrollable">
-                    <h4> Khbar </h4>
+                    <h4> Khbar </h4> 
                     <hr>  
                     <div  class="row no-padding no-margin">
                         <div class="col-md-12 no-padding">
@@ -190,26 +190,27 @@
            
 
                 $.get("{{url('get-bubbles/'.$khbar->name)}}", function( data ) { 
-          
-                          
-                        var datas = [ 
-                            {lat: 41.878, lng: -87.629} ,
-                            {lat: 40.714, lng: -74.005} , 
-                            {lat: 34.052, lng: -118.243} , 
-                            {lat: 49.25, lng: -123.1} 
-                       ];
-         
-                       $.each(datas, function( index, bubble ) {  
-                         var cityCircle = new google.maps.Circle({
-                             strokeColor: '#FF0000',
-                             strokeOpacity: 0.8,
-                             strokeWeight: 2,
-                             fillColor: '#FF0000',
-                             fillOpacity: 0.35,
-                             map: map,
-                             center: bubble,
-                             radius: 120000
-                           });
+                    
+                         for(var i=0; i < data.length; i++)
+                         {
+                            var cityCircle = new google.maps.Circle({
+                                strokeColor: '#FF0000',
+                                strokeOpacity: 0.8,
+                                strokeWeight: 2,
+                                fillColor: '#FF0000',
+                                fillOpacity: 0.35,
+                                map: map,
+                                center: {
+                                   'lat': data[i]['coordinate']['latitude'],
+                                   'lng': data[i]['coordinate']['longitude']
+                               } ,
+                                radius:  data[i]['raduis']['radius']
+                              });
+                        } 
+                        return;                      
+                       $.each(data, function( index, bubble ) {
+                        
+                        
                                 
                     });  
                        
@@ -218,11 +219,7 @@
        
  }
     
-        
- 
-    
- 
-
+         
 </script>  
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBXinhnpgReXMJ-SzB7STNPyNM1mrzyQ8w&callback=initMap" async
     defer></script>

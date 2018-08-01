@@ -17,12 +17,12 @@
         <div class="col-lg-6 sm-no-padding">
             
             @foreach ($khbarat as $khbar) 
-                <a href="" class="text-black">
+                <a href="{{ url('khbars/'.$khbar->name) }}" class="text-black">
                     <div id="card-advance" class="card card-default">
                         <div class="card-body"> 
                             <h4> 
                                 <i class="fa fa-book"></i> 
-                                {{ $khbar->  }}
+                                 Topic
                             </h4>
                             <h5><strong>We have crafted Pages Cards to suit any . Add a maximize button</strong></h5>
                             <small class="badge "> <i class="fa fa-map-marker" ></i> 123  rue du Faubourg National</small> <small> <i class="fa fa-calendar"></i> 01/08/2018</small> 
