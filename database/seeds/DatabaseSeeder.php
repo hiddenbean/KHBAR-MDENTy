@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
              TopicSeeder::class,
              PhoneSeeder::class,
              ReasonSeeder::class,
-             KhbarSeeder::class,
+              KhbarSeeder::class,
              CoordinateSeeder::class,
              BubbleSeeder::class,
              RadiusSeeder::class,

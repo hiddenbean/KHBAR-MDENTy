@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Region;
+use App\RegionPoint;
+use App\Services\Ajax\Ajax;
 use Auth;
 use App\Topic;
 use App\Partner;
 use App\PartnerAccount;
 use Illuminate\Http\Request;
+use App\Http\Controllers\RegionPointController;
+
 
 class RegionController extends Controller
 {
@@ -31,7 +35,7 @@ class RegionController extends Controller
     public function validateRequest(Request $request)
     {
         $request->validate([
-            'name' => 'required|unique:regions,name',
+            'name' => 'required',
         ]);
     }
 
@@ -46,6 +50,7 @@ class RegionController extends Controller
         // Retrieve the partner concerned.
         isset($request->partner) ? $partner = Partner::where('name',$request->partner)->firstOrFail() : $partner = Partner::find(Auth::guard('partner-account')->user()->partner_id);
         $data['partner'] = $partner;
+        $data['regions'] = $partner->regions;
         // return $data;
         // return view('system.regions.index',$data);
         return view('regions.index',$data);
@@ -61,22 +66,69 @@ class RegionController extends Controller
         return view('regions.regions',$data);
     }
 
-    /**
+    public function showPoints()
+    {
+        
+        // Retrieve the partner concerned.
+        isset($request->partner) ? $partner = Partner::where('name',$request->partner)->firstOrFail() : $partner = Partner::find(Auth::guard('partner-account')->user()->partner_id);
+        // return $data;
+        // return view('system.regions.index',$data); 
+        $regions = $partner->regions;
+        $regions1 = [];
+        $points = [];
+        foreach ($regions as $key => $region) 
+        {
+            $regions1 [$key]['name'] = $region->name;
+            foreach($region->regionPoints as $key_point => $point)
+            {
+                $regions1[$key]['points'][$key_point] = $point;
+            }
+        }
+        
+        return $regions1;
+    }
+   
+
+    // /**
+    //  * Show the form for creating a new resource.
+    //  *
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function create()
+    // {
+    //     $partner_account = Auth::guard('partner-account')->user();
+    //     $partner_name = $partner_account->partner->name;
+    //     $partner = Partner::where('name',$partner_name)->firstOrFail();
+    //     return view('regions.create', [
+    //         'partner' => $partner,
+    //         'partner_account' => $partner_account,
+    //     ]);
+    // }
+
+     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Ajax $ajax)
     {
         $partner_account = Auth::guard('partner-account')->user();
         $partner_name = $partner_account->partner->name;
         $partner = Partner::where('name',$partner_name)->firstOrFail();
-        return view('regions.create', [
-            'partner' => $partner,
-            'partner_account' => $partner_account,
-        ]);
+        // return view('regions.create', [
+        //     'partner' => $partner,
+        //     'partner_account' => $partner_account,
+        // ]);
+        $ajax->redrawView('container_create_region');
+       return $ajax->view('regions.shows.create');
     }
 
+    public function regionDetails(Ajax $ajax, Request $request)
+    { 
+        $name = $request->input('name');
+        $ajax->redrawView('container_create_region');
+        return $ajax->view('regions.shows.store', ['name'=>$name]); 
+    }
     /**
      * Store region for a partner.
      * Define regions points.
@@ -84,13 +136,12 @@ class RegionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store($subdomaine ,Ajax $ajax, Request $request)
+    public function store($subdomaine, Request $request)
     {
         $this->validateRequest($request);
-
         $RegionPointController = new RegionPointController();
         $RegionPointController->validateRequest($request);
-
+        
         /* Retrieve the partner account concerned.
         isset($request->partner) ? $partner = $request->partner : $partner = Auth::guard('partner-account')->user()->partner->first()->name;
         $partner = Partner::where('name',$partner)->firstOrFail();
@@ -99,7 +150,7 @@ class RegionController extends Controller
         $partner_name = $partner_account->partner->name;
         $partner = Partner::where('name',$partner_name)->firstOrFail();
         $region = Region::create([
-            'name' => $request->zone,
+            'name' => $request->name,
             'partner_id' => $partner->id,
         ]);
         foreach($request->region_points as $region_point)
@@ -113,9 +164,10 @@ class RegionController extends Controller
                 ]);
             }
         }
-        $ajax->redrawView();
-        return $ajax->view('');
-        return redirect(url('/regions/'.$region->name));
+        $regions = $partner->regions;
+        return redirect('regions');
+        $ajax->redrawView('container_create_region');
+        return $ajax->view('regions.shows.regions', ['regions'=> $regions]);
     }
 
      /**
@@ -160,19 +212,20 @@ class RegionController extends Controller
         // return $data['topics'][0]->regions()->where('region_id',$region)->first();
         return view('regions.show',$data);
     }
-     /**
+    
+    /**
      * Display the specified resource.
      *
      * @param  \App\Region  $region
      * @return \Illuminate\Http\Response
      */
-    public function show($name,$region)
+    public function show(Ajax $ajax,$subdomain, $region)
     {
-       $data['region'] = Region::find($region);
-       $data['topics'] = Topic::all();
-       // return $data['topics'][0]->regions()->where('region_id',$region)->first();
-       return view('system.topics.index',$data);
-    }
+        
+        $region = Region::findOrFail($region);
+        $ajax->redrawView('container_show_region_'.$region->id);
+        return $ajax->view('regions.shows.show', ['region'=> $region]);
+    }   
 
     /**
      * Show the form for editing the specified resource.

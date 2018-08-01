@@ -1,4 +1,6 @@
-@extends('layouts.partner.app') @section('css') @stop @section('content')
+@extends('layouts.partner.app') 
+@section('css') @stop 
+@section('content')
 <div class="jumbotron" data-pages="parallax">
     <div class=" container-fluid   container-fixed-lg sm-p-l-0 sm-p-r-0">
         <div class="inner" style="transform: translateY(0px); opacity: 1;">

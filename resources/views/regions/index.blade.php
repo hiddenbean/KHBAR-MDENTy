@@ -183,11 +183,13 @@
             }); 
 
 
-            $.get("{{url('regions-points')}}", function( data ) { 
+            $.get("{{url('regions/points')}}", function( data ) { 
                 $.each(data, function( index, value ) { 
                    
                     var longlat = [ ];
-    
+                // if (value['points']==Null) {
+                //     return;
+                // }
                     for(var i=0; i < value['points'].length ; i++ ){
                         var longlatpoint = {
                             'lat': value['points'][i]['longitude'],
@@ -195,7 +197,7 @@
                         } 
                         longlat.push(longlatpoint);
                     } 
-                    
+                
                         // Construct the polygon.
                         var trianglePoints = new google.maps.Polygon({
                             paths: longlat,

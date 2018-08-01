@@ -48,7 +48,9 @@ class KhbarController extends Controller
                 }
             }
         }
-        return $citizen_khbarat;
+        return view('khbarat.index', [
+            'khbarat' => $citizen_khbarat,
+        ]);
     }
 
     /**
@@ -139,10 +141,10 @@ class KhbarController extends Controller
      * @param  \App\Khbar  $khbar
      * @return \Illuminate\Http\Response
      */
-    public function show($subdomaine, $khbar)
+    public function show($subdomaine)
     {
-        $khbar = Khbar::where('name',$khbar)->firstOrFail();
-        return view('khbarat.show', compact('khbar'));
+        // $khbar = Khbar::where('id',$khbar)->firstOrFail();
+        return view('khbarat.show');
       
     }
 
@@ -222,7 +224,6 @@ class KhbarController extends Controller
         {
             return 'you have no khbar for now thank you for checking your feed';
         }
-        return $regions;
         $khbarat = $partner->khbars()->get();
         $khbarat_partner = [];
         

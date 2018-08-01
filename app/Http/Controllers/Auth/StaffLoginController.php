@@ -78,7 +78,7 @@ class StaffLoginController extends Controller
     {
         $login = $request->login;
         $loginType = self::loginType($login);
-        $this->validateReqeust($request);
+        $this->validateReqeust($request, $loginType);
         if($loginType == 'email')
         {
             if(Auth::guard('staff')->attempt(['email'=>$request->input('login'), 'password'=>$request->input('password')], $request->remember))
@@ -106,12 +106,22 @@ class StaffLoginController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return void
      */
-    public function validateReqeust(Request $request)
+    public function validateReqeust(Request $request, $loginType)
     {
-        $request->validate([
-            'login' => 'required',
-            'password' => 'required|min:6',
-        ]);
+        if($loginType == 'email')
+        {
+            $request->validate([
+                'login' => 'required|email|exists:staff,email',
+                'password' => 'required|min:6',
+            ]);
+        }
+        else
+        {
+            $request->validate([
+                'login' => 'required|exists:staff,name',
+                'password' => 'required|min:6',
+            ]);
+        }
     }
 
     /**

@@ -45,7 +45,7 @@
                     <tr class="odd gradeX">
                         <td>{{$partner->id}}</td>  
 
-                        <td><img src="{{ Storage::url($partner->picture->path) }}" width="32" height="32" class="rounded"/></td>
+                        <td><img src="{{ asset('img/profiles/avatar_small.jpg') }}" width="32" height="32" class="rounded"/></td>
                         <td>
                             <a href="{{url('partners/'.$partner->id.'/status')}}">{{$partner->company_name}}</a>
                         </td>

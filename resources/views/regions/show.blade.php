@@ -9,9 +9,13 @@
 
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="#">Pages</a>
+                    <a href="{{url('/')}}">Accueil</a>
                 </li>
-                <li class="breadcrumb-item active">Blank template</li>
+                <li class="breadcrumb-item">
+                    <a href="{{url('regions/sujets')}}">Sujets</a>
+                </li>
+                <li class="breadcrumb-item active">{{$region->name}}
+                    </li>
             </ol>
 
         </div>

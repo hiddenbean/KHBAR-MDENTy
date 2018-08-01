@@ -11,6 +11,6 @@ class PartnerAccountSeeder extends Seeder
      */
     public function run()
     {
-        factory('App\PartnerAccount', 3)->create();
+        factory('App\PartnerAccount', 1)->create();
     }
 }

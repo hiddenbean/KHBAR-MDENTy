@@ -37,7 +37,7 @@
                             <p>{{$partner->tax_id}}</p>
                         </div>
                         <div class="col-md-4">
-                            <img src="{{ Storage::url($partner->picture->path) }}" alt="" srcset="" width="250">
+                            <img src="{{ asset('img/profiles/b2x.jpg') }}" alt="" srcset="" width="250">
                         </div>
                     </div>
                     <div class="row">
@@ -109,7 +109,7 @@
                             <p>-----</p>
                         </div>
                         <div class="col-md-4">
-                            <img src="{{ Storage::url($partner_accounts->picture->path) }}" alt="" srcset="" width="250">
+                            <img src="{{ asset('img/profiles/2x.jpg') }}" alt="" srcset="" width="250">
                         </div>
                     </div>
                     @endforeach

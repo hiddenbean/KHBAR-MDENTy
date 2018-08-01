@@ -8,6 +8,20 @@ use Illuminate\Http\Request;
 class RegionPointController extends Controller
 {
 
+    
+    /**
+     * Get a validator for an incoming registration request.
+     *
+     * @param  \Illuminate\Http\Request.
+     * @return void.
+     */
+    public function validateRequest(Request $request)
+    {
+        $request->validate([
+            'region_points' => 'required',
+        ]);
+    }
+
     /**
      * Display a listing of the resource.
      *

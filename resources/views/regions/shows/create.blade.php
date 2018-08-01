@@ -1,4 +1,4 @@
-<form action="region/store" method="post" class="ajax">
+<form action="regions/creer" method="post" class="ajax">
 <div class="row no-padding no-margin ">
         <div class="col-md-8 m-t-5">
             <div class="form-group m-b-10">

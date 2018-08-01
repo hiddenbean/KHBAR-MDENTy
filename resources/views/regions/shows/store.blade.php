@@ -8,7 +8,7 @@
     </tbody>
 </table> 
 
- <form action="regions/ajouter" method="post" id="form" class="ajax">
+ <form action="regions/ajouter" method="post" id="form">
     @csrf
     <div class="hide">
         <input type="text" name="name" id="name_region" value="{{ $name }}" >
