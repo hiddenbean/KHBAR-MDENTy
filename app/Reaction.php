@@ -20,4 +20,9 @@ class Reaction extends Model
     {
         return $this->belongsTo('App\Khbar');
     }
+
+    public function bubble()
+    {
+        return $this->morphOne('App\Bubble', 'bubbleable');
+    }
 }

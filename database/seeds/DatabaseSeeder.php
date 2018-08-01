@@ -12,7 +12,6 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
          $this->call([
-             ReasonSeeder::class,
              RegionSeeder::class,
              AdressSeeder::class,
              CountryCodeSeeder::class,
@@ -24,7 +23,9 @@ class DatabaseSeeder extends Seeder
              StatusSeeder::class,
              TopicSeeder::class,
              PhoneSeeder::class,
-
+             ReasonSeeder::class,
+             KhbarSeeder::class,
+             CoordinateSeeder::class,
          ]);
     }
 }

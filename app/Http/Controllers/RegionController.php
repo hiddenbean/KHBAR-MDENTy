@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Region;
 use Auth;
+use App\Topic;
 use App\Partner;
 use App\PartnerAccount;
 use Illuminate\Http\Request;
@@ -113,9 +114,12 @@ class RegionController extends Controller
      * @param  \App\Region  $region
      * @return \Illuminate\Http\Response
      */
-    public function show(Region $region)
+    public function show($name,$region)
     {
-        
+       $data['region'] = Region::find($region);
+       $data['topics'] = Topic::all();
+       // return $data['topics'][0]->regions()->where('region_id',$region)->first();
+       return view('system.topics.index',$data);
     }
 
     /**
