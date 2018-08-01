@@ -149,16 +149,30 @@ class KhbarController extends Controller
 
     public function getBubbles($subdmaine, $khbar)
     {
+        // $khbar = Khbar::where('name',$khbar)->firstOrFail();
+        // $bubbles = [];
+        // array_push($bubbles, $khbar->bubble->coordinate);
+        // foreach($khbar->reactions as $reaction)
+        // {
+        //     if($reaction->bubble)
+        //     {
+        //         array_push($bubbles, $reaction->bubble->coordinate);
+        //     }
+        // }
         $khbar = Khbar::where('name',$khbar)->firstOrFail();
         $bubbles = [];
-        foreach($khbar->reactions as $reaction)
+        // array_push($bubbles, $khbar->bubble->coordinate);
+        foreach($khbar->reactions as $key => $reaction)
         {
             if($reaction->bubble)
             {
+                $data[$key]['raduis'] =$reaction->bubble->radius;
+                $data[$key]['coordinate'] = $reaction->bubble->coordinate;
                 array_push($bubbles, $reaction->bubble);
             }
         }
-        return $bubbles; 
+        
+        return $data; 
     }
 
     /**
