@@ -97,6 +97,7 @@ class KhbarController extends Controller
             'name' => $name,
             'title' => $request->title,
             'subject_id' => $request->subject_id,
+            'topic_id' => $request->topic,
             'partner_id' => $partner_id,
         ]);
         

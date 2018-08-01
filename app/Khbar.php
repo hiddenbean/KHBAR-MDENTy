@@ -29,4 +29,9 @@ class Khbar extends Model
     {
         return $this->hasMany('App\Reaction');
     }
+
+    public function topic()
+    {
+        return $this->belongsTo('App\Topic');
+    }
 }

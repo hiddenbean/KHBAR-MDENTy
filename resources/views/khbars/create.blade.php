@@ -11,6 +11,7 @@
         @csrf
         <input type="text" name="title" placeholder="title">
         <input type="text" name="subject_id" placeholder="subject_id">
+        <input type="text" name="topic_id" placeholder="subject_id">
         <input type="text" name="longitude" placeholder="longitude">
         <input type="text" name="latitude" placeholder="latitude">
 

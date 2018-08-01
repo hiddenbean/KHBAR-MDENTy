@@ -14,6 +14,10 @@ class Topic extends Model
         return $this->hasMany('App\Subject');
     }
 
+    public function khbar()
+    {
+        return $this->hasOne('App\Khbar');
+    }
 
     public static function boot()
     {
