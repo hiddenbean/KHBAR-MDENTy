@@ -1,54 +1,64 @@
-@extends('layouts.app')
-
-@section('body')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">create subject</div>
-
-                <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ url('sujets/ajouter') }}">
-                        {{ csrf_field() }}
-                        {{ method_field('POST') }}
-                        <div class="form-group{{ $errors->has('login') ? ' has-error' : '' }}">
-                            <label for="title" class="col-md-4 control-label">titre</label>
-
-                            <div class="col-md-6">
-                                <input id="title" type="text" class="form-control" name="title" value="{{ old('title') }}" required autofocus>
-
-                                @if ($errors->has('title'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('title') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
-                            <label for="description" class="col-md-4 control-label">description</label>
-
-                            <div class="col-md-6">
-                                <textarea name="description" id="" cols="53" rows="10"></textarea>
-                                @if ($errors->has('description'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('description') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-8 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    ajouter
-                                </button>
-
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
+@extends('layouts.staff.app') @section('css') @stop @section('content')
+<div class="jumbotron" data-pages="parallax">
+    <div class=" container-fluid   container-fixed-lg sm-p-l-0 sm-p-r-0">
+        <div class="inner" style="transform: translateY(0px); opacity: 1;">
+            <!-- START BREADCRUMB -->
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="{{ url('sujets') }}">sujets</a>
+                </li>
+                <li class="breadcrumb-item active">ajouter</li>
+            </ol>
+            <!-- END BREADCRUMB -->
         </div>
     </div>
 </div>
-@endsection
+<!-- START CONTAINER FLUID -->
+<div class=" container-fluid   container-fixed-lg bg-white">
+    <!-- START card -->
+
+
+    <div class="card card-transparent">
+        <div class="card-body">
+            <form class="form-horizontal" method="POST" action="{{ url('sujets/ajouter') }}">
+                {{ csrf_field() }} {{ method_field('POST') }}
+                <div class="row clearfix">
+                    <div class="col-md-12">
+                        <div class="form-group {{ $errors->has('title') ? ' has-error' : '' }} form-group-default required" aria-required="true">
+                            <label>Title</label>
+                            <input type="text" class="form-control error" name="title" value="{{ old('title') }}" required autofocus aria-required="true"
+                            aria-invalid="true">
+                        </div>
+                        @if ($errors->has('title'))
+                        <label id="firstName-error" class="error" for="firstName">{{ $errors->first('title') }}</label>
+                        @endif
+                    </div>
+                    <br>
+                    <div class="row">
+                    <div class="col-md-12">
+                            <div class="form-group {{ $errors->has('description') ? ' has-error' : '' }} form-group-default required" aria-required="true">
+                                    <label>Description</label>
+                                    <textarea class="form-control" name="description" id="" cols="221" rows="10"></textarea>
+                            </div>
+                      
+                        @if ($errors->has('description'))
+                        <label id="firstName-error" class="error" for="firstName">{{ $errors->first('description') }}</label>
+                        @endif
+                    </div>
+                </div>
+                </div>
+
+
+                <div class="clearfix"></div>
+                <button class="btn btn-primary" type="submit">Ajouter</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+
+<!-- END CONTAINER FLUID -->
+
+
+@stop @section('script') @stop

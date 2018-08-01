@@ -129,7 +129,7 @@
                         </div>
 
                         <div class="col-md-4">
-                            <a href="{{url('partners/'.$partner->id.'/status/non-approuvé')}}" class="btn btn-transparent text-danger">
+                            <a href="{{url('partners/'.$partner->id.'/status/non-approuve')}}" class="btn btn-transparent text-danger">
                                 <i class="fa fa-times" aria-hidden="true"></i>
                                 Rejeter
                             </a>
