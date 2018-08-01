@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class PartnerAccount extends Authenticatable
 {
+    use notifiable;
+    
     protected $guard="partner-account";
 
     protected $fillable = [

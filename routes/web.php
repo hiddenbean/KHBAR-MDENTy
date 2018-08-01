@@ -162,7 +162,16 @@ Route::domain('staff.khbarmdinty.com')->group(function () {
         //Khbarat routes start
         Route::get('khbarat', 'KhbarController@partnerFeed');
         //Khbarat end
-        Route::get('check', 'KhbarController@test');
+        // // Route::get('check', 'KhbarController@test');
+        // // Route::get('notification', 'KhbarController@store');
+        // Route::get('calculer-distance', 'BubbleController@circleDistance');
+        Route::prefix('khbars')->group(function(){
+            Route::get('/ajouter', 'KhbarController@create');
+            Route::get('/', 'KhbarController@index');
+            Route::get('/{khbar}', 'KhbarController@show');
+        });
+        Route::get('get-bubbles/{khbar}', 'KhbarController@getBubbles');
+        
 
 
     // partner authentication route start
@@ -199,7 +208,7 @@ Route::domain('staff.khbarmdinty.com')->group(function () {
 
             });
         });
-
+        Route::post('khbars/ajouter', 'KhbarController@store');
         // Regions routes start
         Route::prefix('regions')->group(function() {
             Route::post('ajouter', 'RegionController@store');

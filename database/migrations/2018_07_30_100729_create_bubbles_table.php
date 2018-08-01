@@ -15,10 +15,10 @@ class CreateBubblesTable extends Migration
     {
         Schema::create('bubbles', function (Blueprint $table) {
             $table->increments('id');
-            $table->double('latitude');
-            $table->double('longitude');
-            $table->integer('reation_id');
+            $table->integer('coordinate_id');
             $table->integer('radius_id');
+            $table->integer('bubbleable_id');
+            $table->string('bubbleable_type');
             $table->timestamps();
         });
     }

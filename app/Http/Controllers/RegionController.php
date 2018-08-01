@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Region;
 use Auth;
-use App\Partner;
 use App\Topic;
+use App\Partner;
 use App\PartnerAccount;
 use Illuminate\Http\Request;
 

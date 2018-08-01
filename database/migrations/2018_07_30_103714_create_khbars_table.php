@@ -15,9 +15,9 @@ class CreateKhbarsTable extends Migration
     {
         Schema::create('khbars', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name')->unique();
             $table->string('title');
-            $table->integer('coordinate_id');
-            $table->integer('partner_id');
+            $table->integer('partner_id')->nullable();
             $table->integer('subject_id');
             $table->timestamps();
         });

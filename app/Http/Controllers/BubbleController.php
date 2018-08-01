@@ -82,4 +82,20 @@ class BubbleController extends Controller
     {
         //
     }
+
+    function circleDistance($from,$to ,$earthRadius = 6371000)
+      {
+        // convert from degrees to radians
+        $latFrom = deg2rad($to['latitude']);
+        $lonFrom = deg2rad($to['longitude']);
+        $latTo = deg2rad($from['latitude']);
+        $lonTo = deg2rad($from['longitude']);
+      
+        $latDelta = $latTo - $latFrom;
+        $lonDelta = $lonTo - $lonFrom;
+        
+        $angle = 2 * asin(sqrt(pow(sin($latDelta / 2), 2) +
+          cos($latFrom) * cos($latTo) * pow(sin($lonDelta / 2), 2)));
+        return ($angle * 6371000);
+      }
 }
