@@ -1,23 +1,31 @@
-@extends('layouts.app')
+@extends('layouts.partner.app') @section('css') @stop @section('content')
+<div class="jumbotron" data-pages="parallax">
+    <div class=" container-fluid   container-fixed-lg sm-p-l-0 sm-p-r-0">
+        <div class="inner" style="transform: translateY(0px); opacity: 1;">
 
-@section('body')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="#">Pages</a>
+                </li>
+                <li class="breadcrumb-item active">Blank template</li>
+            </ol>
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    You are logged in a Partner!
-                </div>
-            </div>
         </div>
     </div>
 </div>
+
+
+<div class=" container-fluid   container-fixed-lg">
+
+    <h1> Hello </h1> 
+      <!-- START card -->
+      <div class="card card-transparent">
+            <div class="card-body">
+               
+           </div>
+        </div>
+    </div>
+    
+</div>
+
 @endsection

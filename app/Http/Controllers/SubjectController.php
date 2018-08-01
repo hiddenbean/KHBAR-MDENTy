@@ -24,6 +24,7 @@ class SubjectController extends Controller
      */
     public function index($topic)
     {
+
         $data['topic'] = Topic::findOrfail($topic);
         return view('staffs.subjects.index',$data);
     }
@@ -35,7 +36,8 @@ class SubjectController extends Controller
      */
     public function create($topic)
     {
-        return view('staffs.subjects.create',['topic' => $topic]);
+        $title = Topic::findOrfail($topic)->title;
+        return view('staffs.subjects.create',['topic' => $topic,'title' => $title]);
     }
 
     /**
@@ -53,7 +55,7 @@ class SubjectController extends Controller
         $subject->description = $request->description;
         $subject->topic_id = $request->topic;
         $subject->save();
-        return redirect('sujets/'.$request->topic.'/détail');
+        return redirect('sujets/'.$request->topic.'/detail');
     }
 
     /**
@@ -94,7 +96,7 @@ class SubjectController extends Controller
         $subject->title = $request->title;
         $subject->description = $request->description;
         $subject->save();
-        return redirect('sujets/'.$request->topic.'/détail');
+        return redirect('sujets/'.$request->topic.'/detail');
     }
 
     /**

@@ -115,6 +115,7 @@ class StatusController extends Controller
     public function check($partner)
     {
         $data['partner']=Partner::find($partner);
+        // return $data['partner']->partnerAccounts;
         return view('partners.check',$data);
     }
 

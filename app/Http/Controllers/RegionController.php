@@ -50,6 +50,16 @@ class RegionController extends Controller
         // return view('system.regions.index',$data);
         return view('regions.index',$data);
     }
+    public function regionForAttach()
+    {
+        
+        // Retrieve the partner concerned.
+        isset($request->partner) ? $partner = Partner::where('name',$request->partner)->firstOrFail() : $partner = Partner::find(Auth::guard('partner-account')->user()->partner_id);
+        $data['regions'] = $partner->regions;
+        // return $data;
+        // return view('system.regions.index',$data);
+        return view('regions.regions',$data);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -125,6 +135,18 @@ class RegionController extends Controller
         }
         return redirect()->back();
     }
+         /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function subjectDetach($name,$region,$subject)
+    {
+        $region = Region::find($region);
+        $region->subjects()->detach($subject);
+        return redirect()->back();
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -134,9 +156,9 @@ class RegionController extends Controller
     public function subjectShow($name,$region)
     {
         $data['topics'] = Topic::all();
-        $data['region'] = $region;
+        $data['region'] =  Region::find($region);
         // return $data['topics'][0]->regions()->where('region_id',$region)->first();
-        return view('system.topics.index',$data);
+        return view('regions.show',$data);
     }
      /**
      * Display the specified resource.
